@@ -22,14 +22,22 @@ void GamePanel::Init()
 {
     context->assets->AddTexture(BACKGROUND, "../assets/images/background.jpg", true);
 
+    // Background image
     background.setTexture(context->assets->GetTexture(BACKGROUND));
     background.setPosition(0, Settings::GAME_YPOS);
     background.setTextureRect(context->window->getViewport(context->window->getDefaultView()));
 
+    // Top panel
     panel.setSize(sf::Vector2f(Settings::WINDOW_WIDTH, Settings::GAME_YPOS));
     panel.setPosition(0, 0);
     panel.setFillColor(sf::Color::Black);
     panel.setOutlineColor(sf::Color::White);
+    panel.setOutlineThickness(2);
+
+    // Center divider
+    divider.setSize(sf::Vector2f(2, Settings::GAME_HEIGHT));
+    divider.setPosition(Settings::CENTER, Settings::GAME_YPOS);
+    divider.setFillColor(sf::Color::White);
 }
 
 void GamePanel::ProcessInput()
@@ -60,6 +68,7 @@ void GamePanel::Draw()
     context->window->clear();
     context->window->draw(background);
     context->window->draw(panel);
+    context->window->draw(divider);
 //    drawGrid();
     player1.draw();
     player2.draw();
