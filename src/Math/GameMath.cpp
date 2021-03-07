@@ -1,5 +1,5 @@
-#include "../include/GameMath.hpp"
-#include <stdlib.h>
+#include "../../include/GameMath.hpp"
+#include <cstdlib>
 
 using namespace Math;
 

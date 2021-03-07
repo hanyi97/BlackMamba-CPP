@@ -6,6 +6,7 @@
 #include "State.hpp"
 #include "Game.hpp"
 #include "Food.hpp"
+#include "Player.hpp"
 
 namespace Engine
 {
@@ -16,8 +17,8 @@ namespace Engine
         sf::Time elapsedTime;
         sf::Sprite background;
         sf::RectangleShape panel;
-        Food food1;
-        Food food2;
+        Player player1;
+        Player player2;
     public:
         GamePanel(std::shared_ptr<Context> &context);
         ~GamePanel();

@@ -1,23 +1,18 @@
-#include "../include/GamePanel.hpp"
-#include "../include/Settings.hpp"
-#include "../include/GameMath.hpp"
+#include "../../include/GamePanel.hpp"
+#include "../../include/Settings.hpp"
 
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
 #include <iostream>
 
 using namespace Engine;
-using namespace Math;
 
 GamePanel::GamePanel(std::shared_ptr<Context> &context)
          : context(context),
            elapsedTime(sf::Time::Zero),
-           food1(context, GameMath::getRandomLeftX(Settings::CENTER, Settings::UNIT_SIZE),
-                 GameMath::getRandomY(Settings::GAME_YPOS, Settings::GAME_HEIGHT, Settings::UNIT_SIZE)),
-           food2(context, GameMath::getRandomRightX(Settings::CENTER, Settings::UNIT_SIZE),
-                 GameMath::getRandomY(Settings::GAME_YPOS, Settings::GAME_HEIGHT, Settings::UNIT_SIZE))
+           player1(context, PLAYER1),
+           player2(context, PLAYER2)
 {
-    std::cout << food1.getXPos() << " " << food1.getYPos();
     srand(time(nullptr));
 }
 
@@ -65,9 +60,9 @@ void GamePanel::Draw()
     context->window->clear();
     context->window->draw(background);
     context->window->draw(panel);
-    drawGrid();
-    food1.draw();
-    food2.draw();
+//    drawGrid();
+    player1.draw();
+    player2.draw();
     context->window->display();
 }
 

@@ -1,6 +1,6 @@
-#include "../include/Game.hpp"
-#include "../include/GamePanel.hpp"
-#include "../include/Settings.hpp"
+#include "../../include/Game.hpp"
+#include "../../include/GamePanel.hpp"
+#include "../../include/Settings.hpp"
 
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>

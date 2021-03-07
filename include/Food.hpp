@@ -14,6 +14,7 @@ namespace Engine
         sf::Sprite food;
         std::shared_ptr<Context> context;
     public:
+        Food();
         Food(std::shared_ptr<Context> &context, int xPos, int yPos);
 
         void draw();

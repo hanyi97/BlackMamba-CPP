@@ -1,7 +1,11 @@
-#include "../include/Food.hpp"
-#include "../include/Settings.hpp"
+#include "../../include/Food.hpp"
+#include "../../include/Settings.hpp"
 
 using namespace Engine;
+Food::Food()
+{
+
+}
 
 Food::Food(std::shared_ptr<Context> &context, int xPos, int yPos) : context(context)
 {

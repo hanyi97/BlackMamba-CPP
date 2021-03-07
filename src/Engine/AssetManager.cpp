@@ -1,4 +1,4 @@
-#include "../include/AssetManager.hpp"
+#include "../../include/AssetManager.hpp"
 
 using namespace Engine;
 
