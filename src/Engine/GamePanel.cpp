@@ -55,35 +55,24 @@ void GamePanel::ProcessInput()
         }
         else if (event.type == sf::Event::KeyPressed)
         {
-            switch (event.key.code)
-            {
-                case sf::Keyboard::W:
-                    player1.changeDirection(true, false, false, false);
-                    break;
-                case sf::Keyboard::A:
-                    player1.changeDirection(false, false, true, false);
-                    break;
-                case sf::Keyboard::S:
-                    player1.changeDirection(false, true, false, false);
-                    break;
-                case sf::Keyboard::D:
-                    player1.changeDirection(false, false, false, true);
-                    break;
-                case sf::Keyboard::Up:
-                    player2.changeDirection(true, false, false, false);
-                    break;
-                case sf::Keyboard::Down:
-                    player2.changeDirection(false, true, false, false);
-                    break;
-                case sf::Keyboard::Left:
-                    player2.changeDirection(false, false, true, false);
-                    break;
-                case sf::Keyboard::Right:
-                    player2.changeDirection(false, false, false, true);
-                    break;
-                default:
-                    break;
-            }
+            int key = event.key.code;
+
+            if (key == sf::Keyboard::W && !player1.getDown())
+                player1.changeDirection(true, false, false, false);
+            if (key == sf::Keyboard::S && !player1.getUp())
+                player1.changeDirection(false, true, false, false);
+            if (key == sf::Keyboard::A && !player1.getRight())
+                player1.changeDirection(false, false, true, false);
+            if (key == sf::Keyboard::D && !player1.getLeft())
+                player1.changeDirection(false, false, false, true);
+            if (key == sf::Keyboard::Up && !player2.getDown())
+                player2.changeDirection(true, false, false, false);
+            if (key == sf::Keyboard::Down && !player2.getUp())
+                player2.changeDirection(false, true, false, false);
+            if (key == sf::Keyboard::Left && !player2.getRight())
+                player2.changeDirection(false, false, true, false);
+            if (key == sf::Keyboard::Right && !player2.getLeft())
+                player2.changeDirection(false, false, false, true);
         }
     }
 }

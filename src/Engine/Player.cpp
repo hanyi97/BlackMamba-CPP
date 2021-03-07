@@ -65,3 +65,23 @@ void Player::changeDirection(bool up, bool down, bool left, bool right)
     this->left = left;
     this->right = right;
 }
+
+bool Player::getUp()
+{
+    return up;
+}
+
+bool Player::getDown()
+{
+    return down;
+}
+
+bool Player::getLeft()
+{
+    return left;
+}
+
+bool Player::getRight()
+{
+    return right;
+}

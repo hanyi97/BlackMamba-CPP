@@ -32,6 +32,11 @@ namespace Engine
         void draw();
         void moveSnake();
         void changeDirection(bool up, bool down, bool left, bool right);
+
+        bool getUp();
+        bool getDown();
+        bool getLeft();
+        bool getRight();
     };
 }
 
