@@ -3,13 +3,13 @@
 
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
-#include <iostream>
 
 using namespace Engine;
 
 GamePanel::GamePanel(std::shared_ptr<Context> &context)
          : context(context),
            elapsedTime(sf::Time::Zero),
+           running(true),
            player1(context, PLAYER1),
            player2(context, PLAYER2)
 {
@@ -38,6 +38,9 @@ void GamePanel::Init()
     divider.setSize(sf::Vector2f(2, Settings::GAME_HEIGHT));
     divider.setPosition(Settings::CENTER, Settings::GAME_YPOS);
     divider.setFillColor(sf::Color::White);
+
+    player1.Init();
+    player2.Init();
 }
 
 void GamePanel::ProcessInput()
@@ -52,7 +55,35 @@ void GamePanel::ProcessInput()
         }
         else if (event.type == sf::Event::KeyPressed)
         {
-
+            switch (event.key.code)
+            {
+                case sf::Keyboard::W:
+                    player1.changeDirection(true, false, false, false);
+                    break;
+                case sf::Keyboard::A:
+                    player1.changeDirection(false, false, false, true);
+                    break;
+                case sf::Keyboard::S:
+                    player1.changeDirection(false, true, false, false);
+                    break;
+                case sf::Keyboard::D:
+                    player1.changeDirection(false, false, true, false);
+                    break;
+                case sf::Keyboard::Up:
+                    player2.changeDirection(true, false, false, false);
+                    break;
+                case sf::Keyboard::Down:
+                    player2.changeDirection(false, true, false, false);
+                    break;
+                case sf::Keyboard::Left:
+                    player2.changeDirection(false, false, true, false);
+                    break;
+                case sf::Keyboard::Right:
+                    player2.changeDirection(false, false, false, true);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
@@ -60,7 +91,12 @@ void GamePanel::ProcessInput()
 void GamePanel::Update(sf::Time deltaTime)
 {
     elapsedTime += deltaTime;
-    elapsedTime = sf::Time::Zero;
+    if (elapsedTime.asSeconds() > 0.1)
+    {
+        player1.moveSnake();
+        player2.moveSnake();
+        elapsedTime = sf::Time::Zero;
+    }
 }
 
 void GamePanel::Draw()
@@ -77,12 +113,12 @@ void GamePanel::Draw()
 
 void GamePanel::Pause()
 {
-
+    running = false;
 }
 
 void GamePanel::Start()
 {
-
+    running = true;
 }
 
 void GamePanel::drawGrid()

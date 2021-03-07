@@ -2,6 +2,7 @@
 #define BLACKMAMBA_PLAYER_HPP
 
 #include "Food.hpp"
+#include "Snake.hpp"
 
 namespace Engine
 {
@@ -14,13 +15,23 @@ namespace Engine
     class Player
     {
     private:
-        int lives{};
-        int score{};
-        bool lose{};
+        int lives;
+        int score;
+        bool lose;
+
+        bool up;
+        bool down;
+        bool left;
+        bool right;
+
         Food food;
+        Snake snake;
     public:
         Player(std::shared_ptr<Context> &context, int player);
+        void Init();
         void draw();
+        void moveSnake();
+        void changeDirection(bool up, bool down, bool left, bool right);
     };
 }
 

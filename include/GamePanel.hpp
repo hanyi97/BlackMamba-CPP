@@ -21,6 +21,8 @@ namespace Engine
 
         Player player1;
         Player player2;
+
+        bool running;
     public:
         GamePanel(std::shared_ptr<Context> &context);
         ~GamePanel();
