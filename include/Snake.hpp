@@ -28,9 +28,9 @@ namespace Engine
         void draw(char direction);
 
         void setXPos(int x);
-        int getXPos();
+        int getXPos() const;
         void setYPos(int y);
-        int getYPos();
+        int getYPos() const;
     };
 }
 

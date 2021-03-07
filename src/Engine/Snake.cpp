@@ -38,6 +38,8 @@ void Snake::Init()
         body.emplace_back(context, x, y);
         x+=Settings::UNIT_SIZE;
     }
+    xPos = x;
+    yPos = y;
 }
 
 void Snake::Move()
@@ -50,23 +52,10 @@ void Snake::draw(char dir)
 {
     for (auto part = body.begin(); part != body.end(); ++part)
     {
-        switch (player)
-        {
-            case PLAYER1:
-                if (part == body.end()-1)
-                    part->drawHead(dir);
-                else
-                    part->drawBody();
-                break;
-            case PLAYER2:
-                if (part == body.begin())
-                    part->drawHead(dir);
-                else
-                    part->drawBody();
-                break;
-            default:
-                break;
-        }
+        if (part == body.end()-1)
+            part->drawHead(dir);
+        else
+            part->drawBody();
     }
 }
 
@@ -75,7 +64,7 @@ void Snake::setXPos(int x)
     xPos = x;
 }
 
-int Snake::getXPos()
+int Snake::getXPos() const
 {
     return xPos;
 }
@@ -85,7 +74,7 @@ void Snake::setYPos(int y)
     yPos = y;
 }
 
-int Snake::getYPos()
+int Snake::getYPos() const
 {
     return yPos;
 }

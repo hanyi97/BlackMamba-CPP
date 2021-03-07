@@ -55,7 +55,7 @@ void Player::moveSnake()
 
     snake.setXPos(x);
     snake.setYPos(y);
-//    snake.Move();
+    snake.Move();
 }
 
 void Player::changeDirection(bool up, bool down, bool left, bool right)
