@@ -61,13 +61,13 @@ void GamePanel::ProcessInput()
                     player1.changeDirection(true, false, false, false);
                     break;
                 case sf::Keyboard::A:
-                    player1.changeDirection(false, false, false, true);
+                    player1.changeDirection(false, false, true, false);
                     break;
                 case sf::Keyboard::S:
                     player1.changeDirection(false, true, false, false);
                     break;
                 case sf::Keyboard::D:
-                    player1.changeDirection(false, false, true, false);
+                    player1.changeDirection(false, false, false, true);
                     break;
                 case sf::Keyboard::Up:
                     player2.changeDirection(true, false, false, false);
