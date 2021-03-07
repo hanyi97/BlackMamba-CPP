@@ -50,19 +50,22 @@ void Snake::draw(char dir)
 {
     for (auto part = body.begin(); part != body.end(); ++part)
     {
-        if (player == PLAYER1)
+        switch (player)
         {
-            if (part == body.end()-1)
-                part->drawHead(dir);
-            else
-                part->drawBody();
-        }
-        else
-        {
-            if (part == body.begin())
-                part->drawHead(dir);
-            else
-                part->drawBody();
+            case PLAYER1:
+                if (part == body.end()-1)
+                    part->drawHead(dir);
+                else
+                    part->drawBody();
+                break;
+            case PLAYER2:
+                if (part == body.begin())
+                    part->drawHead(dir);
+                else
+                    part->drawBody();
+                break;
+            default:
+                break;
         }
     }
 }
