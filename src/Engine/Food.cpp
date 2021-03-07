@@ -7,10 +7,9 @@ Food::Food()
 
 }
 
-Food::Food(std::shared_ptr<Context> &context, int xPos, int yPos) : context(context)
+Food::Food(std::shared_ptr<Context> &context, int xPos, int yPos)
+    : context(context), xPos(xPos), yPos(yPos)
 {
-    this->xPos = xPos;
-    this->yPos = yPos;
 }
 
 void Food::draw()

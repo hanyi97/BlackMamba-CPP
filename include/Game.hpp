@@ -14,7 +14,10 @@ namespace Engine
     {
         BACKGROUND,
         FOOD,
-        SNAKE
+        UP_MOUTH,
+        DOWN_MOUTH,
+        LEFT_MOUTH,
+        RIGHT_MOUTH
     };
 
     struct Context

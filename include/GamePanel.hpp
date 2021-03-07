@@ -18,6 +18,7 @@ namespace Engine
         sf::Sprite background;
         sf::RectangleShape panel;
         sf::RectangleShape divider;
+
         Player player1;
         Player player2;
     public:

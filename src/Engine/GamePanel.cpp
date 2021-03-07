@@ -42,7 +42,7 @@ void GamePanel::Init()
 
 void GamePanel::ProcessInput()
 {
-    sf::Event event;
+    sf::Event event{};
 
     while (context->window->pollEvent(event))
     {
