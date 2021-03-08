@@ -27,12 +27,12 @@ namespace Engine
         GamePanel(std::shared_ptr<Context> &context);
         ~GamePanel();
 
-        void Init() override;
-        void ProcessInput() override;
-        void Update(sf::Time deltaTime) override;
-        void Draw() override;
-        void Pause() override;
-        void Start() override;
+        void init() override;
+        void processInput() override;
+        void update(sf::Time deltaTime) override;
+        void draw() override;
+        void pause() override;
+        void start() override;
         void drawGrid();
     };
 }

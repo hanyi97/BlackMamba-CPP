@@ -16,7 +16,7 @@ Snake::Snake(std::shared_ptr<Context> &context, int player) :context(context), p
 {
 }
 
-void Snake::Init()
+void Snake::init()
 {
     int x, y;
     switch (player)
@@ -42,7 +42,7 @@ void Snake::Init()
     yPos = y;
 }
 
-void Snake::Move()
+void Snake::move()
 {
     body.emplace_back(context, xPos, yPos);
     if (body.size() > size) body.erase(body.begin());

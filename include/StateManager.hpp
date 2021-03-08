@@ -20,9 +20,9 @@ namespace Engine
         StateManager();
         ~StateManager();
 
-        void Add(std::unique_ptr<State> toAdd, bool replace = false);
-        void PopCurrent();
-        void ProcessStateChange();
+        void addState(std::unique_ptr<State> toAdd, bool replace = false);
+        void popCurrent();
+        void processStateChange();
         std::unique_ptr<State>& GetCurrent();
     };
 }

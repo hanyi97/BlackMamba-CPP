@@ -12,7 +12,7 @@ using namespace Engine;
 Game::Game() : context(std::make_shared<Context>())
 {
     context->window->create(sf::VideoMode(Settings::WINDOW_WIDTH, Settings::WINDOW_HEIGHT), "Black Mamba", sf::Style::Close);
-    context->states->Add(std::make_unique<GamePanel>(context));
+    context->states->addState(std::make_unique<GamePanel>(context));
 }
 
 Game::~Game() = default;
@@ -35,10 +35,10 @@ void Game::Run()
         {
             timeSinceLastFrame -= TIME_PER_FRAME;
 
-            context->states->ProcessStateChange();
-            context->states->GetCurrent()->ProcessInput();
-            context->states->GetCurrent()->Update(TIME_PER_FRAME);
-            context->states->GetCurrent()->Draw();
+            context->states->processStateChange();
+            context->states->GetCurrent()->processInput();
+            context->states->GetCurrent()->update(TIME_PER_FRAME);
+            context->states->GetCurrent()->draw();
         }
     }
 }
