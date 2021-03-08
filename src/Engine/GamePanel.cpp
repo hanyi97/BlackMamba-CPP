@@ -140,11 +140,13 @@ void GamePanel::draw()
     context->window->draw(panel);
     context->window->draw(divider);
 //    drawGrid();
+
     if (!player1.isLose()) player1.draw();
     else showP1LoseScreen();
     if (!player2.isLose()) player2.draw();
     else showP2LoseScreen();
     if (player1.isLose() && player2.isLose()) showGameOverScreen();
+
     context->window->draw(borders);
     displayPanelText();
     context->window->display();
