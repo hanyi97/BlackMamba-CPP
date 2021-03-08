@@ -139,6 +139,7 @@ void GamePanel::draw()
     context->window->draw(background);
     context->window->draw(panel);
     context->window->draw(divider);
+    context->window->draw(borders);
 //    drawGrid();
 
     if (!player1.isLose()) player1.draw();
@@ -147,7 +148,6 @@ void GamePanel::draw()
     else showP2LoseScreen();
     if (player1.isLose() && player2.isLose()) showGameOverScreen();
 
-    context->window->draw(borders);
     displayPanelText();
     context->window->display();
 }
@@ -240,20 +240,47 @@ void GamePanel::showGameOverScreen()
 
 void GamePanel::showP1LoseScreen()
 {
+    // Clear left screen
     sf::RectangleShape rect;
     rect.setPosition(1, 1 + Settings::GAME_YPOS);
-    rect.setSize(sf::Vector2f {(Settings::WINDOW_WIDTH / 2) - 1, Settings::GAME_HEIGHT - 2});
+    rect.setSize(sf::Vector2f {(Settings::WINDOW_WIDTH / 2.0f) - 1, Settings::GAME_HEIGHT - 2});
     rect.setFillColor(sf::Color::Black);
+
+    // Game over text
+    sf::Text gameOver;
+    gameOver.setCharacterSize(30);
+    gameOver.setString("Player 1 Game Over");
+    gameOver.setFont(context->assets->getFont(BOLD_FONT));
+    sf::FloatRect gameOverRect = gameOver.getLocalBounds();
+    gameOver.setOrigin(gameOverRect.left + gameOverRect.width/2.0f,gameOverRect.top  + gameOverRect.height/2.0f);
+    gameOver.setPosition(sf::Vector2f(Settings::CENTER/2.0f, Settings::WINDOW_HEIGHT/2.0f));
+    gameOver.setFillColor(sf::Color(255, 102, 102));
+
     context->window->draw(rect);
+    context->window->draw(gameOver);
 }
 
 void GamePanel::showP2LoseScreen()
 {
+    // Clear right screen
     sf::RectangleShape rect;
     rect.setPosition(Settings::CENTER + 1, 1 + Settings::GAME_YPOS);
-    rect.setSize(sf::Vector2f{(Settings::WINDOW_WIDTH / 2) - 2, Settings::GAME_HEIGHT - 2});
+    rect.setSize(sf::Vector2f{(Settings::WINDOW_WIDTH / 2.0f) - 2, Settings::GAME_HEIGHT - 2});
     rect.setFillColor(sf::Color::Black);
+
+
+    // Game over text
+    sf::Text gameOver;
+    gameOver.setCharacterSize(30);
+    gameOver.setString("Player 2 Game Over");
+    gameOver.setFont(context->assets->getFont(BOLD_FONT));
+    sf::FloatRect gameOverRect = gameOver.getLocalBounds();
+    gameOver.setOrigin(gameOverRect.left + gameOverRect.width/2.0f,gameOverRect.top  + gameOverRect.height/2.0f);
+    gameOver.setPosition(sf::Vector2f(Settings::CENTER + Settings::CENTER/2.0f, Settings::WINDOW_HEIGHT/2.0f));
+    gameOver.setFillColor(sf::Color(255, 102, 102));
+
     context->window->draw(rect);
+    context->window->draw(gameOver);
 }
 
 void GamePanel::displayPanelText()
@@ -264,7 +291,7 @@ void GamePanel::displayPanelText()
 
     // Player 1 text
     p1.setCharacterSize(20);
-    p1.setPosition(Settings::CENTER/2, 18);
+    p1.setPosition(Settings::CENTER/2.0f, 18);
     p1.setFillColor(sf::Color(255, 102, 153));
     p1.setFont(context->assets->getFont(BOLD_FONT));
     p1.setString("Player 1");
@@ -285,7 +312,7 @@ void GamePanel::displayPanelText()
 
     // Player 2 text
     p2.setCharacterSize(20);
-    p2.setPosition(Settings::CENTER + Settings::CENTER/2, 18);
+    p2.setPosition(Settings::CENTER + Settings::CENTER/2.0f, 18);
     p2.setFillColor(sf::Color(255, 102, 153));
     p2.setFont(context->assets->getFont(BOLD_FONT));
     p2.setString("Player 2");
