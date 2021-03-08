@@ -15,8 +15,11 @@ namespace Engine
     class Player
     {
     private:
+        std::shared_ptr<Context> context;
+
         int lives;
         int score;
+        int player;
         bool lose;
 
         bool up;
@@ -26,6 +29,9 @@ namespace Engine
 
         Food food;
         Snake snake;
+
+        static const int SCORE_INCREMENT = 10;
+        static const int SCORE_DECREMENT = 5;
     public:
         Player(std::shared_ptr<Context> &context, int player);
         void init();
@@ -33,10 +39,21 @@ namespace Engine
         void moveSnake();
         void changeDirection(bool up, bool down, bool left, bool right);
 
-        bool getUp();
-        bool getDown();
-        bool getLeft();
-        bool getRight();
+        Food createFood();
+
+        void checkHit();
+        void checkEat();
+
+        bool getUp() const;
+        bool getDown() const;
+        bool getLeft() const;
+        bool getRight() const;
+
+        void setLose(bool lose);
+        bool isLose() const;
+
+        int getScore() const;
+        int getLives() const;
     };
 }
 

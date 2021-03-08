@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "Body.hpp"
+#include "Food.hpp"
 
 namespace Engine
 {
@@ -26,6 +27,10 @@ namespace Engine
         void init();
         void move();
         void draw(char direction);
+
+        bool hitBorder() const;
+        bool hitItself();
+        bool hitFood(Food &food);
 
         void setXPos(int x);
         int getXPos() const;

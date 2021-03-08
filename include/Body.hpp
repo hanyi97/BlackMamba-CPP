@@ -11,8 +11,8 @@ namespace Engine
     class Body
     {
     private:
-        int xPos{};
-        int yPos{};
+        int xPos;
+        int yPos;
         sf::Sprite head;
         sf::CircleShape body;
         std::shared_ptr<Context> context;
