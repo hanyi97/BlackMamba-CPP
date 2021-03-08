@@ -39,6 +39,13 @@ void GamePanel::init()
     divider.setPosition(Settings::CENTER, Settings::GAME_YPOS);
     divider.setFillColor(sf::Color::White);
 
+    // Borders
+    borders.setSize(sf::Vector2f(Settings::WINDOW_WIDTH - 4, Settings::GAME_HEIGHT - 4));
+    borders.setPosition(2, Settings::GAME_YPOS);
+    borders.setFillColor(sf::Color::Transparent);
+    borders.setOutlineColor(sf::Color::White);
+    borders.setOutlineThickness(2);
+
     player1.init();
     player2.init();
 }
@@ -82,8 +89,20 @@ void GamePanel::update(sf::Time deltaTime)
     elapsedTime += deltaTime;
     if (elapsedTime.asSeconds() > 0.1)
     {
-        player1.moveSnake();
-        player2.moveSnake();
+        if (!player1.isLose())
+        {
+            player1.moveSnake();
+            player1.checkHit();
+            player1.checkEat();
+        }
+
+        if (!player2.isLose())
+        {
+            player2.moveSnake();
+            player2.checkHit();
+            player2.checkEat();
+        }
+
         elapsedTime = sf::Time::Zero;
     }
 }
@@ -95,8 +114,17 @@ void GamePanel::draw()
     context->window->draw(panel);
     context->window->draw(divider);
 //    drawGrid();
-    player1.draw();
-    player2.draw();
+    if (!player1.isLose())
+        player1.draw();
+    else
+        showP1LoseScreen();
+
+    if (!player2.isLose())
+        player2.draw();
+    else
+        showP2LoseScreen();
+
+    context->window->draw(borders);
     context->window->display();
 }
 
@@ -130,4 +158,27 @@ void GamePanel::drawGrid()
         line.setFillColor(sf::Color::White);
         context->window->draw(line);
     }
+}
+
+void GamePanel::showGameOverScreen()
+{
+
+}
+
+void GamePanel::showP1LoseScreen()
+{
+    sf::RectangleShape rect;
+    rect.setPosition(1, 1 + Settings::GAME_YPOS);
+    rect.setSize(sf::Vector2f {(Settings::WINDOW_WIDTH / 2) - 1, Settings::GAME_HEIGHT - 2});
+    rect.setFillColor(sf::Color::Black);
+    context->window->draw(rect);
+}
+
+void GamePanel::showP2LoseScreen()
+{
+    sf::RectangleShape rect;
+    rect.setPosition(Settings::CENTER + 1, 1 + Settings::GAME_YPOS);
+    rect.setSize(sf::Vector2f{(Settings::WINDOW_WIDTH / 2) - 2, Settings::GAME_HEIGHT - 2});
+    rect.setFillColor(sf::Color::Black);
+    context->window->draw(rect);
 }

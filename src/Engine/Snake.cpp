@@ -54,6 +54,43 @@ void Snake::draw(char dir)
     }
 }
 
+bool Snake::hitBorder() const
+{
+    switch (player)
+    {
+        case PLAYER1:
+            return xPos < 0 || xPos > Settings::CENTER - Settings::UNIT_SIZE
+            || yPos < Settings::GAME_YPOS || yPos >= Settings::WINDOW_HEIGHT;
+        case PLAYER2:
+            return xPos < Settings::CENTER || xPos > Settings::WINDOW_WIDTH - Settings::UNIT_SIZE
+            || yPos < Settings::GAME_YPOS || yPos >= Settings::WINDOW_HEIGHT;
+        default:
+            return false;
+    }
+}
+
+bool Snake::hitItself()
+{
+    for (auto part = body.begin(); part != body.end(); ++part)
+    {
+        if (part != body.end()-1)
+        {
+            return (xPos == part->getXPos() && yPos == part->getYPos());
+        }
+    }
+    return false;
+}
+
+bool Snake::hitFood(Food &food)
+{
+    if (xPos == food.getXPos() && yPos == food.getYPos())
+    {
+        size++;
+        return true;
+    }
+    return false;
+}
+
 void Snake::setXPos(int x)
 {
     xPos = x;

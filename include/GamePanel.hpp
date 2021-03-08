@@ -18,6 +18,7 @@ namespace Engine
         sf::Sprite background;
         sf::RectangleShape panel;
         sf::RectangleShape divider;
+        sf::RectangleShape borders;
 
         Player player1;
         Player player2;
@@ -34,6 +35,9 @@ namespace Engine
         void pause() override;
         void start() override;
         void drawGrid();
+        void showGameOverScreen();
+        void showP1LoseScreen();
+        void showP2LoseScreen();
     };
 }
 

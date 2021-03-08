@@ -57,20 +57,20 @@ void Body::drawHead(char direction)
 
 int Body::getXPos()
 {
-
+    return xPos;
 }
 
 void Body::setXPos(int xPos)
 {
-
+    this->xPos = xPos;
 }
 
 int Body::getYPos()
 {
-
+    return yPos;
 }
 
 void Body::setYPos(int yPos)
 {
-
+    this->yPos = yPos;
 }
