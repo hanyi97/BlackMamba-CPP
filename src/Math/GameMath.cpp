@@ -26,5 +26,5 @@ int GameMath::getRandomLeftX(int center, int unitSize)
 
 int GameMath::getRandomRightX(int center, int unitSize)
 {
-    return rand() % calculateXBound(center, unitSize) + calculateXBound(center, unitSize) * unitSize;
+    return (rand() % calculateXBound(center, unitSize) + calculateXBound(center, unitSize)) * unitSize;
 }
