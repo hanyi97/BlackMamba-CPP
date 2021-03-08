@@ -72,7 +72,11 @@ void Player::checkHit()
 
 void Player::checkEat()
 {
-    if (snake.hitFood(food)) food = createFood();
+    if (snake.hitFood(food))
+    {
+        score += SCORE_INCREMENT;
+        food = createFood();
+    }
 }
 
 Food Player::createFood()

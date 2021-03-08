@@ -29,6 +29,9 @@ namespace Engine
 
         Food food;
         Snake snake;
+
+        static const int SCORE_INCREMENT = 10;
+        static const int SCORE_DECREMENT = 5;
     public:
         Player(std::shared_ptr<Context> &context, int player);
         void init();
