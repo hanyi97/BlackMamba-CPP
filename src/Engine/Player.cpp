@@ -35,9 +35,9 @@ void Player::draw()
 {
     char dir = 'A';
     if (up) dir = 'U';
-    if (down) dir = 'D';
-    if (left) dir = 'L';
-    if (right) dir = 'R';
+    else if (down) dir = 'D';
+    else if (left) dir = 'L';
+    else if (right) dir = 'R';
 
     food.draw();
     snake.draw(dir);

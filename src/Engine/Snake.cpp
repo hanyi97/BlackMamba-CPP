@@ -33,11 +33,6 @@ void Snake::init()
             x = 0, y = 0;
             break;
     }
-    for (int i = 0; i < size; i++)
-    {
-        body.emplace_back(context, x, y);
-        x+=Settings::UNIT_SIZE;
-    }
     xPos = x;
     yPos = y;
 }
