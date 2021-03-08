@@ -20,7 +20,7 @@ void Body::drawBody()
 {
     body.setRadius(Settings::UNIT_SIZE/2);
     body.setPosition(xPos, yPos);
-    body.setFillColor(sf::Color::Cyan);
+    body.setFillColor(sf::Color(rand() % 256, rand() % 256, rand() % 256));
     context->window->draw(body);
 }
 
