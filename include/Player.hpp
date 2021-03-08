@@ -48,6 +48,9 @@ namespace Engine
 
         void setLose(bool lose);
         bool isLose() const;
+
+        int getScore() const;
+        int getLives() const;
     };
 }
 

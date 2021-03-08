@@ -3,6 +3,8 @@
 
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
+#include <SFML/Graphics/Text.hpp>
+#include <iostream>
 
 using namespace Engine;
 
@@ -20,6 +22,8 @@ GamePanel::~GamePanel() = default;
 
 void GamePanel::init()
 {
+    context->assets->addFont(MAIN_FONT, "../assets/fonts/Helvetica.ttf");
+    context->assets->addFont(BOLD_FONT, "../assets/fonts/Helvetica-Bold.ttf");
     context->assets->addTexture(BACKGROUND, "../assets/images/background.jpg", true);
 
     // Background image
@@ -48,6 +52,7 @@ void GamePanel::init()
 
     player1.init();
     player2.init();
+    start();
 }
 
 void GamePanel::processInput()
@@ -80,6 +85,22 @@ void GamePanel::processInput()
                 player2.changeDirection(false, false, true, false);
             else if (key == sf::Keyboard::Right && !player2.getLeft())
                 player2.changeDirection(false, false, false, true);
+            else if (key == sf::Keyboard::Space)
+            {
+                if (running) running = false;
+                else running = true;
+            }
+            else if (key == sf::Keyboard::Enter)
+            {
+                if (!running)
+                {
+                    running = true;
+                    player1 = Player(context, PLAYER1);
+                    player2 = Player(context, PLAYER2);
+                    player1.init();
+                    player2.init();
+                }
+            }
         }
     }
 }
@@ -89,18 +110,23 @@ void GamePanel::update(sf::Time deltaTime)
     elapsedTime += deltaTime;
     if (elapsedTime.asSeconds() > 0.1)
     {
-        if (!player1.isLose())
+        if (running)
         {
-            player1.moveSnake();
-            player1.checkHit();
-            player1.checkEat();
-        }
+            if (player1.isLose() && player2.isLose()) running = false;
 
-        if (!player2.isLose())
-        {
-            player2.moveSnake();
-            player2.checkHit();
-            player2.checkEat();
+            if (!player1.isLose())
+            {
+                player1.moveSnake();
+                player1.checkHit();
+                player1.checkEat();
+            }
+
+            if (!player2.isLose())
+            {
+                player2.moveSnake();
+                player2.checkHit();
+                player2.checkEat();
+            }
         }
 
         elapsedTime = sf::Time::Zero;
@@ -114,17 +140,12 @@ void GamePanel::draw()
     context->window->draw(panel);
     context->window->draw(divider);
 //    drawGrid();
-    if (!player1.isLose())
-        player1.draw();
-    else
-        showP1LoseScreen();
-
-    if (!player2.isLose())
-        player2.draw();
-    else
-        showP2LoseScreen();
-
+    if (!player1.isLose()) player1.draw();
+    else showP1LoseScreen();
+    if (!player2.isLose()) player2.draw();
+    else showP2LoseScreen();
     context->window->draw(borders);
+    displayPanelText();
     context->window->display();
 }
 
@@ -181,4 +202,68 @@ void GamePanel::showP2LoseScreen()
     rect.setSize(sf::Vector2f{(Settings::WINDOW_WIDTH / 2) - 2, Settings::GAME_HEIGHT - 2});
     rect.setFillColor(sf::Color::Black);
     context->window->draw(rect);
+}
+
+void GamePanel::displayPanelText()
+{
+    sf::Text p1, p1Score, p1Lives,
+             p2, p2Score, p2Lives,
+             pauseText;
+
+    // Player 1 text
+    p1.setCharacterSize(20);
+    p1.setPosition(Settings::CENTER/2, 18);
+    p1.setFillColor(sf::Color(255, 102, 153));
+    p1.setFont(context->assets->getFont(BOLD_FONT));
+    p1.setString("Player 1");
+
+    // Player 1 score
+    p1Score.setCharacterSize(15);
+    p1Score.setPosition(10, 10);
+    p1Score.setFillColor(sf::Color::White);
+    p1Score.setFont(context->assets->getFont(BOLD_FONT));
+    p1Score.setString("Score: " + std::to_string(player1.getScore()));
+
+    // Player 1 lives
+    p1Lives.setCharacterSize(15);
+    p1Lives.setPosition(10, 30);
+    p1Lives.setFillColor(sf::Color::White);
+    p1Lives.setFont(context->assets->getFont(BOLD_FONT));
+    p1Lives.setString("Lives: " + std::to_string(player1.getLives()));
+
+    // Player 2 text
+    p2.setCharacterSize(20);
+    p2.setPosition(Settings::CENTER + Settings::CENTER/2, 18);
+    p2.setFillColor(sf::Color(255, 102, 153));
+    p2.setFont(context->assets->getFont(BOLD_FONT));
+    p2.setString("Player 2");
+
+    // Player 2 score
+    p2Score.setCharacterSize(15);
+    p2Score.setPosition(Settings::CENTER + 500, 10);
+    p2Score.setFillColor(sf::Color::White);
+    p2Score.setFont(context->assets->getFont(BOLD_FONT));
+    p2Score.setString("Score: " + std::to_string(player2.getScore()));
+
+    // Player 2 lives
+    p2Lives.setCharacterSize(15);
+    p2Lives.setPosition(Settings::CENTER + 500, 30);
+    p2Lives.setFillColor(sf::Color::White);
+    p2Lives.setFont(context->assets->getFont(BOLD_FONT));
+    p2Lives.setString("Lives: " + std::to_string(player2.getLives()));
+
+    // Pause text
+    pauseText.setCharacterSize(12);
+    pauseText.setPosition(10, Settings::GAME_YPOS - 25);
+    pauseText.setFillColor(sf::Color::Red);
+    pauseText.setFont(context->assets->getFont(MAIN_FONT));
+    pauseText.setString("Press 'spacebar' to pause");
+
+    context->window->draw(p1);
+    context->window->draw(p2);
+    context->window->draw(p1Score);
+    context->window->draw(p2Score);
+    context->window->draw(p1Lives);
+    context->window->draw(p2Lives);
+    context->window->draw(pauseText);
 }

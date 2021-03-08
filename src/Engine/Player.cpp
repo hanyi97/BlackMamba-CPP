@@ -119,3 +119,13 @@ bool Player::isLose() const
 {
     return lose;
 }
+
+int Player::getScore() const
+{
+    return score;
+}
+
+int Player::getLives() const
+{
+    return lives;
+}

@@ -12,6 +12,8 @@ namespace Engine
 {
     enum AssetID
     {
+        MAIN_FONT,
+        BOLD_FONT,
         BACKGROUND,
         FOOD,
         UP_MOUTH,

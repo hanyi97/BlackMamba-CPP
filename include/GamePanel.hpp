@@ -38,6 +38,7 @@ namespace Engine
         void showGameOverScreen();
         void showP1LoseScreen();
         void showP2LoseScreen();
+        void displayPanelText();
     };
 }
 
