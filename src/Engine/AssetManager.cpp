@@ -10,7 +10,7 @@ AssetManager::~AssetManager()
 {
 }
 
-void AssetManager::AddTexture(int id, const std::string &filePath, bool wantRepeated)
+void AssetManager::addTexture(int id, const std::string &filePath, bool wantRepeated)
 {
     auto texture = std::make_unique<sf::Texture>();
 
@@ -21,7 +21,7 @@ void AssetManager::AddTexture(int id, const std::string &filePath, bool wantRepe
     }
 }
 
-void AssetManager::AddFont(int id, const std::string &filePath)
+void AssetManager::addFont(int id, const std::string &filePath)
 {
     auto font = std::make_unique<sf::Font>();
 
@@ -31,12 +31,12 @@ void AssetManager::AddFont(int id, const std::string &filePath)
     }
 }
 
-const sf::Texture &AssetManager::GetTexture(int id) const
+const sf::Texture &AssetManager::getTexture(int id) const
 {
     return *(textures.at(id).get());
 }
 
-const sf::Font &AssetManager::GetFont(int id) const
+const sf::Font &AssetManager::getFont(int id) const
 {
     return *(fonts.at(id).get());
 }

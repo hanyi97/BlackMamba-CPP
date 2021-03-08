@@ -23,8 +23,8 @@ namespace Engine
         Snake();
         Snake(std::shared_ptr<Context> &context, int player);
 
-        void Init();
-        void Move();
+        void init();
+        void move();
         void draw(char direction);
 
         void setXPos(int x);

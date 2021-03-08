@@ -18,12 +18,12 @@ GamePanel::GamePanel(std::shared_ptr<Context> &context)
 
 GamePanel::~GamePanel() = default;
 
-void GamePanel::Init()
+void GamePanel::init()
 {
-    context->assets->AddTexture(BACKGROUND, "../assets/images/background.jpg", true);
+    context->assets->addTexture(BACKGROUND, "../assets/images/background.jpg", true);
 
     // Background image
-    background.setTexture(context->assets->GetTexture(BACKGROUND));
+    background.setTexture(context->assets->getTexture(BACKGROUND));
     background.setPosition(0, Settings::GAME_YPOS);
     background.setTextureRect(context->window->getViewport(context->window->getDefaultView()));
 
@@ -39,11 +39,11 @@ void GamePanel::Init()
     divider.setPosition(Settings::CENTER, Settings::GAME_YPOS);
     divider.setFillColor(sf::Color::White);
 
-    player1.Init();
-    player2.Init();
+    player1.init();
+    player2.init();
 }
 
-void GamePanel::ProcessInput()
+void GamePanel::processInput()
 {
     sf::Event event{};
 
@@ -59,25 +59,25 @@ void GamePanel::ProcessInput()
 
             if (key == sf::Keyboard::W && !player1.getDown())
                 player1.changeDirection(true, false, false, false);
-            if (key == sf::Keyboard::S && !player1.getUp())
+            else if (key == sf::Keyboard::S && !player1.getUp())
                 player1.changeDirection(false, true, false, false);
-            if (key == sf::Keyboard::A && !player1.getRight())
+            else if (key == sf::Keyboard::A && !player1.getRight())
                 player1.changeDirection(false, false, true, false);
-            if (key == sf::Keyboard::D && !player1.getLeft())
+            else if (key == sf::Keyboard::D && !player1.getLeft())
                 player1.changeDirection(false, false, false, true);
-            if (key == sf::Keyboard::Up && !player2.getDown())
+            else if (key == sf::Keyboard::Up && !player2.getDown())
                 player2.changeDirection(true, false, false, false);
-            if (key == sf::Keyboard::Down && !player2.getUp())
+            else if (key == sf::Keyboard::Down && !player2.getUp())
                 player2.changeDirection(false, true, false, false);
-            if (key == sf::Keyboard::Left && !player2.getRight())
+            else if (key == sf::Keyboard::Left && !player2.getRight())
                 player2.changeDirection(false, false, true, false);
-            if (key == sf::Keyboard::Right && !player2.getLeft())
+            else if (key == sf::Keyboard::Right && !player2.getLeft())
                 player2.changeDirection(false, false, false, true);
         }
     }
 }
 
-void GamePanel::Update(sf::Time deltaTime)
+void GamePanel::update(sf::Time deltaTime)
 {
     elapsedTime += deltaTime;
     if (elapsedTime.asSeconds() > 0.1)
@@ -88,7 +88,7 @@ void GamePanel::Update(sf::Time deltaTime)
     }
 }
 
-void GamePanel::Draw()
+void GamePanel::draw()
 {
     context->window->clear();
     context->window->draw(background);
@@ -100,19 +100,19 @@ void GamePanel::Draw()
     context->window->display();
 }
 
-void GamePanel::Pause()
+void GamePanel::pause()
 {
     running = false;
 }
 
-void GamePanel::Start()
+void GamePanel::start()
 {
     running = true;
 }
 
 void GamePanel::drawGrid()
 {
-    // Draw vertical lines
+    // draw vertical lines
     for (int i = 0; i < Settings::WINDOW_HEIGHT / Settings::UNIT_SIZE; i++)
     {
         sf::RectangleShape line;
@@ -121,7 +121,7 @@ void GamePanel::drawGrid()
         line.setFillColor(sf::Color::White);
         context->window->draw(line);
     }
-    // Draw horizontal lines
+    // draw horizontal lines
     for (int i = 0; i < Settings::WINDOW_WIDTH / Settings::UNIT_SIZE; i++)
     {
         sf::RectangleShape line;

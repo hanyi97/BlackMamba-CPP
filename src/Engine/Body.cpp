@@ -30,19 +30,19 @@ void Body::drawHead(char direction)
     switch (direction)
     {
         case 'U':
-            context->assets->AddTexture(UP_MOUTH, "../assets/images/upmouth.png");
+            context->assets->addTexture(UP_MOUTH, "../assets/images/upmouth.png");
             id = UP_MOUTH;
             break;
         case 'D':
-            context->assets->AddTexture(DOWN_MOUTH, "../assets/images/downmouth.png");
+            context->assets->addTexture(DOWN_MOUTH, "../assets/images/downmouth.png");
             id = DOWN_MOUTH;
             break;
         case 'L':
-            context->assets->AddTexture(LEFT_MOUTH, "../assets/images/leftmouth.png");
+            context->assets->addTexture(LEFT_MOUTH, "../assets/images/leftmouth.png");
             id = LEFT_MOUTH;
             break;
         case 'R':
-            context->assets->AddTexture(RIGHT_MOUTH, "../assets/images/rightmouth.png");
+            context->assets->addTexture(RIGHT_MOUTH, "../assets/images/rightmouth.png");
             id = RIGHT_MOUTH;
             break;
         default:
@@ -50,7 +50,7 @@ void Body::drawHead(char direction)
             break;
     }
 
-    head.setTexture(context->assets->GetTexture(id));
+    head.setTexture(context->assets->getTexture(id));
     head.setPosition(xPos, yPos);
     context->window->draw(head);
 }

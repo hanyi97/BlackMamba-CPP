@@ -26,9 +26,9 @@ Player::Player(std::shared_ptr<Context> &context, int player):lives(3), score(0)
     }
 }
 
-void Player::Init()
+void Player::init()
 {
-    snake.Init();
+    snake.init();
 }
 
 void Player::draw()
@@ -55,7 +55,7 @@ void Player::moveSnake()
 
     snake.setXPos(x);
     snake.setYPos(y);
-    snake.Move();
+    snake.move();
 }
 
 void Player::changeDirection(bool up, bool down, bool left, bool right)

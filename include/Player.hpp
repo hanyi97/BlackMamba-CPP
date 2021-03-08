@@ -28,7 +28,7 @@ namespace Engine
         Snake snake;
     public:
         Player(std::shared_ptr<Context> &context, int player);
-        void Init();
+        void init();
         void draw();
         void moveSnake();
         void changeDirection(bool up, bool down, bool left, bool right);

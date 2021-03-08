@@ -13,8 +13,8 @@ Food::Food(std::shared_ptr<Context> &context, int xPos, int yPos)
 
 void Food::draw()
 {
-    context->assets->AddTexture(FOOD, "../assets/images/donut.png");
-    food.setTexture(context->assets->GetTexture(FOOD));
+    context->assets->addTexture(FOOD, "../assets/images/donut.png");
+    food.setTexture(context->assets->getTexture(FOOD));
     food.setPosition(xPos, yPos);
     context->window->draw(food);
 }
