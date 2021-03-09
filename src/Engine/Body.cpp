@@ -15,7 +15,9 @@ Body::Body(std::shared_ptr<Context> &context, int xPos, int yPos)
 
 }
 
-
+/**
+ * Method to draw the body of the snake
+ */
 void Body::drawBody()
 {
     body.setRadius(Settings::UNIT_SIZE/2.0f);
@@ -24,6 +26,10 @@ void Body::drawBody()
     context->window->draw(body);
 }
 
+/**
+ * Method to initialise head image depending on the direction it is facing
+ * and draw it to the given position
+ */
 void Body::drawHead(char direction)
 {
     int id;
@@ -55,21 +61,33 @@ void Body::drawHead(char direction)
     context->window->draw(head);
 }
 
+/**
+ * @return x position of a body part
+ */
 int Body::getXPos() const
 {
     return xPos;
 }
 
+/**
+ * @param xPos: x position to set
+ */
 void Body::setXPos(int xPos)
 {
     this->xPos = xPos;
 }
 
+/**
+ * @return y position of a body part
+ */
 int Body::getYPos() const
 {
     return yPos;
 }
 
+/**
+ * @param yPos: y position to set
+ */
 void Body::setYPos(int yPos)
 {
     this->yPos = yPos;

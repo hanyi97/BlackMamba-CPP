@@ -26,11 +26,17 @@ Player::Player(std::shared_ptr<Context> &context, int player)
     }
 }
 
+/**
+ * Initialises snake
+ */
 void Player::init()
 {
     snake.init();
 }
 
+/**
+ * Draws snake and edibles for player
+ */
 void Player::draw()
 {
     char dir = 'A';
@@ -44,6 +50,9 @@ void Player::draw()
     snake.draw(dir);
 }
 
+/**
+ * Move snake based on direction it is facing
+ */
 void Player::moveSnake()
 {
     int x = snake.getXPos();
@@ -59,6 +68,13 @@ void Player::moveSnake()
     snake.move();
 }
 
+/**
+ * Change direction of snake
+ * @param up: true to indicate up
+ * @param down: true to indicate down
+ * @param left: true to indicate left
+ * @param right: true to indicate right
+ */
 void Player::changeDirection(bool up, bool down, bool left, bool right)
 {
     this->up = up;
@@ -67,11 +83,18 @@ void Player::changeDirection(bool up, bool down, bool left, bool right)
     this->right = right;
 }
 
+/**
+ * Check if snake hits border/itself or when life count becomes zero
+ */
 void Player::checkHit()
 {
     if (snake.hitBorder() || snake.hitItself() || lives == 0) lose = true;
 }
 
+/**
+ * Increase snake size and score when snake eats food.
+ * Increase snake size by 10 and minus lives and score when ate poison.
+ */
 void Player::checkEat()
 {
     if (snake.hitFood(food))
@@ -90,11 +113,17 @@ void Player::checkEat()
     }
 }
 
+/**
+ * Regenerate position for poison
+ */
 void Player::repositionPoison()
 {
     poison = createPoison();
 }
 
+/**
+ * @return new food object
+ */
 Food Player::createFood()
 {
     switch (player)
@@ -110,6 +139,9 @@ Food Player::createFood()
     }
 }
 
+/**
+ * @return new poison object
+ */
 Poison Player::createPoison()
 {
     Poison newPoison;
@@ -135,41 +167,65 @@ Poison Player::createPoison()
     return newPoison;
 }
 
+/**
+ * @return up boolean
+ */
 bool Player::getUp() const
 {
     return up;
 }
 
+/**
+ * @return down boolean
+ */
 bool Player::getDown() const
 {
     return down;
 }
 
+/**
+ * @return left boolean
+ */
 bool Player::getLeft() const
 {
     return left;
 }
 
+/**
+ * @return right boolean
+ */
 bool Player::getRight() const
 {
     return right;
 }
 
+/**
+ * @param lose: boolean to set
+ */
 void Player::setLose(bool lose)
 {
     this->lose = lose;
 }
 
+/**
+ * @return lose boolean
+ */
 bool Player::isLose() const
 {
     return lose;
 }
 
+/**
+ * @return score count
+ */
 int Player::getScore() const
 {
     return score;
 }
 
+/**
+ * @return lives count
+ */
 int Player::getLives() const
 {
     return lives;
