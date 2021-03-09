@@ -45,7 +45,7 @@ void GamePanel::init()
     divider.setFillColor(sf::Color::White);
 
     // Borders
-    borders.setSize(sf::Vector2f(Settings::WINDOW_WIDTH - 4, Settings::GAME_HEIGHT - 4));
+    borders.setSize(sf::Vector2f(Settings::WINDOW_WIDTH - 4, Settings::GAME_HEIGHT - 2));
     borders.setPosition(2, Settings::GAME_YPOS);
     borders.setFillColor(sf::Color::Transparent);
     borders.setOutlineColor(sf::Color::White);
@@ -137,7 +137,6 @@ void GamePanel::update(sf::Time deltaTime)
             }
             ticks++;
         }
-
         elapsedTime = sf::Time::Zero;
     }
 }
@@ -342,7 +341,7 @@ void GamePanel::displayPanelText()
 
     // Pause text
     pauseText.setCharacterSize(12);
-    pauseText.setPosition(10, Settings::GAME_YPOS - 25);
+    pauseText.setPosition(10, Settings::GAME_YPOS - 20);
     pauseText.setFillColor(sf::Color::Red);
     pauseText.setFont(context->assets->getFont(MAIN_FONT));
     pauseText.setString("Press 'spacebar' to pause");
