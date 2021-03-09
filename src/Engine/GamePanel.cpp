@@ -12,6 +12,7 @@ GamePanel::GamePanel(std::shared_ptr<Context> &context)
          : context(context),
            elapsedTime(sf::Time::Zero),
            running(true),
+           ticks(0),
            player1(context, PLAYER1),
            player2(context, PLAYER2)
 {
@@ -127,6 +128,14 @@ void GamePanel::update(sf::Time deltaTime)
                 player2.checkHit();
                 player2.checkEat();
             }
+
+            if (ticks >= 20)
+            {
+                player1.repositionPoison();
+                player2.repositionPoison();
+                ticks = 0;
+            }
+            ticks++;
         }
 
         elapsedTime = sf::Time::Zero;

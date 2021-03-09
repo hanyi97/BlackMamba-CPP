@@ -1,3 +1,4 @@
+#include <iostream>
 #include "../../include/Player.hpp"
 #include "../../include/GameMath.hpp"
 #include "../../include/Settings.hpp"
@@ -8,17 +9,15 @@ using namespace Math;
 Player::Player(std::shared_ptr<Context> &context, int player)
       :context(context), player(player), lives(3), score(0), lose(false)
 {
+    this->food = createFood();
+    this->poison = createPoison();
     switch (player)
     {
         case PLAYER1:
-            this->food = createFood();
-            this->poison = createPoison();
             this->snake = Snake(context, PLAYER1);
             right = true, left = false, up = false, down = false;
             break;
         case PLAYER2:
-            this->food = createFood();
-            this->poison = createPoison();
             this->snake = Snake(context, PLAYER2);
             right = false, left = true, up = false, down = false;
             break;
@@ -89,6 +88,11 @@ void Player::checkEat()
         snake.increaseSize(10);
         poison = createPoison();
     }
+}
+
+void Player::repositionPoison()
+{
+    poison = createPoison();
 }
 
 Food Player::createFood()

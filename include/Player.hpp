@@ -46,6 +46,7 @@ namespace Engine
 
         void checkHit();
         void checkEat();
+        void repositionPoison();
 
         bool getUp() const;
         bool getDown() const;
