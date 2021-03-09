@@ -222,21 +222,21 @@ void GamePanel::showGameOverScreen()
     result.setFillColor(sf::Color(102, 255, 153));
 
     // Restart text
-    restart.setCharacterSize(20);
+    restart.setCharacterSize(15);
     restart.setString("Press Enter to Restart");
-    restart.setFont(context->assets->getFont(BOLD_FONT));
+    restart.setFont(context->assets->getFont(MAIN_FONT));
     sf::FloatRect restartRect = restart.getLocalBounds();
     restart.setOrigin(restartRect.left + restartRect.width/2.0f,restartRect.top  + restartRect.height/2.0f);
     restart.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH/2.0f, Settings::WINDOW_HEIGHT/2.0f + 100));
     restart.setFillColor(sf::Color(255, 77, 77));
 
     // Menu text
-    menu.setCharacterSize(20);
+    menu.setCharacterSize(15);
     menu.setString("Press Escape to return to Main Menu");
-    menu.setFont(context->assets->getFont(BOLD_FONT));
+    menu.setFont(context->assets->getFont(MAIN_FONT));
     sf::FloatRect menuRect = menu.getLocalBounds();
     menu.setOrigin(menuRect.left + menuRect.width/2.0f,menuRect.top  + menuRect.height/2.0f);
-    menu.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH/2.0f, Settings::WINDOW_HEIGHT/2.0f + 150));
+    menu.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH/2.0f, Settings::WINDOW_HEIGHT/2.0f + 130));
     menu.setFillColor(sf::Color(255, 77, 77));
 
     context->window->draw(rect);
