@@ -31,7 +31,7 @@ namespace Engine
 
         bool hitBorder() const;
         bool hitItself();
-        bool hitFood(Drawable &food);
+        bool hitFood(Drawable &food) const;
 
         void setXPos(int x);
         int getXPos() const;

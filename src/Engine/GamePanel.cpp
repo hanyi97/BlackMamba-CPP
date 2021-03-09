@@ -21,6 +21,9 @@ GamePanel::GamePanel(std::shared_ptr<Context> &context)
 
 GamePanel::~GamePanel() = default;
 
+/**
+ * Initialises screen objects
+ */
 void GamePanel::init()
 {
     context->assets->addFont(MAIN_FONT, "../assets/fonts/Helvetica.ttf");
@@ -56,6 +59,9 @@ void GamePanel::init()
     start();
 }
 
+/**
+ * Wait for user keypress
+ */
 void GamePanel::processInput()
 {
     sf::Event event{};
@@ -106,6 +112,11 @@ void GamePanel::processInput()
     }
 }
 
+/**
+ * Updates game frame
+ *
+ * @param deltaTime: Elapsed time
+ */
 void GamePanel::update(sf::Time deltaTime)
 {
     elapsedTime += deltaTime;
@@ -113,8 +124,10 @@ void GamePanel::update(sf::Time deltaTime)
     {
         if (running)
         {
+            // Both lost
             if (player1.isLose() && player2.isLose()) running = false;
 
+            // Player 1
             if (!player1.isLose())
             {
                 player1.moveSnake();
@@ -122,6 +135,7 @@ void GamePanel::update(sf::Time deltaTime)
                 player1.checkEat();
             }
 
+            // Player 2
             if (!player2.isLose())
             {
                 player2.moveSnake();
@@ -129,6 +143,7 @@ void GamePanel::update(sf::Time deltaTime)
                 player2.checkEat();
             }
 
+            // Reposition poison
             if (ticks >= 20)
             {
                 player1.repositionPoison();
@@ -141,35 +156,50 @@ void GamePanel::update(sf::Time deltaTime)
     }
 }
 
+/**
+ * Clears screen frame and redraw objects
+ */
 void GamePanel::draw()
 {
+    // Clear screen
     context->window->clear();
+
+    // Draw objects
     context->window->draw(background);
     context->window->draw(panel);
     context->window->draw(divider);
     context->window->draw(borders);
 //    drawGrid();
-
     if (!player1.isLose()) player1.draw();
     else showP1LoseScreen();
     if (!player2.isLose()) player2.draw();
     else showP2LoseScreen();
     if (player1.isLose() && player2.isLose()) showGameOverScreen();
-
     displayPanelText();
+
+    // Display objects
     context->window->display();
 }
 
+/**
+ * Set running state to false
+ */
 void GamePanel::pause()
 {
     running = false;
 }
 
+/**
+ * Set running state to true
+ */
 void GamePanel::start()
 {
     running = true;
 }
 
+/**
+ * Helper method to draw grid lines
+ */
 void GamePanel::drawGrid()
 {
     // draw vertical lines
@@ -192,6 +222,9 @@ void GamePanel::drawGrid()
     }
 }
 
+/**
+ * Draws game over screen
+ */
 void GamePanel::showGameOverScreen()
 {
     sf::RectangleShape rect;
@@ -246,6 +279,9 @@ void GamePanel::showGameOverScreen()
     context->window->draw(menu);
 }
 
+/**
+ * Draws player 1 game over screen
+ */
 void GamePanel::showP1LoseScreen()
 {
     // Clear left screen
@@ -268,6 +304,9 @@ void GamePanel::showP1LoseScreen()
     context->window->draw(gameOver);
 }
 
+/**
+ * Draws player 2 game over screen
+ */
 void GamePanel::showP2LoseScreen()
 {
     // Clear right screen
@@ -291,6 +330,9 @@ void GamePanel::showP2LoseScreen()
     context->window->draw(gameOver);
 }
 
+/**
+ * Draws objects for top panel
+ */
 void GamePanel::displayPanelText()
 {
     sf::Text p1, p1Score, p1Lives,
