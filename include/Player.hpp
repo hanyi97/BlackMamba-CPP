@@ -3,6 +3,7 @@
 
 #include "Food.hpp"
 #include "Snake.hpp"
+#include "Poison.hpp"
 
 namespace Engine
 {
@@ -29,6 +30,7 @@ namespace Engine
 
         Food food;
         Snake snake;
+        Poison poison;
 
         static const int SCORE_INCREMENT = 10;
         static const int SCORE_DECREMENT = 5;
@@ -40,6 +42,7 @@ namespace Engine
         void changeDirection(bool up, bool down, bool left, bool right);
 
         Food createFood();
+        Poison createPoison();
 
         void checkHit();
         void checkEat();

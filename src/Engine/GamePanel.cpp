@@ -87,8 +87,8 @@ void GamePanel::processInput()
                 player2.changeDirection(false, false, false, true);
             else if (key == sf::Keyboard::Space)
             {
-                if (running) running = false;
-                else running = true;
+                if (running) pause();
+                else start();
             }
             else if (key == sf::Keyboard::Enter)
             {

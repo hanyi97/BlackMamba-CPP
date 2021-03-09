@@ -16,6 +16,7 @@ namespace Engine
         BOLD_FONT,
         BACKGROUND,
         FOOD,
+        POISON,
         UP_MOUTH,
         DOWN_MOUTH,
         LEFT_MOUTH,

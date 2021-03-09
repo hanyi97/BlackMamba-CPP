@@ -81,14 +81,14 @@ bool Snake::hitItself()
     return false;
 }
 
-bool Snake::hitFood(Food &food)
+bool Snake::hitFood(Drawable &food)
 {
-    if (xPos == food.getXPos() && yPos == food.getYPos())
-    {
-        size++;
-        return true;
-    }
-    return false;
+    return xPos == food.getXPos() && yPos == food.getYPos();
+}
+
+void Snake::increaseSize(int increment)
+{
+    size += increment;
 }
 
 void Snake::setXPos(int x)

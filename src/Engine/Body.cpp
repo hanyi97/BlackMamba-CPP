@@ -18,7 +18,7 @@ Body::Body(std::shared_ptr<Context> &context, int xPos, int yPos)
 
 void Body::drawBody()
 {
-    body.setRadius(Settings::UNIT_SIZE/2);
+    body.setRadius(Settings::UNIT_SIZE/2.0f);
     body.setPosition(xPos, yPos);
     body.setFillColor(sf::Color(rand() % 256, rand() % 256, rand() % 256));
     context->window->draw(body);

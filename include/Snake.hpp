@@ -26,11 +26,12 @@ namespace Engine
 
         void init();
         void move();
+        void increaseSize(int increment = 1);
         void draw(char direction);
 
         bool hitBorder() const;
         bool hitItself();
-        bool hitFood(Food &food);
+        bool hitFood(Drawable &food);
 
         void setXPos(int x);
         int getXPos() const;
