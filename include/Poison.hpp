@@ -1,23 +1,23 @@
-#ifndef BLACKMAMBA_FOOD_HPP
-#define BLACKMAMBA_FOOD_HPP
+#ifndef BLACKMAMBA_POISON_HPP
+#define BLACKMAMBA_POISON_HPP
 
+#include <memory>
 #include <SFML/Graphics/Sprite.hpp>
-#include "Game.hpp"
 #include "Drawable.hpp"
+#include "Game.hpp"
 
 namespace Engine
 {
-    class Food : public Drawable
+    class Poison : public Drawable
     {
     private:
         int xPos;
         int yPos;
-        sf::Sprite food;
+        sf::Sprite poison;
         std::shared_ptr<Context> context;
     public:
-        Food();
-        Food(std::shared_ptr<Context> &context, int xPos, int yPos);
-
+        Poison();
+        Poison(std::shared_ptr<Context> &context, int xPos, int yPos);
         void draw() override;
         int getXPos() override;
         void setXPos(int xPos) override;
@@ -27,4 +27,4 @@ namespace Engine
 }
 
 
-#endif //BLACKMAMBA_FOOD_HPP
+#endif //BLACKMAMBA_POISON_HPP

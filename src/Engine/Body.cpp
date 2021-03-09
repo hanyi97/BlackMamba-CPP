@@ -10,7 +10,7 @@ Body::Body()
 }
 
 Body::Body(std::shared_ptr<Context> &context, int xPos, int yPos)
-    :context(context), xPos(xPos), yPos(yPos)
+    :context(context), xPos(xPos), yPos(yPos), color(sf::Color(rand() % 256, rand() % 256, rand() % 256))
 {
 
 }
@@ -18,9 +18,9 @@ Body::Body(std::shared_ptr<Context> &context, int xPos, int yPos)
 
 void Body::drawBody()
 {
-    body.setRadius(Settings::UNIT_SIZE/2);
+    body.setRadius(Settings::UNIT_SIZE/2.0f);
     body.setPosition(xPos, yPos);
-    body.setFillColor(sf::Color(rand() % 256, rand() % 256, rand() % 256));
+    body.setFillColor(color);
     context->window->draw(body);
 }
 
@@ -55,7 +55,7 @@ void Body::drawHead(char direction)
     context->window->draw(head);
 }
 
-int Body::getXPos()
+int Body::getXPos() const
 {
     return xPos;
 }
@@ -65,7 +65,7 @@ void Body::setXPos(int xPos)
     this->xPos = xPos;
 }
 
-int Body::getYPos()
+int Body::getYPos() const
 {
     return yPos;
 }

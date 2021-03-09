@@ -73,22 +73,22 @@ bool Snake::hitItself()
 {
     for (auto part = body.begin(); part != body.end(); ++part)
     {
-        if (part != body.end()-1)
+        if (xPos == part->getXPos() && yPos == part->getYPos())
         {
-            return (xPos == part->getXPos() && yPos == part->getYPos());
+            if (part != body.end()-1) return true;
         }
     }
     return false;
 }
 
-bool Snake::hitFood(Food &food)
+bool Snake::hitFood(Drawable &food)
 {
-    if (xPos == food.getXPos() && yPos == food.getYPos())
-    {
-        size++;
-        return true;
-    }
-    return false;
+    return xPos == food.getXPos() && yPos == food.getYPos();
+}
+
+void Snake::increaseSize(int increment)
+{
+    size += increment;
 }
 
 void Snake::setXPos(int x)

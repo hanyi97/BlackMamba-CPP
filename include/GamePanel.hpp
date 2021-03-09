@@ -24,6 +24,7 @@ namespace Engine
         Player player2;
 
         bool running;
+        int ticks;
     public:
         GamePanel(std::shared_ptr<Context> &context);
         ~GamePanel();

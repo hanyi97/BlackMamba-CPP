@@ -15,6 +15,7 @@ namespace Engine
         int yPos;
         sf::Sprite head;
         sf::CircleShape body;
+        sf::Color color;
         std::shared_ptr<Context> context;
     public:
         Body();
@@ -22,9 +23,9 @@ namespace Engine
 
         void drawBody();
         void drawHead(char direction);
-        int getXPos();
+        int getXPos() const;
         void setXPos(int xPos);
-        int getYPos();
+        int getYPos() const;
         void setYPos(int yPos);
     };
 }
