@@ -251,7 +251,7 @@ void GamePanel::showP1LoseScreen()
     // Clear left screen
     sf::RectangleShape rect;
     rect.setPosition(1, 1 + Settings::GAME_YPOS);
-    rect.setSize(sf::Vector2f {(Settings::WINDOW_WIDTH / 2.0f) - 1, Settings::GAME_HEIGHT - 2});
+    rect.setSize(sf::Vector2f {(Settings::WINDOW_WIDTH / 2.0f) - 1, Settings::GAME_HEIGHT - 1});
     rect.setFillColor(sf::Color::Black);
 
     // Game over text
@@ -273,7 +273,7 @@ void GamePanel::showP2LoseScreen()
     // Clear right screen
     sf::RectangleShape rect;
     rect.setPosition(Settings::CENTER + 1, 1 + Settings::GAME_YPOS);
-    rect.setSize(sf::Vector2f{(Settings::WINDOW_WIDTH / 2.0f) - 2, Settings::GAME_HEIGHT - 2});
+    rect.setSize(sf::Vector2f{(Settings::WINDOW_WIDTH / 2.0f) - 2, Settings::GAME_HEIGHT - 1});
     rect.setFillColor(sf::Color::Black);
 
 
@@ -298,7 +298,7 @@ void GamePanel::displayPanelText()
              pauseText;
 
     // Player 1 text
-    p1.setCharacterSize(20);
+    p1.setCharacterSize(25);
     p1.setPosition(Settings::CENTER/2.0f, 18);
     p1.setFillColor(sf::Color(255, 102, 153));
     p1.setFont(context->assets->getFont(BOLD_FONT));
@@ -319,7 +319,7 @@ void GamePanel::displayPanelText()
     p1Lives.setString("Lives: " + std::to_string(player1.getLives()));
 
     // Player 2 text
-    p2.setCharacterSize(20);
+    p2.setCharacterSize(25);
     p2.setPosition(Settings::CENTER + Settings::CENTER/2.0f, 18);
     p2.setFillColor(sf::Color(255, 102, 153));
     p2.setFont(context->assets->getFont(BOLD_FONT));
