@@ -11,7 +11,8 @@ using namespace Engine;
 
 Game::Game() : context(std::make_shared<Context>())
 {
-    context->window->create(sf::VideoMode(Settings::WINDOW_WIDTH, Settings::WINDOW_HEIGHT), "Black Mamba", sf::Style::Close);
+    context->window->create(sf::VideoMode(Settings::WINDOW_WIDTH*2, Settings::WINDOW_HEIGHT*2), "Black Mamba", sf::Style::Close);
+    context->window->setView(sf::View(sf::FloatRect(0, 0, Settings::WINDOW_WIDTH, Settings::WINDOW_HEIGHT)));
     context->states->addState(std::make_unique<GamePanel>(context));
 }
 

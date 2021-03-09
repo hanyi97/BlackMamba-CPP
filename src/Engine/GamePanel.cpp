@@ -328,14 +328,14 @@ void GamePanel::displayPanelText()
 
     // Player 2 score
     p2Score.setCharacterSize(15);
-    p2Score.setPosition(Settings::CENTER + 500, 10);
+    p2Score.setPosition(Settings::CENTER + 460, 10);
     p2Score.setFillColor(sf::Color::White);
     p2Score.setFont(context->assets->getFont(BOLD_FONT));
     p2Score.setString("Score: " + std::to_string(player2.getScore()));
 
     // Player 2 lives
     p2Lives.setCharacterSize(15);
-    p2Lives.setPosition(Settings::CENTER + 500, 30);
+    p2Lives.setPosition(Settings::CENTER + 460, 30);
     p2Lives.setFillColor(sf::Color::White);
     p2Lives.setFont(context->assets->getFont(BOLD_FONT));
     p2Lives.setString("Lives: " + std::to_string(player2.getLives()));
