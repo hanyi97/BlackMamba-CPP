@@ -73,9 +73,9 @@ bool Snake::hitItself()
 {
     for (auto part = body.begin(); part != body.end(); ++part)
     {
-        if (part != body.end()-1)
+        if (xPos == part->getXPos() && yPos == part->getYPos())
         {
-            return (xPos == part->getXPos() && yPos == part->getYPos());
+            if (part != body.end()-1) return true;
         }
     }
     return false;

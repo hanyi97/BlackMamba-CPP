@@ -55,7 +55,7 @@ void Body::drawHead(char direction)
     context->window->draw(head);
 }
 
-int Body::getXPos()
+int Body::getXPos() const
 {
     return xPos;
 }
@@ -65,7 +65,7 @@ void Body::setXPos(int xPos)
     this->xPos = xPos;
 }
 
-int Body::getYPos()
+int Body::getYPos() const
 {
     return yPos;
 }
