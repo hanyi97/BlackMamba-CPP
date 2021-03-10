@@ -35,11 +35,11 @@ namespace Engine
         static const int SCORE_INCREMENT = 10;
         static const int SCORE_DECREMENT = 5;
     public:
-        Player(std::shared_ptr<Context> &context, int player);
+        Player(std::shared_ptr<Context> &, int);
         void init();
         void draw();
         void moveSnake();
-        void changeDirection(bool up, bool down, bool left, bool right);
+        void changeDirection(bool, bool, bool, bool);
 
         Food createFood();
         Poison createPoison();
@@ -53,7 +53,7 @@ namespace Engine
         bool getLeft() const;
         bool getRight() const;
 
-        void setLose(bool lose);
+        void setLose(bool);
         bool isLose() const;
 
         int getScore() const;

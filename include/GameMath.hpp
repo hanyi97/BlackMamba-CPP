@@ -6,14 +6,13 @@ namespace Math
     class GameMath
     {
     private:
-        static int calculateXBound(int center, int unitSize);
-        static int calculateYBound(int height, int unitSize);
+        static int calculateXBound(int, int);
+        static int calculateYBound(int, int);
     public:
-        static int getRandomLeftX(int center, int unitSize);
-        static int getRandomRightX(int center, int unitSize);
-        static int getRandomY(int yPos, int height, int unitSize);
+        static int getRandomLeftX(int, int);
+        static int getRandomRightX(int, int);
+        static int getRandomY(int, int, int);
     };
 }
-
 
 #endif //BLACKMAMBA_GAMEMATH_HPP

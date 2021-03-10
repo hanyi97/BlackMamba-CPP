@@ -2,8 +2,6 @@
 
 using namespace Engine;
 
-AssetManager::AssetManager() = default;
-
 /**
  * Associate texture to id
  * @param id: ID to associate file with

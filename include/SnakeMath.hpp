@@ -6,12 +6,11 @@ namespace Math
     class SnakeMath
     {
     public:
-        static int calculateSnake1X(int unitSize);
-        static int calculateSnake1Y(int gameYPos, int unitSize);
-        static int calculateSnake2X(int center, int unitSize);
-        static int calculateSnake2Y(int gameYPos, int unitSize);
+        static int calculateSnake1X(int);
+        static int calculateSnake1Y(int, int);
+        static int calculateSnake2X(int, int);
+        static int calculateSnake2Y(int, int);
     };
 }
-
 
 #endif //BLACKMAMBA_SNAKEMATH_HPP

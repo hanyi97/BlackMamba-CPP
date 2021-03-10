@@ -20,20 +20,20 @@ namespace Engine
         int size = 5;
     public:
         Snake();
-        Snake(std::shared_ptr<Context> &context, int player);
+        Snake(std::shared_ptr<Context> &, int);
 
         void init();
         void move();
-        void increaseSize(int increment = 1);
-        void draw(char direction);
+        void increaseSize(int = 1);
+        void draw(char);
 
         bool hitBorder() const;
         bool hitItself();
-        bool hitFood(Drawable &food) const;
+        bool hitFood(Drawable &) const;
 
-        void setXPos(int x);
+        void setXPos(int);
         int getXPos() const;
-        void setYPos(int y);
+        void setYPos(int);
         int getYPos() const;
     };
 }

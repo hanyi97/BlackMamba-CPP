@@ -19,14 +19,14 @@ namespace Engine
         std::shared_ptr<Context> context;
     public:
         Body();
-        Body(std::shared_ptr<Context> &context, int xPos, int yPos);
+        Body(std::shared_ptr<Context> &, int, int);
 
         void drawBody();
-        void drawHead(char direction);
+        void drawHead(char);
         int getXPos() const;
-        void setXPos(int xPos);
+        void setXPos(int);
         int getYPos() const;
-        void setYPos(int yPos);
+        void setYPos(int);
     };
 }
 

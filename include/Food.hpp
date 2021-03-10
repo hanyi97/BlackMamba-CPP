@@ -16,13 +16,13 @@ namespace Engine
         std::shared_ptr<Context> context;
     public:
         Food();
-        Food(std::shared_ptr<Context> &context, int xPos, int yPos);
+        Food(std::shared_ptr<Context> &, int, int);
 
         void draw() override;
         int getXPos() override;
-        void setXPos(int xPos) override;
+        void setXPos(int) override;
         int getYPos() override;
-        void setYPos(int yPos) override;
+        void setYPos(int) override;
     };
 }
 

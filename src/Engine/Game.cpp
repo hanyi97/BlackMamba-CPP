@@ -17,8 +17,6 @@ Game::Game() : context(std::make_shared<Context>())
     context->states->addState(std::make_unique<GamePanel>(context));
 }
 
-Game::~Game() = default;
-
 /**
  * Start timer and run game loop
  */
