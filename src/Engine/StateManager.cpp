@@ -7,8 +7,6 @@ StateManager::StateManager() : add(false), replace(false), remove(false)
 
 }
 
-StateManager::~StateManager() = default;
-
 /**
  * Adds current state to stack
  * @param toAdd: Stack of states

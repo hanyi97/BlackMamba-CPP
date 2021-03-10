@@ -26,12 +26,12 @@ namespace Engine
         bool running;
         int ticks;
     public:
-        GamePanel(std::shared_ptr<Context> &context);
+        GamePanel(std::shared_ptr<Context> &);
         ~GamePanel();
 
         void init() override;
         void processInput() override;
-        void update(sf::Time deltaTime) override;
+        void update(sf::Time) override;
         void draw() override;
         void pause() override;
         void start() override;
