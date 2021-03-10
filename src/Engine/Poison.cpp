@@ -18,9 +18,9 @@ Poison::Poison(std::shared_ptr<Context> &context, int xPos, int yPos)
  */
 void Poison::draw()
 {
-    context->assets->addTexture(POISON, "../assets/images/poison.png");
+    context->assets->addTexture(POISON, "../assets/images/poison_apple.png");
     poison.setTexture(context->assets->getTexture(POISON));
-    poison.setPosition(xPos, yPos);
+    poison.setPosition((float)xPos, (float)yPos);
     context->window->draw(poison);
 }
 
@@ -33,11 +33,11 @@ int Poison::getXPos()
 }
 
 /**
- * @param xPos:	x position to set
+ * @param x:	x position to set
  */
-void Poison::setXPos(int xPos)
+void Poison::setXPos(int x)
 {
-    this->xPos = xPos;
+    this->xPos = x;
 }
 
 /**
@@ -49,9 +49,9 @@ int Poison::getYPos()
 }
 
 /**
- * @param yPos: y position to set
+ * @param y: y position to set
  */
-void Poison::setYPos(int yPos)
+void Poison::setYPos(int y)
 {
-    this->yPos;
+    this->yPos = y;
 }

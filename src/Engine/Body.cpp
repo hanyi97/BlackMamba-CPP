@@ -23,6 +23,8 @@ void Body::drawBody()
     body.setRadius(Settings::UNIT_SIZE/2.0f);
     body.setPosition(xPos, yPos);
     body.setFillColor(color);
+    body.setOutlineThickness(1);
+    body.setOutlineColor(sf::Color::White);
     context->window->draw(body);
 }
 
@@ -57,7 +59,7 @@ void Body::drawHead(char direction)
     }
 
     head.setTexture(context->assets->getTexture(id));
-    head.setPosition(xPos, yPos);
+    head.setPosition((float)xPos, (float)yPos);
     context->window->draw(head);
 }
 
@@ -70,11 +72,11 @@ int Body::getXPos() const
 }
 
 /**
- * @param xPos: x position to set
+ * @param x: x position to set
  */
-void Body::setXPos(int xPos)
+void Body::setXPos(int x)
 {
-    this->xPos = xPos;
+    this->xPos = x;
 }
 
 /**
@@ -86,9 +88,9 @@ int Body::getYPos() const
 }
 
 /**
- * @param yPos: y position to set
+ * @param y: y position to set
  */
-void Body::setYPos(int yPos)
+void Body::setYPos(int y)
 {
-    this->yPos = yPos;
+    this->yPos = y;
 }

@@ -1,4 +1,5 @@
 #include "../../include/Food.hpp"
+#include "../../include/Settings.hpp"
 
 using namespace Engine;
 Food::Food()
@@ -11,13 +12,13 @@ Food::Food(std::shared_ptr<Context> &context, int xPos, int yPos)
 }
 
 /**
- * Initialise donut image file and draws it to the current position
+ * Initialise food image file and draws it to the current position
  */
 void Food::draw()
 {
-    context->assets->addTexture(FOOD, "../assets/images/donut.png");
+    context->assets->addTexture(FOOD, "../assets/images/apple.png");
     food.setTexture(context->assets->getTexture(FOOD));
-    food.setPosition(xPos, yPos);
+    food.setPosition((float)xPos, (float)yPos);
     context->window->draw(food);
 }
 
