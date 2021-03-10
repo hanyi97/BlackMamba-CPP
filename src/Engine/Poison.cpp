@@ -2,10 +2,7 @@
 
 using namespace Engine;
 
-Poison::Poison()
-{
-
-}
+Poison::Poison() = default;
 
 Poison::Poison(std::shared_ptr<Context> &context, int xPos, int yPos)
       : context(context), xPos(xPos), yPos(yPos)

@@ -11,8 +11,8 @@ namespace Engine
     class Poison : public Drawable
     {
     private:
-        int xPos;
-        int yPos;
+        int xPos{};
+        int yPos{};
         sf::Sprite poison;
         std::shared_ptr<Context> context;
     public:

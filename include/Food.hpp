@@ -10,8 +10,8 @@ namespace Engine
     class Food : public Drawable
     {
     private:
-        int xPos;
-        int yPos;
+        int xPos{};
+        int yPos{};
         sf::Sprite food;
         std::shared_ptr<Context> context;
     public:

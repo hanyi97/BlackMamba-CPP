@@ -7,10 +7,7 @@
 using namespace Engine;
 using namespace Math;
 
-Snake::Snake()
-{
-
-}
+Snake::Snake() = default;
 
 Snake::Snake(std::shared_ptr<Context> &context, int player) :context(context), player(player)
 {

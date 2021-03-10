@@ -2,9 +2,7 @@
 #include "../../include/Settings.hpp"
 
 using namespace Engine;
-Food::Food()
-{
-}
+Food::Food() = default;
 
 Food::Food(std::shared_ptr<Context> &context, int xPos, int yPos)
     : context(context), xPos(xPos), yPos(yPos)
@@ -31,11 +29,11 @@ int Food::getXPos()
 }
 
 /**
- * @param xPos: x position to set
+ * @param x: x position to set
  */
-void Food::setXPos(int xPos)
+void Food::setXPos(int x)
 {
-    this->xPos = xPos;
+    this->xPos = x;
 }
 
 /**
@@ -47,9 +45,9 @@ int Food::getYPos()
 }
 
 /**
- * @param yPos: y position to set
+ * @param y: y position to set
  */
-void Food::setYPos(int yPos)
+void Food::setYPos(int y)
 {
-    this->yPos = yPos;
+    this->yPos = y;
 }

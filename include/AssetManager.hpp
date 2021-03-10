@@ -17,7 +17,6 @@ namespace Engine
         std::map<int, std::unique_ptr<sf::Font>> fonts;
     public:
         AssetManager();
-        ~AssetManager();
 
         void addTexture(int id, const std::string &filePath, bool wantRepeated = false);
         void addFont(int id, const std::string &filePath);

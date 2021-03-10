@@ -2,13 +2,7 @@
 
 using namespace Engine;
 
-AssetManager::AssetManager()
-{
-}
-
-AssetManager::~AssetManager()
-{
-}
+AssetManager::AssetManager() = default;
 
 /**
  * Associate texture to id
