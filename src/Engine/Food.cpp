@@ -1,40 +1,53 @@
 #include "../../include/Food.hpp"
+#include "../../include/Settings.hpp"
 
 using namespace Engine;
-Food::Food()
-{
-
-}
+Food::Food() = default;
 
 Food::Food(std::shared_ptr<Context> &context, int xPos, int yPos)
     : context(context), xPos(xPos), yPos(yPos)
 {
 }
 
+/**
+ * Initialise food image file and draws it to the current position
+ */
 void Food::draw()
 {
-    context->assets->AddTexture(FOOD, "../assets/images/donut.png");
-    food.setTexture(context->assets->GetTexture(FOOD));
-    food.setPosition(xPos, yPos);
+    context->assets->addTexture(FOOD, "../assets/images/basketball.png");
+    food.setTexture(context->assets->getTexture(FOOD));
+    food.setPosition((float)xPos, (float)yPos);
     context->window->draw(food);
 }
 
+/**
+ * @return x position of food
+ */
 int Food::getXPos()
 {
     return xPos;
 }
 
-void Food::setXPos(int xPos)
+/**
+ * @param x: x position to set
+ */
+void Food::setXPos(int x)
 {
-    this->xPos = xPos;
+    this->xPos = x;
 }
 
+/**
+ * @return y position of food
+ */
 int Food::getYPos()
 {
     return yPos;
 }
 
-void Food::setYPos(int yPos)
+/**
+ * @param y: y position to set
+ */
+void Food::setYPos(int y)
 {
-    this->yPos = yPos;
+    this->yPos = y;
 }

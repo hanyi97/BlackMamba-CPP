@@ -16,14 +16,11 @@ namespace Engine
         std::map<int, std::unique_ptr<sf::Texture>> textures;
         std::map<int, std::unique_ptr<sf::Font>> fonts;
     public:
-        AssetManager();
-        ~AssetManager();
+        void addTexture(int, const std::string &, bool  = false);
+        void addFont(int, const std::string &);
 
-        void AddTexture(int id, const std::string &filePath, bool wantRepeated = false);
-        void AddFont(int id, const std::string &filePath);
-
-        const sf::Texture &GetTexture(int id) const;
-        const sf::Font &GetFont(int id) const;
+        const sf::Texture &getTexture(int) const;
+        const sf::Font &getFont(int) const;
     };
 }
 

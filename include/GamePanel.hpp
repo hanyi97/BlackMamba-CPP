@@ -18,22 +18,28 @@ namespace Engine
         sf::Sprite background;
         sf::RectangleShape panel;
         sf::RectangleShape divider;
+        sf::RectangleShape borders;
 
         Player player1;
         Player player2;
 
         bool running;
+        int ticks;
     public:
-        GamePanel(std::shared_ptr<Context> &context);
+        GamePanel(std::shared_ptr<Context> &);
         ~GamePanel();
 
-        void Init() override;
-        void ProcessInput() override;
-        void Update(sf::Time deltaTime) override;
-        void Draw() override;
-        void Pause() override;
-        void Start() override;
+        void init() override;
+        void processInput() override;
+        void update(sf::Time) override;
+        void draw() override;
+        void pause() override;
+        void start() override;
         void drawGrid();
+        void showGameOverScreen();
+        void showP1LoseScreen();
+        void showP2LoseScreen();
+        void displayPanelText();
     };
 }
 

@@ -11,13 +11,13 @@ namespace Engine
 //        State();
 //        virtual ~State();
 
-        virtual void Init() = 0;
-        virtual void ProcessInput() = 0;
-        virtual void Update(sf::Time deltaTime) = 0;
-        virtual void Draw() = 0;
+        virtual void init() = 0;
+        virtual void processInput() = 0;
+        virtual void update(sf::Time) = 0;
+        virtual void draw() = 0;
 
-        virtual void Pause(){};
-        virtual void Start(){};
+        virtual void pause(){};
+        virtual void start(){};
     };
 }
 #endif //BLACKMAMBA_STATE_HPP

@@ -7,28 +7,37 @@ StateManager::StateManager() : add(false), replace(false), remove(false)
 
 }
 
-StateManager::~StateManager() = default;
-
-void StateManager::Add(std::unique_ptr<State> toAdd, bool replace)
+/**
+ * Adds current state to stack
+ * @param toAdd: Stack of states
+ * @param replace: Boolean to indicate replacement
+ */
+void StateManager::addState(std::unique_ptr<State> toAdd, bool replace)
 {
     add = true;
     newState = std::move(toAdd);
     this->replace = replace;
 }
 
-void StateManager::PopCurrent()
+/**
+ * Remove state from stack
+ */
+void StateManager::popCurrent()
 {
     remove = true;
 }
 
-void StateManager::ProcessStateChange()
+/**
+ * Change state of current process
+ */
+void StateManager::processStateChange()
 {
     if (remove && !stateStack.empty())
     {
         stateStack.pop();
         if (!stateStack.empty())
         {
-            stateStack.top()->Start();
+            stateStack.top()->start();
         }
 
         remove = false;
@@ -44,16 +53,19 @@ void StateManager::ProcessStateChange()
 
         if (!stateStack.empty())
         {
-            stateStack.top()->Pause();
+            stateStack.top()->pause();
         }
 
         stateStack.push(std::move(newState));
-        stateStack.top()->Init();
-        stateStack.top()->Start();
+        stateStack.top()->init();
+        stateStack.top()->start();
         add = false;
     }
 }
 
+/**
+ * @return current game state
+ */
 std::unique_ptr<State>& StateManager::GetCurrent()
 {
     return stateStack.top();

@@ -3,6 +3,7 @@
 
 #include "Food.hpp"
 #include "Snake.hpp"
+#include "Poison.hpp"
 
 namespace Engine
 {
@@ -15,8 +16,11 @@ namespace Engine
     class Player
     {
     private:
+        std::shared_ptr<Context> context;
+
         int lives;
         int score;
+        int player;
         bool lose;
 
         bool up;
@@ -26,17 +30,34 @@ namespace Engine
 
         Food food;
         Snake snake;
+        Poison poison;
+
+        static const int SCORE_INCREMENT = 10;
+        static const int SCORE_DECREMENT = 5;
     public:
-        Player(std::shared_ptr<Context> &context, int player);
-        void Init();
+        Player(std::shared_ptr<Context> &, int);
+        void init();
         void draw();
         void moveSnake();
-        void changeDirection(bool up, bool down, bool left, bool right);
+        void changeDirection(bool, bool, bool, bool);
 
-        bool getUp();
-        bool getDown();
-        bool getLeft();
-        bool getRight();
+        Food createFood();
+        Poison createPoison();
+
+        void checkHit();
+        void checkEat();
+        void repositionPoison();
+
+        bool getUp() const;
+        bool getDown() const;
+        bool getLeft() const;
+        bool getRight() const;
+
+        void setLose(bool);
+        bool isLose() const;
+
+        int getScore() const;
+        int getLives() const;
     };
 }
 

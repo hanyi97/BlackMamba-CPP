@@ -11,22 +11,19 @@ using namespace Engine;
 
 Game::Game() : context(std::make_shared<Context>())
 {
-    context->window->create(sf::VideoMode(Settings::WINDOW_WIDTH, Settings::WINDOW_HEIGHT), "Black Mamba", sf::Style::Close);
-    context->states->Add(std::make_unique<GamePanel>(context));
+    // Setup window and show first screen to display
+    context->window->create(sf::VideoMode(Settings::WINDOW_WIDTH*2, Settings::WINDOW_HEIGHT*2), "Black Mamba", sf::Style::Close);
+    context->window->setView(sf::View(sf::FloatRect(0, 0, Settings::WINDOW_WIDTH, Settings::WINDOW_HEIGHT)));
+    context->states->addState(std::make_unique<GamePanel>(context));
 }
 
-Game::~Game() = default;
-
-
+/**
+ * Start timer and run game loop
+ */
 void Game::Run()
 {
     sf::Clock clock;
     sf::Time timeSinceLastFrame = sf::Time::Zero;
-
-    sf::CircleShape shape;
-    shape.setRadius(40.f);
-    shape.setPosition(100.f, 100.f);
-    shape.setFillColor(sf::Color::Cyan);
 
     while (context->window->isOpen())
     {
@@ -35,10 +32,10 @@ void Game::Run()
         {
             timeSinceLastFrame -= TIME_PER_FRAME;
 
-            context->states->ProcessStateChange();
-            context->states->GetCurrent()->ProcessInput();
-            context->states->GetCurrent()->Update(TIME_PER_FRAME);
-            context->states->GetCurrent()->Draw();
+            context->states->processStateChange();
+            context->states->GetCurrent()->processInput();
+            context->states->GetCurrent()->update(TIME_PER_FRAME);
+            context->states->GetCurrent()->draw();
         }
     }
 }

@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "Body.hpp"
+#include "Food.hpp"
 
 namespace Engine
 {
@@ -13,23 +14,26 @@ namespace Engine
         std::shared_ptr<Context> context;
         std::vector<Body> body;
 
-        char direction;
-
-        int xPos;
-        int yPos;
-        int player;
+        int xPos{};
+        int yPos{};
+        int player{};
         int size = 5;
     public:
         Snake();
-        Snake(std::shared_ptr<Context> &context, int player);
+        Snake(std::shared_ptr<Context> &, int);
 
-        void Init();
-        void Move();
-        void draw(char direction);
+        void init();
+        void move();
+        void increaseSize(int = 1);
+        void draw(char);
 
-        void setXPos(int x);
+        bool hitBorder() const;
+        bool hitItself();
+        bool hitFood(Drawable &) const;
+
+        void setXPos(int);
         int getXPos() const;
-        void setYPos(int y);
+        void setYPos(int);
         int getYPos() const;
     };
 }

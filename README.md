@@ -7,8 +7,8 @@ This is a multiplayer snake game coded in C++ for ICT1009 project.
 1. Clone project  
    ```git clone https://github.com/hanyi97/BlackMamba-CPP.git```
 
-1. Checkout master branch  
-   ```git checkout master```
+1. Checkout main branch  
+   ```git checkout main```
 
 1. Create and checkout branch  
    ```git checkout -b <branchname>```
@@ -33,30 +33,26 @@ This is a multiplayer snake game coded in C++ for ICT1009 project.
 5. Push your changes to Github  
    ```git push```
 
-### Get updates from master branch to your own branch:
-1. Check out master branch  
-   ```git checkout master```
+### Get updates from main branch to your own branch:
+1. Check out main branch  
+   ```git checkout main```
 
-2. Pull updates from remote master branch to local master branch    
+2. Pull updates from remote main branch to local main branch    
    ```git pull```
 
 3. Change back to your branch  
    ```git checkout <branchname>```
 
-4. Merge master branch code to your branch  
-   ```git merge master```
+4. Merge main branch code to your branch  
+   ```git merge main```
 
-### Once your feature is completed, merge it to master branch:
-You can create a pull request in Github to merge your branch to master branch
-
-#### OR
-1. Checkout master branch  
-   ```git checkout master```
-
-2. Merge your branch to master branch  
-   ```git merge <branchname>```
-
-3. Push merged code to master branch in Github  
-   ```git push```
+### Once your feature is completed, merge it to main branch:
+You can create a pull request in Github to merge your branch to main branch
 
 **Note: Best practice to commit your changes regularly**
+
+### Naming conventions:
+**Class/Header:** Hello.cpp/Hello.hpp, HelloWorld.cpp/HelloWorld.hpp  
+**Methods:** hello(), helloWorld()  
+**Variables:** hello, helloWorld  
+**Constants:** HELLO, HELLO_WORLD  
