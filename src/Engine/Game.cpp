@@ -27,7 +27,7 @@ Game::Game() : context(std::make_shared<Context>())
     {
         context->window->create(sf::VideoMode(Settings::WINDOW_WIDTH, Settings::WINDOW_HEIGHT), "Black Mamba", sf::Style::Close);
     }
-    context->states->addState(std::make_unique<GamePanel>(context));
+    context->states->addState(std::make_unique<Menu>(context));
 
 }
 
