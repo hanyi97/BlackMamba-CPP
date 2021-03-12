@@ -1,6 +1,7 @@
 #include "../../include/Game.hpp"
 #include "../../include/GamePanel.hpp"
 #include "../../include/Settings.hpp"
+#include "../../include/Menu.hpp"
 
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -26,7 +27,8 @@ Game::Game() : context(std::make_shared<Context>())
     {
         context->window->create(sf::VideoMode(Settings::WINDOW_WIDTH, Settings::WINDOW_HEIGHT), "Black Mamba", sf::Style::Close);
     }
-    context->states->addState(std::make_unique<GamePanel>(context));
+    context->states->addState(std::make_unique<Menu>(context));
+
 }
 
 /**
