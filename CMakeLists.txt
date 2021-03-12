@@ -12,12 +12,12 @@ add_executable(BlackMamba src/Engine/Game.cpp include/Game.hpp include/Settings.
         include/Snake.hpp src/Engine/Body.cpp include/Body.hpp src/Math/SnakeMath.cpp
         include/SnakeMath.hpp src/Engine/Poison.cpp include/Poison.hpp
         include/Drawable.hpp src/Engine/Menu.cpp include/Menu.hpp)
-set(SFML_STATIC_LIBRARIES TRUE)
 
 
 if (APPLE)
     include_directories(/usr/local/include)
 else()
+    set(SFML_STATIC_LIBRARIES TRUE)
     set(SFML_DIR "C:\\SFML\\lib\\cmake\\SFML")
     include_directories(headers /usr/include c:/SFML/include)
 endif()
