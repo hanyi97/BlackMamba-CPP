@@ -19,8 +19,10 @@ void Body::drawBody()
     body.setRadius(Settings::UNIT_SIZE/2.0f);
     body.setPosition((float)xPos, (float)yPos);
     body.setFillColor(color);
-    body.setOutlineThickness(1);
+//    body.setFillColor(sf::Color::Transparent);
+    body.setOutlineThickness(2);
     body.setOutlineColor(sf::Color::White);
+//    body.setOutlineColor(color);
     context->window->draw(body);
 }
 
