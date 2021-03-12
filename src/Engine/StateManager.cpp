@@ -7,8 +7,11 @@ StateManager::StateManager() : add(false), replace(false), remove(false)
 
 }
 
-StateManager::~StateManager() = default;
-
+/**
+ * Adds current state to stack
+ * @param toAdd: Stack of states
+ * @param replace: Boolean to indicate replacement
+ */
 void StateManager::addState(std::unique_ptr<State> toAdd, bool replace)
 {
     add = true;
@@ -16,11 +19,17 @@ void StateManager::addState(std::unique_ptr<State> toAdd, bool replace)
     this->replace = replace;
 }
 
+/**
+ * Remove state from stack
+ */
 void StateManager::popCurrent()
 {
     remove = true;
 }
 
+/**
+ * Change state of current process
+ */
 void StateManager::processStateChange()
 {
     if (remove && !stateStack.empty())
@@ -54,6 +63,9 @@ void StateManager::processStateChange()
     }
 }
 
+/**
+ * @return current game state
+ */
 std::unique_ptr<State>& StateManager::GetCurrent()
 {
     return stateStack.top();

@@ -14,27 +14,26 @@ namespace Engine
         std::shared_ptr<Context> context;
         std::vector<Body> body;
 
-        char direction;
-
-        int xPos;
-        int yPos;
-        int player;
+        int xPos{};
+        int yPos{};
+        int player{};
         int size = 5;
     public:
         Snake();
-        Snake(std::shared_ptr<Context> &context, int player);
+        Snake(std::shared_ptr<Context> &, int);
 
         void init();
         void move();
-        void draw(char direction);
+        void increaseSize(int = 1);
+        void draw(char);
 
         bool hitBorder() const;
         bool hitItself();
-        bool hitFood(Food &food);
+        bool hitFood(Drawable &) const;
 
-        void setXPos(int x);
+        void setXPos(int);
         int getXPos() const;
-        void setYPos(int y);
+        void setYPos(int);
         int getYPos() const;
     };
 }

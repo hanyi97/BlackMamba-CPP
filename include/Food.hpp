@@ -3,25 +3,26 @@
 
 #include <SFML/Graphics/Sprite.hpp>
 #include "Game.hpp"
+#include "Drawable.hpp"
 
 namespace Engine
 {
-    class Food
+    class Food : public Drawable
     {
     private:
-        int xPos;
-        int yPos;
+        int xPos{};
+        int yPos{};
         sf::Sprite food;
         std::shared_ptr<Context> context;
     public:
         Food();
-        Food(std::shared_ptr<Context> &context, int xPos, int yPos);
+        Food(std::shared_ptr<Context> &, int, int);
 
-        void draw();
-        int getXPos();
-        void setXPos(int xPos);
-        int getYPos();
-        void setYPos(int yPos);
+        void draw() override;
+        int getXPos() override;
+        void setXPos(int) override;
+        int getYPos() override;
+        void setYPos(int) override;
     };
 }
 

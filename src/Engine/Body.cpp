@@ -4,26 +4,32 @@
 
 using namespace Engine;
 
-Body::Body()
-{
-
-}
+Body::Body() = default;
 
 Body::Body(std::shared_ptr<Context> &context, int xPos, int yPos)
-    :context(context), xPos(xPos), yPos(yPos)
+    :context(context), xPos(xPos), yPos(yPos), color(sf::Color(rand() % 256, rand() % 256, rand() % 256))
 {
-
 }
 
-
+/**
+ * Method to draw the body of the snake
+ */
 void Body::drawBody()
 {
-    body.setRadius(Settings::UNIT_SIZE/2);
-    body.setPosition(xPos, yPos);
-    body.setFillColor(sf::Color(rand() % 256, rand() % 256, rand() % 256));
+    body.setRadius(Settings::UNIT_SIZE/2.0f);
+    body.setPosition((float)xPos, (float)yPos);
+    body.setFillColor(color);
+//    body.setFillColor(sf::Color::Transparent);
+    body.setOutlineThickness(2);
+    body.setOutlineColor(sf::Color::White);
+//    body.setOutlineColor(color);
     context->window->draw(body);
 }
 
+/**
+ * Method to initialise head image depending on the direction it is facing
+ * and draw it to the given position
+ */
 void Body::drawHead(char direction)
 {
     int id;
@@ -51,26 +57,38 @@ void Body::drawHead(char direction)
     }
 
     head.setTexture(context->assets->getTexture(id));
-    head.setPosition(xPos, yPos);
+    head.setPosition((float)xPos, (float)yPos);
     context->window->draw(head);
 }
 
-int Body::getXPos()
+/**
+ * @return x position of a body part
+ */
+int Body::getXPos() const
 {
     return xPos;
 }
 
-void Body::setXPos(int xPos)
+/**
+ * @param x: x position to set
+ */
+void Body::setXPos(int x)
 {
-    this->xPos = xPos;
+    this->xPos = x;
 }
 
-int Body::getYPos()
+/**
+ * @return y position of a body part
+ */
+int Body::getYPos() const
 {
     return yPos;
 }
 
-void Body::setYPos(int yPos)
+/**
+ * @param y: y position to set
+ */
+void Body::setYPos(int y)
 {
-    this->yPos = yPos;
+    this->yPos = y;
 }

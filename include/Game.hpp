@@ -16,6 +16,7 @@ namespace Engine
         BOLD_FONT,
         BACKGROUND,
         FOOD,
+        POISON,
         UP_MOUTH,
         DOWN_MOUTH,
         LEFT_MOUTH,
@@ -43,8 +44,6 @@ namespace Engine
         const sf::Time TIME_PER_FRAME = sf::seconds(1.f/60.f);
     public:
         Game();
-        ~Game();
-
         void Run();
     };
 }

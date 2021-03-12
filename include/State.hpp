@@ -13,7 +13,7 @@ namespace Engine
 
         virtual void init() = 0;
         virtual void processInput() = 0;
-        virtual void update(sf::Time deltaTime) = 0;
+        virtual void update(sf::Time) = 0;
         virtual void draw() = 0;
 
         virtual void pause(){};

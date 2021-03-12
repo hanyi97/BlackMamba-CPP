@@ -18,9 +18,8 @@ namespace Engine
         bool remove;
     public:
         StateManager();
-        ~StateManager();
 
-        void addState(std::unique_ptr<State> toAdd, bool replace = false);
+        void addState(std::unique_ptr<State>, bool = false);
         void popCurrent();
         void processStateChange();
         std::unique_ptr<State>& GetCurrent();
