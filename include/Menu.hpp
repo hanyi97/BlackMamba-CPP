@@ -19,6 +19,17 @@ namespace Engine {
         sf::Text playButton;
         sf::Text exitButton;
 
+        sf::Sprite snake;
+        sf::Sprite cobra1;
+        sf::Sprite cobra2;
+
+
+        //buttons
+        sf::Sprite start_button;
+        sf::Sprite help_button;
+        sf::Sprite gear_button;
+        sf::Sprite exit_button;
+
         bool playButtonSelected;
         bool playButtonPressed;
 
