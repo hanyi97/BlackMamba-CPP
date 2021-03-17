@@ -4,7 +4,7 @@
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Window/Event.hpp>
 
-#include "../../include/Game.hpp"
+//#include "../../include/Game.hpp"
 #include "../../include/Menu.hpp"
 #include "../../include/Help.hpp"
 #include "../../include/GamePanel.hpp"
@@ -51,46 +51,71 @@ void Menu::init() {
 }
 
 void Menu::processInput() {
+
+    // Keyboard menu
     sf::Event event;
     while (context->window->pollEvent(event)) {
-        if (event.type == sf::Event::Closed)
-            context->window->close();
-        else {
-            switch (event.type) {
-                case sf::Event::KeyReleased:
-                    switch (event.key.code) {
-                        case sf::Keyboard::Up:
-                            moveUp();
-                            break;
-                        case sf::Keyboard::Down:
-                            moveDown();
-                            break;
-                        case sf::Keyboard::Return: {
-                            playButtonPressed = false;
-                            exitButtonPressed = false;
-                            helpButtonPressed = false;
-                            switch (pressedItem()) {
-                                case 0:
-                                    playButtonPressed = true;
-                                    std::cout << "Play button pressed" << std::endl;
-                                    break;
-
-                                case 1:
-                                    helpButtonPressed = true;
-                                    std::cout << "Help button pressed" << std::endl;
-                                    break;
-                                case 2:
-                                    exitButtonPressed = true;
-                                    context->window->close();
-                                    std::cout << "Exit button pressed" << std::endl;
-                                    break;
-                            }
-                        }
+        switch (event.type) {
+            case sf::Event::Closed:
+                context->window->close();
+                break;
+            case sf::Event::MouseMoved:
+                std::cout << "X: " << event.mouseMove.x << "Y: " << event.mouseMove.y << std::endl;
+                break;
+            case sf::Event::MouseButtonPressed:
+                if (event.mouseButton.button == sf::Mouse::Left) {
+                    // play
+                    if (event.mouseButton.x >= 550 and event.mouseButton.x <= 600) {
+                        if (event.mouseButton.y >= 305 and event.mouseButton.y <= 325)
+                            playButtonPressed = true;
                     }
-            }
+                    // help
+                    if (event.mouseButton.x >= 550 and event.mouseButton.x <= 600) {
+                        if (event.mouseButton.y >= 355 and event.mouseButton.y <= 375)
+                            helpButtonPressed = true;
+                    }
+                    // quit
+                    if (event.mouseButton.x >= 550 and event.mouseButton.x <= 600) {
+                        if (event.mouseButton.y >= 410 and event.mouseButton.y <= 430)
+                            exitButtonPressed = true;
+                    }
+                }
+                break;
+            case sf::Event::KeyReleased:
+                switch (event.key.code) {
+                    case sf::Keyboard::Up:
+                        moveUp();
+                        break;
+                    case sf::Keyboard::Down:
+                        moveDown();
+                        break;
+                    case sf::Keyboard::Return: {
+                        playButtonPressed = false;
+                        exitButtonPressed = false;
+                        helpButtonPressed = false;
+                        switch (pressedItem()) {
+                            case 0:
+                                playButtonPressed = true;
+                                std::cout << "Play button pressed" << std::endl;
+                                break;
+
+                            case 1:
+                                helpButtonPressed = true;
+                                std::cout << "Help button pressed" << std::endl;
+                                break;
+                            case 2:
+                                exitButtonPressed = true;
+                                std::cout << "Exit button pressed" << std::endl;
+                                break;
+                        }
+                        break;
+                    }
+                }
+                break;
         }
     }
 }
+
 
 void Menu::update(sf::Time) {
     menu[currentMenuIndex].setFillColor(sf::Color::Yellow);
@@ -98,11 +123,9 @@ void Menu::update(sf::Time) {
         context->states->addState(std::make_unique<GamePanel>(context), true);
     } else if (helpButtonPressed) {
         context->states->addState(std::make_unique<Help>(context), true);
+    } else if (exitButtonPressed) {
+        context->window->close();
     }
-//    else
-//    {
-//        context->window->close();
-//    }
 }
 
 void Menu::draw() {

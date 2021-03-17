@@ -2,6 +2,9 @@
 // Created by sheng on 11/3/2021.
 //
 
+#ifndef BLACKMAMBA_MENU_HPP
+#define BLACKMAMBA_MENU_HPP
+
 #pragma once
 
 #include <memory>
@@ -46,3 +49,5 @@ namespace Engine {
         void draw() override;
     };
 }
+
+#endif

@@ -1,6 +1,6 @@
 #ifndef BLACKMAMBA_DRAWABLE_HPP
 #define BLACKMAMBA_DRAWABLE_HPP
-
+#pragma once
 class Drawable
 {
 public:

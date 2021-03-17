@@ -42,6 +42,16 @@ void StateManager::processStateChange()
 
         remove = false;
     }
+    if (remove && !stateStack.empty())
+    {
+        stateStack.pop();
+        if (!stateStack.empty())
+        {
+            stateStack.top()->start();
+        }
+
+        remove = false;
+    }
 
     if (add)
     {

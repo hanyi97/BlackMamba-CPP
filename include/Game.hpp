@@ -1,6 +1,6 @@
 #ifndef BLACKMAMBA_GAME_HPP
 #define BLACKMAMBA_GAME_HPP
-
+#pragma once
 #include <memory>
 #include <SFML/Graphics/RenderWindow.hpp>
 

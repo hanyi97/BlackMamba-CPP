@@ -2,6 +2,9 @@
 // Created by sheng on 11/3/2021.
 //
 
+#ifndef BLACKMAMBA_HELP_HPP
+#define BLACKMAMBA_HELP_HPP
+
 #pragma once
 
 #include <memory>
@@ -17,16 +20,10 @@ namespace Engine {
     private:
         std::shared_ptr<Context> context;
         sf::Text gameTitle;
-        sf::Text t1;
-        sf::Text t2;
-        sf::Text t3;
-        sf::Text t4;
-        sf::Text t5;
-        sf::Text t6;
         sf::Text backButton;
         sf::Sprite background;
 
-        bool backButtonPressed;
+        bool startButtonPressed;
 
 
     public:
@@ -43,3 +40,5 @@ namespace Engine {
         void draw() override;
     };
 }
+
+#endif

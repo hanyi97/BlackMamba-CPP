@@ -1,6 +1,6 @@
 #ifndef BLACKMAMBA_POISON_HPP
 #define BLACKMAMBA_POISON_HPP
-
+#pragma once
 #include <memory>
 #include <SFML/Graphics/Sprite.hpp>
 #include "Drawable.hpp"
