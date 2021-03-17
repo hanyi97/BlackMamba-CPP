@@ -1,6 +1,6 @@
 #ifndef BLACKMAMBA_STATE_HPP
 #define BLACKMAMBA_STATE_HPP
-
+#pragma once
 #include <SFML/System/Time.hpp>
 
 namespace Engine

@@ -1,6 +1,6 @@
 #ifndef BLACKMAMBA_PLAYER_HPP
 #define BLACKMAMBA_PLAYER_HPP
-
+#pragma once
 #include "Food.hpp"
 #include "Snake.hpp"
 #include "Poison.hpp"
