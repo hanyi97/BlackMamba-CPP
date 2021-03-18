@@ -1,4 +1,3 @@
-#include <iostream>
 #include "../../include/Snake.hpp"
 #include "../../include/Settings.hpp"
 #include "../../include/Player.hpp"
