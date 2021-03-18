@@ -334,7 +334,7 @@ void GamePanel::showP2LoseScreen()
 /**
  * Display hearts for player 1 remaining lives
  */
-void GamePanel::displayP1Heart()
+void GamePanel::displayP1Hearts()
 {
     for (int i = 0; i < player1.getLives(); i++)
     {
@@ -348,7 +348,7 @@ void GamePanel::displayP1Heart()
 /**
  * Display hearts for player 2 remaining lives
  */
-void GamePanel::displayP2Heart()
+void GamePanel::displayP2Hearts()
 {
     for (int i = 0; i < player2.getLives(); i++)
     {
@@ -383,7 +383,7 @@ void GamePanel::displayPanelText()
     p1Score.setString("Score: " + std::to_string(player1.getScore()));
 
     // Player 1 lives
-    GamePanel::displayP1Heart();
+    GamePanel::displayP1Hearts();
     p1Lives.setCharacterSize(15);
     p1Lives.setPosition(10, 30);
     p1Lives.setFillColor(sf::Color::White);
@@ -405,7 +405,7 @@ void GamePanel::displayPanelText()
     p2Score.setString("Score: " + std::to_string(player2.getScore()));
 
     // Player 2 lives
-    GamePanel::displayP2Heart();
+    GamePanel::displayP2Hearts();
     p2Lives.setCharacterSize(15);
     p2Lives.setPosition(Settings::CENTER + 430, 30);
     p2Lives.setFillColor(sf::Color::White);

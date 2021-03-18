@@ -40,9 +40,8 @@ namespace Engine
         void showP1LoseScreen();
         void showP2LoseScreen();
         void displayPanelText();
-        void displayHearts(int);
-        void displayP1Heart();
-        void displayP2Heart();
+        void displayP1Hearts();
+        void displayP2Hearts();
     };
 }
 
