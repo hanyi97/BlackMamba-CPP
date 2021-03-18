@@ -17,6 +17,7 @@ namespace Engine
         BACKGROUND,
         FOOD,
         POISON,
+        HEART,
         UP_MOUTH,
         DOWN_MOUTH,
         LEFT_MOUTH,

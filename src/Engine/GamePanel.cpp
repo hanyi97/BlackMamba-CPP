@@ -29,6 +29,7 @@ void GamePanel::init()
     context->assets->addFont(MAIN_FONT, "../assets/fonts/Helvetica.ttf");
     context->assets->addFont(BOLD_FONT, "../assets/fonts/Helvetica-Bold.ttf");
     context->assets->addTexture(BACKGROUND, "../assets/images/background.jpg", true);
+    context->assets->addTexture(HEART, "../assets/images/heart.png");
 
     // Background image
     background.setTexture(context->assets->getTexture(BACKGROUND));
@@ -330,6 +331,27 @@ void GamePanel::showP2LoseScreen()
     context->window->draw(gameOver);
 }
 
+void GamePanel::displayP1Heart()
+{
+    for (int i = 0; i < player1.getLives(); i++)
+    {
+        sf::Sprite heart;
+        heart.setTexture(context->assets->getTexture(HEART));
+        heart.setPosition((float)60+((float )i*25), (float)30);
+        context->window->draw(heart);
+    }
+}
+
+void GamePanel::displayP2Heart()
+{
+    for (int i = 0; i < player2.getLives(); i++)
+    {
+        sf::Sprite heart;
+        heart.setTexture(context->assets->getTexture(HEART));
+        heart.setPosition(Settings::CENTER + 480 + ((float )i*25), (float)30);
+        context->window->draw(heart);
+    }
+}
 /**
  * Draws objects for top panel
  */
@@ -354,11 +376,12 @@ void GamePanel::displayPanelText()
     p1Score.setString("Score: " + std::to_string(player1.getScore()));
 
     // Player 1 lives
+    GamePanel::displayP1Heart();
     p1Lives.setCharacterSize(15);
     p1Lives.setPosition(10, 30);
     p1Lives.setFillColor(sf::Color::White);
     p1Lives.setFont(context->assets->getFont(BOLD_FONT));
-    p1Lives.setString("Lives: " + std::to_string(player1.getLives()));
+    p1Lives.setString("Lives: ");
 
     // Player 2 text
     p2.setCharacterSize(25);
@@ -369,17 +392,19 @@ void GamePanel::displayPanelText()
 
     // Player 2 score
     p2Score.setCharacterSize(15);
-    p2Score.setPosition(Settings::CENTER + 460, 10);
+    p2Score.setPosition(Settings::CENTER + 430, 10);
     p2Score.setFillColor(sf::Color::White);
     p2Score.setFont(context->assets->getFont(BOLD_FONT));
     p2Score.setString("Score: " + std::to_string(player2.getScore()));
 
     // Player 2 lives
+    GamePanel::displayP2Heart();
     p2Lives.setCharacterSize(15);
-    p2Lives.setPosition(Settings::CENTER + 460, 30);
+    p2Lives.setPosition(Settings::CENTER + 430, 30);
     p2Lives.setFillColor(sf::Color::White);
     p2Lives.setFont(context->assets->getFont(BOLD_FONT));
-    p2Lives.setString("Lives: " + std::to_string(player2.getLives()));
+//    p2Lives.setString("Lives: " + std::to_string(player2.getLives()));
+    p2Lives.setString("Lives: ");
 
     // Pause text
     pauseText.setCharacterSize(12);
