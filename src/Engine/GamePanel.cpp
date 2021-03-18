@@ -331,6 +331,9 @@ void GamePanel::showP2LoseScreen()
     context->window->draw(gameOver);
 }
 
+/**
+ * Display hearts for player 1 remaining lives
+ */
 void GamePanel::displayP1Heart()
 {
     for (int i = 0; i < player1.getLives(); i++)
@@ -342,6 +345,9 @@ void GamePanel::displayP1Heart()
     }
 }
 
+/**
+ * Display hearts for player 2 remaining lives
+ */
 void GamePanel::displayP2Heart()
 {
     for (int i = 0; i < player2.getLives(); i++)
@@ -352,6 +358,7 @@ void GamePanel::displayP2Heart()
         context->window->draw(heart);
     }
 }
+
 /**
  * Draws objects for top panel
  */
@@ -385,7 +392,7 @@ void GamePanel::displayPanelText()
 
     // Player 2 text
     p2.setCharacterSize(25);
-    p2.setPosition(Settings::CENTER + Settings::CENTER/2.0f, 18);
+    p2.setPosition(Settings::CENTER + Settings::CENTER/2.0f - 60, 18);
     p2.setFillColor(sf::Color(255, 102, 153));
     p2.setFont(context->assets->getFont(BOLD_FONT));
     p2.setString("Player 2");
@@ -403,7 +410,6 @@ void GamePanel::displayPanelText()
     p2Lives.setPosition(Settings::CENTER + 430, 30);
     p2Lives.setFillColor(sf::Color::White);
     p2Lives.setFont(context->assets->getFont(BOLD_FONT));
-//    p2Lives.setString("Lives: " + std::to_string(player2.getLives()));
     p2Lives.setString("Lives: ");
 
     // Pause text
