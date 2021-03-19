@@ -2,6 +2,7 @@
 #include "../../include/Settings.hpp"
 #include "../../include/Player.hpp"
 #include "../../include/SnakeMath.hpp"
+
 #include <iostream>
 #include <exception>
 #include <windows.h> // for error dialogue box.
