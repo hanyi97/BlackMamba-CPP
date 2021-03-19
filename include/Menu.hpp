@@ -1,6 +1,7 @@
 //
 // Created by sheng on 11/3/2021.
 //
+// Updated by Danial on 17/3/2021
 
 #ifndef BLACKMAMBA_MENU_HPP
 #define BLACKMAMBA_MENU_HPP
@@ -8,7 +9,6 @@
 #pragma once
 
 #include <memory>
-
 #include  <SFML/Graphics/Text.hpp>
 #include "State.hpp"
 #include "Game.hpp"
@@ -20,6 +20,15 @@ namespace Engine {
     private:
         std::shared_ptr<Context> context;
         sf::Text gameTitle;
+        sf::Sprite snake;
+        sf::Sprite cobra1;
+        sf::Sprite cobra2;
+        //buttons
+        sf::Sprite start_button;
+        sf::Sprite help_button;
+        sf::Sprite gear_button;
+        sf::Sprite exit_button;
+
         sf::Text menu[menuLength];
         int currentMenuIndex;
         bool playButtonPressed;
