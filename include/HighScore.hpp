@@ -9,9 +9,9 @@ namespace Engine
     {
     private:
         inline static const std::string FILE_PATH = "highscore.txt";
+        static void fileWrite(std::string);
     public:
         static void checkScore(int, int);
-        static void fileWrite(std::string);
         static std::string getHighScore();
     };
 }
