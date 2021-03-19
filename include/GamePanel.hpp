@@ -28,7 +28,7 @@ namespace Engine
         int ticks;
     public:
         GamePanel(std::shared_ptr<Context> &);
-        ~GamePanel();
+        ~GamePanel() = default;
 
         void init() override;
         void processInput() override;

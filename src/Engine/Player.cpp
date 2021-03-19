@@ -45,9 +45,9 @@ void Player::draw()
     else if (left) dir = 'L';
     else if (right) dir = 'R';
 
+    snake.draw(dir);
     food.draw();
     poison.draw();
-    snake.draw(dir);
 }
 
 /**

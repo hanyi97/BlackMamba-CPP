@@ -1,12 +1,11 @@
 #include "../../include/GamePanel.hpp"
 #include "../../include/Settings.hpp"
-#include <stdlib.h>
+#include <cstdlib>
 #include <fstream>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/Text.hpp>
 #include "../../include/HighScore.hpp"
-#include "../../include/GameMath.hpp"
 #include "../../include/Menu.hpp"
 #include <iostream>
 
@@ -23,8 +22,6 @@ GamePanel::GamePanel(std::shared_ptr<Context> &context)
 {
     srand(time(nullptr));
 }
-
-GamePanel::~GamePanel() = default;
 
 /**
  * Initialises screen objects
@@ -184,7 +181,7 @@ void GamePanel::draw()
     context->window->draw(panel);
     context->window->draw(divider);
     context->window->draw(borders);
-//    drawGrid();
+    //drawGrid();
     if (!player1.isLose()) player1.draw();
     else showP1LoseScreen();
     if (!player2.isLose()) player2.draw();
