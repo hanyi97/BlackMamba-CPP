@@ -24,7 +24,10 @@ namespace Engine
         UP_MOUTH,
         DOWN_MOUTH,
         LEFT_MOUTH,
-        RIGHT_MOUTH
+        RIGHT_MOUTH,
+        DRAW,
+        PLAYER1WON,
+        PLAYER2WON
     };
 
     struct Context
