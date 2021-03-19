@@ -7,6 +7,7 @@
 #include <SFML/Graphics/Text.hpp>
 #include "../../include/HighScore.hpp"
 #include "../../include/GameMath.hpp"
+#include "../../include/Menu.hpp"
 #include <iostream>
 
 using namespace Engine;
@@ -110,6 +111,13 @@ void GamePanel::processInput()
                     player2 = Player(context, PLAYER2);
                     player1.init();
                     player2.init();
+                }
+            }
+            else if (key == sf::Keyboard::Escape)
+            {
+                if (!running)
+                {
+                    context->states->addState(std::make_unique<Menu>(context), true);
                 }
             }
         }
