@@ -1,9 +1,12 @@
 #include "../../include/GamePanel.hpp"
 #include "../../include/Settings.hpp"
-
+#include <stdlib.h>
+#include <fstream>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/Text.hpp>
+#include "../../include/HighScore.hpp"
+#include "../../include/GameMath.hpp"
 #include <iostream>
 
 using namespace Engine;
@@ -228,6 +231,8 @@ void GamePanel::drawGrid()
  */
 void GamePanel::showGameOverScreen()
 {
+    //show highscore of both players
+    checkScore(getHighScore());
     sf::RectangleShape rect;
     rect.setSize(sf::Vector2f {Settings::WINDOW_WIDTH, Settings::GAME_HEIGHT});
     rect.setPosition(0, Settings::GAME_YPOS + 1);
@@ -244,16 +249,24 @@ void GamePanel::showGameOverScreen()
     gameOver.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH/2.0f, Settings::WINDOW_HEIGHT/2.0f));
     gameOver.setFillColor(sf::Color(255, 102, 102));
 
+
     // Result text
     result.setCharacterSize(30);
     result.setFont(context->assets->getFont(BOLD_FONT));
-    if (player1.getScore() > player2.getScore()) result.setString("Player 1 Won!!");
-    else if (player2.getScore() > player1.getScore()) result.setString("Player 2 Won!!");
+    if (player1.getScore() > player2.getScore()){
+        result.setString("Player 1 Won!!");
+    }
+
+    else if (player2.getScore() > player1.getScore()){
+        result.setString("Player 2 Won!!");
+    }
     else result.setString("Draw");
     sf::FloatRect resultRect = result.getLocalBounds();
     result.setOrigin(resultRect.left + resultRect.width/2.0f,resultRect.top  + resultRect.height/2.0f);
     result.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH/2.0f, Settings::WINDOW_HEIGHT/2.0f + 50));
     result.setFillColor(sf::Color(102, 255, 153));
+
+
 
     // Restart text
     restart.setCharacterSize(15);
@@ -331,6 +344,65 @@ void GamePanel::showP2LoseScreen()
     context->window->draw(gameOver);
 }
 
+
+void GamePanel::checkScore(std::string highScore){
+    // int to store the high score.
+    int high;
+    // compare if player 1 is higher than high score.
+    if(player1.getScore() > std::stoi(highScore)){
+        high = player1.getScore();
+
+        // if got new high score update the high score.
+        fileWrite(std::to_string(high));
+    }
+    // compare if player 2 is higher than high score.
+    else if (player2.getScore() > std::stoi(highScore)){
+        high = player2.getScore();
+
+        // if got new high score update the high score.
+        fileWrite(std::to_string(high));
+    }
+}
+
+void GamePanel::fileWrite(std::string highScore) {
+    // int to store the high score
+    int hs;
+    // write initial score to highscore.txt
+    std::ofstream outfile("highscore.txt");
+
+    // read highscore.txt
+    std::ifstream myFile("highscore.txt");
+
+    // if file is empty then write 0 to the highscore.txt
+    if (myFile.peek() == std::ifstream::traits_type::eof()){
+        outfile << "0";
+        outfile.close();
+    }
+
+    // get the int from highscore.txt
+    myFile >> hs;
+    myFile.close();
+
+    // overwrite the current score with new high score.
+    std::ofstream hscore("highscore.txt", std::ofstream::trunc);
+    // update high score.
+    hscore << highScore;
+    hscore.close();
+}
+
+std::string GamePanel::getHighScore()
+{
+    int line;
+    std::ifstream myfile;
+    myfile.open ("highscore.txt");
+    if (myfile.is_open())
+    {
+        myfile >> line;
+        myfile.close();
+    }
+    return std::to_string(line);
+}
+
 /**
  * Display hearts for player 1 remaining lives
  */
@@ -361,12 +433,13 @@ void GamePanel::displayP2Hearts()
 
 /**
  * Draws objects for top panel
+>>>>>>> main
  */
 void GamePanel::displayPanelText()
 {
     sf::Text p1, p1Score, p1Lives,
              p2, p2Score, p2Lives,
-             pauseText;
+             pauseText, HighScore;
 
     // Player 1 text
     p1.setCharacterSize(25);
@@ -419,6 +492,13 @@ void GamePanel::displayPanelText()
     pauseText.setFont(context->assets->getFont(MAIN_FONT));
     pauseText.setString("Press 'spacebar' to pause");
 
+    // High score text
+    HighScore.setCharacterSize(15);
+    HighScore.setPosition(Settings::CENTER - 50, 20);
+    HighScore.setFillColor(sf::Color::Cyan);
+    HighScore.setFont(context->assets->getFont(BOLD_FONT));
+    HighScore.setString("High Score: " + getHighScore());
+
     context->window->draw(p1);
     context->window->draw(p2);
     context->window->draw(p1Score);
@@ -426,4 +506,5 @@ void GamePanel::displayPanelText()
     context->window->draw(p1Lives);
     context->window->draw(p2Lives);
     context->window->draw(pauseText);
+    context->window->draw(HighScore);
 }
