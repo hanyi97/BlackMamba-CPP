@@ -5,7 +5,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 
 #include <iostream>
-#include <windows.h>
+//#include <windows.h>
 
 #include "StateManager.hpp"
 #include "AssetManager.hpp"
@@ -69,8 +69,8 @@ namespace Engine
             } catch(MultipleGameInitException& e) {
                 std::cerr << "MultipleGameInit exception caught!" << std::endl;
                 std::cerr << e.what() << std::endl;
-                MessageBox(NULL, "Calling Multiple Game Instances! Ending game!",
-                           "Exception has occurred!", MB_ICONERROR); // windows only.
+//                MessageBox(NULL, "Calling Multiple Game Instances! Ending game!",
+//                           "Exception has occurred!", MB_ICONERROR); // windows only.
                 std::terminate(); // aborts program.
             }
         }
