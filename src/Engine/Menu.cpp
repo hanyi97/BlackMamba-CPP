@@ -1,5 +1,6 @@
 //
 // Created by sheng on 11/3/2021.
+// updated by Danial on 17/3/2021.
 //
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Window/Event.hpp>
@@ -7,7 +8,6 @@
 #include "../../include/Game.hpp"
 #include "../../include/Menu.hpp"
 #include "../../include/GamePanel.hpp"
-#include <SFML/Graphics/RectangleShape.hpp>
 
 using namespace Engine;
 
