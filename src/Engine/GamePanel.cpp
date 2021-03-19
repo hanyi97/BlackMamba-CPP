@@ -1,9 +1,12 @@
 #include "../../include/GamePanel.hpp"
 #include "../../include/Settings.hpp"
-
+#include <stdlib.h>
+#include <fstream>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/Text.hpp>
+#include "../../include/HighScore.hpp"
+#include "../../include/GameMath.hpp"
 #include <iostream>
 
 using namespace Engine;
@@ -29,6 +32,7 @@ void GamePanel::init()
     context->assets->addFont(MAIN_FONT, "../assets/fonts/Helvetica.ttf");
     context->assets->addFont(BOLD_FONT, "../assets/fonts/Helvetica-Bold.ttf");
     context->assets->addTexture(BACKGROUND, "../assets/images/background.jpg", true);
+    context->assets->addTexture(HEART, "../assets/images/heart.png");
 
     // Background image
     background.setTexture(context->assets->getTexture(BACKGROUND));
@@ -231,6 +235,8 @@ void GamePanel::drawGrid()
  */
 void GamePanel::showGameOverScreen()
 {
+    //show highscore of both players
+    checkScore(getHighScore());
     sf::RectangleShape rect;
     rect.setSize(sf::Vector2f {Settings::WINDOW_WIDTH, Settings::GAME_HEIGHT});
     rect.setPosition(0, Settings::GAME_YPOS + 1);
@@ -260,6 +266,7 @@ void GamePanel::showGameOverScreen()
     sf::Text gameOver, restart, result, menu;
 
 
+
     // Result text
     result.setCharacterSize(30);
     result.setFont(context->assets->getFont(BOLD_FONT));
@@ -268,7 +275,6 @@ void GamePanel::showGameOverScreen()
     result.setOrigin(resultRect.left + resultRect.width/2.0f,resultRect.top  + resultRect.height/2.0f);
     result.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH/2.0f, Settings::WINDOW_HEIGHT/2.0f + 50));
     result.setFillColor(sf::Color(102, 255, 153));
-
 
     context->window->draw(rect);
     if (player1.getScore() > player2.getScore()) //result.setString("Player 1 Won!!");
@@ -338,14 +344,102 @@ void GamePanel::showP2LoseScreen()
     context->window->draw(gameOver);
 }
 
+
+void GamePanel::checkScore(std::string highScore){
+    // int to store the high score.
+    int high;
+    // compare if player 1 is higher than high score.
+    if(player1.getScore() > std::stoi(highScore)){
+        high = player1.getScore();
+
+        // if got new high score update the high score.
+        fileWrite(std::to_string(high));
+    }
+    // compare if player 2 is higher than high score.
+    else if (player2.getScore() > std::stoi(highScore)){
+        high = player2.getScore();
+
+        // if got new high score update the high score.
+        fileWrite(std::to_string(high));
+    }
+}
+
+void GamePanel::fileWrite(std::string highScore) {
+    // int to store the high score
+    int hs;
+    // write initial score to highscore.txt
+    std::ofstream outfile("highscore.txt");
+
+    // read highscore.txt
+    std::ifstream myFile("highscore.txt");
+
+    // if file is empty then write 0 to the highscore.txt
+    if (myFile.peek() == std::ifstream::traits_type::eof()){
+        outfile << "0";
+        outfile.close();
+    }
+
+    // get the int from highscore.txt
+    myFile >> hs;
+    myFile.close();
+
+    // overwrite the current score with new high score.
+    std::ofstream hscore("highscore.txt", std::ofstream::trunc);
+    // update high score.
+    hscore << highScore;
+    hscore.close();
+}
+
+std::string GamePanel::getHighScore()
+{
+    int line;
+    std::ifstream myfile;
+    myfile.open ("highscore.txt");
+    if (myfile.is_open())
+    {
+        myfile >> line;
+        myfile.close();
+    }
+    return std::to_string(line);
+}
+
+/**
+ * Display hearts for player 1 remaining lives
+ */
+void GamePanel::displayP1Hearts()
+{
+    for (int i = 0; i < player1.getLives(); i++)
+    {
+        sf::Sprite heart;
+        heart.setTexture(context->assets->getTexture(HEART));
+        heart.setPosition((float)60+((float )i*25), (float)30);
+        context->window->draw(heart);
+    }
+}
+
+/**
+ * Display hearts for player 2 remaining lives
+ */
+void GamePanel::displayP2Hearts()
+{
+    for (int i = 0; i < player2.getLives(); i++)
+    {
+        sf::Sprite heart;
+        heart.setTexture(context->assets->getTexture(HEART));
+        heart.setPosition(Settings::CENTER + 480 + ((float )i*25), (float)30);
+        context->window->draw(heart);
+    }
+}
+
 /**
  * Draws objects for top panel
+>>>>>>> main
  */
 void GamePanel::displayPanelText()
 {
     sf::Text p1, p1Score, p1Lives,
              p2, p2Score, p2Lives,
-             pauseText;
+             pauseText, HighScore;
 
     // Player 1 text
     p1.setCharacterSize(25);
@@ -362,32 +456,34 @@ void GamePanel::displayPanelText()
     p1Score.setString("Score: " + std::to_string(player1.getScore()));
 
     // Player 1 lives
+    GamePanel::displayP1Hearts();
     p1Lives.setCharacterSize(15);
     p1Lives.setPosition(10, 30);
     p1Lives.setFillColor(sf::Color::White);
     p1Lives.setFont(context->assets->getFont(BOLD_FONT));
-    p1Lives.setString("Lives: " + std::to_string(player1.getLives()));
+    p1Lives.setString("Lives: ");
 
     // Player 2 text
     p2.setCharacterSize(25);
-    p2.setPosition(Settings::CENTER + Settings::CENTER/2.0f, 18);
+    p2.setPosition(Settings::CENTER + Settings::CENTER/2.0f - 60, 18);
     p2.setFillColor(sf::Color(255, 102, 153));
     p2.setFont(context->assets->getFont(BOLD_FONT));
     p2.setString("Player 2");
 
     // Player 2 score
     p2Score.setCharacterSize(15);
-    p2Score.setPosition(Settings::CENTER + 460, 10);
+    p2Score.setPosition(Settings::CENTER + 430, 10);
     p2Score.setFillColor(sf::Color::White);
     p2Score.setFont(context->assets->getFont(BOLD_FONT));
     p2Score.setString("Score: " + std::to_string(player2.getScore()));
 
     // Player 2 lives
+    GamePanel::displayP2Hearts();
     p2Lives.setCharacterSize(15);
-    p2Lives.setPosition(Settings::CENTER + 460, 30);
+    p2Lives.setPosition(Settings::CENTER + 430, 30);
     p2Lives.setFillColor(sf::Color::White);
     p2Lives.setFont(context->assets->getFont(BOLD_FONT));
-    p2Lives.setString("Lives: " + std::to_string(player2.getLives()));
+    p2Lives.setString("Lives: ");
 
     // Pause text
     pauseText.setCharacterSize(12);
@@ -396,6 +492,13 @@ void GamePanel::displayPanelText()
     pauseText.setFont(context->assets->getFont(MAIN_FONT));
     pauseText.setString("Press 'spacebar' to pause");
 
+    // High score text
+    HighScore.setCharacterSize(15);
+    HighScore.setPosition(Settings::CENTER - 50, 20);
+    HighScore.setFillColor(sf::Color::Cyan);
+    HighScore.setFont(context->assets->getFont(BOLD_FONT));
+    HighScore.setString("High Score: " + getHighScore());
+
     context->window->draw(p1);
     context->window->draw(p2);
     context->window->draw(p1Score);
@@ -403,4 +506,5 @@ void GamePanel::displayPanelText()
     context->window->draw(p1Lives);
     context->window->draw(p2Lives);
     context->window->draw(pauseText);
+    context->window->draw(HighScore);
 }

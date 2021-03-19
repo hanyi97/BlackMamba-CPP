@@ -7,7 +7,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
 
-#ifdef __APPLE__
+#ifdef APPLE
 #define OS 0
 #elif defined(_WIN32) || defined(_WIN64)
 #define OS 1
@@ -15,6 +15,11 @@
 
 using namespace Engine;
 
+// Initialise pointer to null so that it can be initialised
+// in first call to getInstance
+Game *Game::instance = nullptr;
+
+// Private constructor for Game class.
 Game::Game() : context(std::make_shared<Context>())
 {
     // Setup window and show first screen to display
@@ -55,8 +60,8 @@ void Game::Run()
 
 int main()
 {
-    Game game;
-    game.Run();
+    Game *singleton_game = Engine::Game::getInstance();
+    singleton_game->Run();
 
     return 0;
 }
