@@ -8,7 +8,7 @@ namespace Engine
     class HighScore
     {
     private:
-        inline static const std::string FILE_PATH = "highscore.txt";
+        static const std::string FILE_PATH;
         static void fileWrite(std::string);
     public:
         static void checkScore(int, int);
