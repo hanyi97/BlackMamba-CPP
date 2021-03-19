@@ -34,7 +34,7 @@ void Help::init() {
 
     // Back Button
     backButton.setFont(context->assets->getFont(MAIN_FONT));
-    backButton.setString("Start Game!");
+    backButton.setString("Back!");
     backButton.setOrigin(backButton.getLocalBounds().width / 2, backButton.getLocalBounds().height / 2);
     backButton.setPosition(context->window->getSize().x / 2, context->window->getSize().y / 2 + 200.f);
 

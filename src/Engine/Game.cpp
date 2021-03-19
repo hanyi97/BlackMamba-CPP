@@ -1,4 +1,5 @@
 #include "../../include/Game.hpp"
+#include "../../include/GamePanel.hpp"
 #include "../../include/Settings.hpp"
 #include "../../include/Menu.hpp"
 
@@ -8,6 +9,11 @@
 
 using namespace Engine;
 
+// Initialise pointer to null so that it can be initialised
+// in first call to getInstance
+Game *Game::instance = nullptr;
+
+// Private constructor for Game class.
 Game::Game() : context(std::make_shared<Context>())
 {
     // Setup window and show first screen to display
@@ -40,8 +46,8 @@ void Game::Run()
 
 int main()
 {
-    Game game;
-    game.Run();
+    Game *singleton_game = Engine::Game::getInstance();
+    singleton_game->Run();
 
     return 0;
 }
