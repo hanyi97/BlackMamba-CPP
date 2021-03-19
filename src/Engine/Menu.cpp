@@ -77,25 +77,6 @@ void Menu::init() {
     gameTitle.setOrigin(gameTitle.getLocalBounds().width / 2, gameTitle.getLocalBounds().height / 2);
     gameTitle.setPosition(context->window->getSize().x / 2, context->window->getSize().y / 2 - 200.f);
 
-    // Play Button
-
-    menu[0].setFont(context->assets->getFont(MAIN_FONT));
-    menu[0].setString("Play");
-    menu[0].setOrigin(menu[0].getLocalBounds().width / 2, menu[0].getLocalBounds().height / 2);
-    menu[0].setPosition(context->window->getSize().x / 2, context->window->getSize().y / 2 - 25.f);
-
-    // Help Button
-    menu[1].setFont(context->assets->getFont(MAIN_FONT));
-    menu[1].setString("Help");
-    menu[1].setOrigin(menu[1].getLocalBounds().width / 2, menu[1].getLocalBounds().height / 2);
-    menu[1].setPosition(context->window->getSize().x / 2, context->window->getSize().y / 2 + 25.f);
-
-    // Exit Button
-    menu[2].setFont(context->assets->getFont(MAIN_FONT));
-    menu[2].setString("Quit");
-    menu[2].setOrigin(menu[2].getLocalBounds().width / 2, menu[2].getLocalBounds().height / 2);
-    menu[2].setPosition(context->window->getSize().x / 2, context->window->getSize().y / 2 + 75.f);
-
 }
 
 void Menu::processInput() {
@@ -113,18 +94,18 @@ void Menu::processInput() {
             case sf::Event::MouseButtonPressed:
                 if (event.mouseButton.button == sf::Mouse::Left) {
                     // play
-                    if (event.mouseButton.x >= 550 and event.mouseButton.x <= 600) {
-                        if (event.mouseButton.y >= 305 and event.mouseButton.y <= 325)
+                    if (event.mouseButton.x >= 300 and event.mouseButton.x <= 400) {
+                        if (event.mouseButton.y >= 400 and event.mouseButton.y <= 500)
                             playButtonPressed = true;
                     }
                     // help
-                    if (event.mouseButton.x >= 550 and event.mouseButton.x <= 600) {
-                        if (event.mouseButton.y >= 355 and event.mouseButton.y <= 375)
+                    if (event.mouseButton.x >= 500 and event.mouseButton.x <= 600) {
+                        if (event.mouseButton.y >= 400 and event.mouseButton.y <= 500)
                             helpButtonPressed = true;
                     }
                     // quit
-                    if (event.mouseButton.x >= 550 and event.mouseButton.x <= 600) {
-                        if (event.mouseButton.y >= 410 and event.mouseButton.y <= 430)
+                    if (event.mouseButton.x >= 800 and event.mouseButton.x <= 850) {
+                        if (event.mouseButton.y >= 400 and event.mouseButton.y <= 500)
                             exitButtonPressed = true;
                     }
                 }
