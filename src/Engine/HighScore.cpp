@@ -3,6 +3,8 @@
 
 using namespace Engine;
 
+const std::string HighScore::FILE_PATH = "highscore.txt";
+
 void HighScore::checkScore(int p1Score, int p2Score)
 {
     // int to store the high score.
