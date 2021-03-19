@@ -1,5 +1,11 @@
-#ifndef BLACKMAMBA_GAMEPANEL_HPP
-#define BLACKMAMBA_GAMEPANEL_HPP
+//
+// Created by gohts on 14/3/2021.
+//
+/*
+
+#pragma once
+
+#include <memory>
 
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
@@ -7,7 +13,8 @@
 #include "Game.hpp"
 #include "Food.hpp"
 #include "Player.hpp"
-
+#ifndef BLACKMAMBA_HIGHSCORE_H
+#define BLACKMAMBA_HIGHSCORE_H
 namespace Engine
 {
     class GamePanel : public State
@@ -40,11 +47,8 @@ namespace Engine
         void showP1LoseScreen();
         void showP2LoseScreen();
         void displayPanelText();
-        std::string getHighScore();
-        void fileWrite(std::string);
-        void checkScore(std::string);
-     /*   std::string displayHighScore();*/
     };
 }
 
-#endif //BLACKMAMBA_GAMEPANEL_HPP
+#endif //BLACKMAMBA_HIGHSCORE_H
+*/
