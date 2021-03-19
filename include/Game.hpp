@@ -4,6 +4,9 @@
 #include <memory>
 #include <SFML/Graphics/RenderWindow.hpp>
 
+#include <iostream>
+#include <windows.h>
+
 #include "StateManager.hpp"
 #include "AssetManager.hpp"
 
@@ -38,6 +41,12 @@ namespace Engine
         }
     };
 
+    struct MultipleGameInitException : public std::exception {
+        const char * what () const throw () {
+            return "MultipleGameInit Exception";
+        }
+    };
+
     class Game
     {
         // we will implement Game class as singleton class.
@@ -48,10 +57,22 @@ namespace Engine
         Game(); // constructor is private as per singleton class implementation.
     public:
         static Game* getInstance() {
-            if(!instance) {
-                instance = new Game;
+            try {
+                if (!instance) {
+                    instance = new Game;
+                    return instance;
+                } else {
+                    // throw an exception since somewhere is trying to call an instance...
+                    // ...when an instance already exists.
+                    throw MultipleGameInitException();
+                }
+            } catch(MultipleGameInitException& e) {
+                std::cerr << "MultipleGameInit exception caught!" << std::endl;
+                std::cerr << e.what() << std::endl;
+                MessageBox(NULL, "Calling Multiple Game Instances! Ending game!",
+                           "Exception has occurred!", MB_ICONERROR); // windows only.
+                std::terminate(); // aborts program.
             }
-            return instance;
         }
         void Run();
     };
