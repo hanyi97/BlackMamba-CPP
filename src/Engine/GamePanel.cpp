@@ -7,6 +7,7 @@
 #include <SFML/Graphics/Text.hpp>
 #include "../../include/HighScore.hpp"
 #include "../../include/GameMath.hpp"
+#include "../../include/Menu.hpp"
 #include <iostream>
 
 using namespace Engine;
@@ -15,6 +16,7 @@ GamePanel::GamePanel(std::shared_ptr<Context> &context)
          : context(context),
            elapsedTime(sf::Time::Zero),
            running(true),
+           gameOver(false),
            ticks(0),
            player1(context, PLAYER1),
            player2(context, PLAYER2)
@@ -114,7 +116,7 @@ void GamePanel::processInput()
             }
             else if (key == sf::Keyboard::Escape)
             {
-                //context->states->addState(std::make_unique<GamePanel>(context),true);
+                gameOver = true;
             }
         }
     }
@@ -159,6 +161,11 @@ void GamePanel::update(sf::Time deltaTime)
                 ticks = 0;
             }
             ticks++;
+        }
+        else{
+            if(gameOver){
+                context->states->addState(std::make_unique<Menu>(context),true);
+            }
         }
         elapsedTime = sf::Time::Zero;
     }
@@ -433,7 +440,6 @@ void GamePanel::displayP2Hearts()
 
 /**
  * Draws objects for top panel
->>>>>>> main
  */
 void GamePanel::displayPanelText()
 {
