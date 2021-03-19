@@ -108,6 +108,10 @@ void GamePanel::processInput()
                     player2.init();
                 }
             }
+            else if (key == sf::Keyboard::Escape)
+            {
+                //context->states->addState(std::make_unique<GamePanel>(context),true);
+            }
         }
     }
 }
@@ -232,49 +236,53 @@ void GamePanel::showGameOverScreen()
     rect.setPosition(0, Settings::GAME_YPOS + 1);
     rect.setFillColor(sf::Color::Black);
 
+    // Draw result image
+    sf::Sprite gameoverDrawImage;
+    context->assets->addTexture(DRAW, "../assets/images/gameoverDraw.jpg");
+    gameoverDrawImage.setTexture(context->assets->getTexture(DRAW));
+    gameoverDrawImage.setPosition(0, Settings::GAME_YPOS);
+    gameoverDrawImage.setTextureRect(context->window->getViewport(context->window->getDefaultView()));
+
+    // Player 1 won image
+    sf::Sprite player1won;
+    context->assets->addTexture(PLAYER1WON, "../assets/images/gameoverPlayer1Won.jpg");
+    player1won.setTexture(context->assets->getTexture(PLAYER1WON));
+    player1won.setPosition(0, Settings::GAME_YPOS);
+    player1won.setTextureRect(context->window->getViewport(context->window->getDefaultView()));
+
+    // Player 2 won image
+    sf::Sprite player2won;
+    context->assets->addTexture(PLAYER2WON, "../assets/images/gameoverPlayer2Won.jpg");
+    player2won.setTexture(context->assets->getTexture(PLAYER2WON));
+    player2won.setPosition(0, Settings::GAME_YPOS);
+    player2won.setTextureRect(context->window->getViewport(context->window->getDefaultView()));
+
     sf::Text gameOver, restart, result, menu;
 
-    // Game over text
-    gameOver.setCharacterSize(30);
-    gameOver.setString("GAME OVER");
-    gameOver.setFont(context->assets->getFont(BOLD_FONT));
-    sf::FloatRect gameOverRect = gameOver.getLocalBounds();
-    gameOver.setOrigin(gameOverRect.left + gameOverRect.width/2.0f,gameOverRect.top  + gameOverRect.height/2.0f);
-    gameOver.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH/2.0f, Settings::WINDOW_HEIGHT/2.0f));
-    gameOver.setFillColor(sf::Color(255, 102, 102));
 
     // Result text
     result.setCharacterSize(30);
     result.setFont(context->assets->getFont(BOLD_FONT));
-    if (player1.getScore() > player2.getScore()) result.setString("Player 1 Won!!");
-    else if (player2.getScore() > player1.getScore()) result.setString("Player 2 Won!!");
-    else result.setString("Draw");
+
     sf::FloatRect resultRect = result.getLocalBounds();
     result.setOrigin(resultRect.left + resultRect.width/2.0f,resultRect.top  + resultRect.height/2.0f);
     result.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH/2.0f, Settings::WINDOW_HEIGHT/2.0f + 50));
     result.setFillColor(sf::Color(102, 255, 153));
 
-    // Restart text
-    restart.setCharacterSize(15);
-    restart.setString("Press Enter to Restart");
-    restart.setFont(context->assets->getFont(MAIN_FONT));
-    sf::FloatRect restartRect = restart.getLocalBounds();
-    restart.setOrigin(restartRect.left + restartRect.width/2.0f,restartRect.top  + restartRect.height/2.0f);
-    restart.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH/2.0f, Settings::WINDOW_HEIGHT/2.0f + 100));
-    restart.setFillColor(sf::Color(255, 77, 77));
-
-    // Menu text
-    menu.setCharacterSize(15);
-    menu.setString("Press Escape to return to Main Menu");
-    menu.setFont(context->assets->getFont(MAIN_FONT));
-    sf::FloatRect menuRect = menu.getLocalBounds();
-    menu.setOrigin(menuRect.left + menuRect.width/2.0f,menuRect.top  + menuRect.height/2.0f);
-    menu.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH/2.0f, Settings::WINDOW_HEIGHT/2.0f + 130));
-    menu.setFillColor(sf::Color(255, 77, 77));
 
     context->window->draw(rect);
-    context->window->draw(gameOver);
-    context->window->draw(result);
+    if (player1.getScore() > player2.getScore()) //result.setString("Player 1 Won!!");
+    {
+        context->window->draw(player1won);
+    }
+    else if (player2.getScore() > player1.getScore()) //result.setString("Player 2 Won!!");
+    {
+        context->window->draw(player2won);
+    }
+    else //result.setString("Draw");
+    {
+        context->window->draw(gameoverDrawImage);
+    }
     context->window->draw(restart);
     context->window->draw(menu);
 }
