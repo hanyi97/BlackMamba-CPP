@@ -1,30 +1,27 @@
 #include "../../include/GamePanel.hpp"
 #include "../../include/Settings.hpp"
-#include <stdlib.h>
+#include <cstdlib>
 #include <fstream>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/Text.hpp>
 #include "../../include/HighScore.hpp"
-#include "../../include/GameMath.hpp"
 #include "../../include/Menu.hpp"
 #include <iostream>
 
 using namespace Engine;
 
 GamePanel::GamePanel(std::shared_ptr<Context> &context)
-         : context(context),
-           elapsedTime(sf::Time::Zero),
-           running(true),
-           gameOver(false),
-           ticks(0),
-           player1(context, PLAYER1),
-           player2(context, PLAYER2)
+        : context(context),
+          elapsedTime(sf::Time::Zero),
+          running(true),
+          gameOver(false),
+          ticks(0),
+          player1(context, PLAYER1),
+          player2(context, PLAYER2)
 {
     srand(time(nullptr));
 }
-
-GamePanel::~GamePanel() = default;
 
 /**
  * Initialises screen objects
@@ -162,9 +159,11 @@ void GamePanel::update(sf::Time deltaTime)
             }
             ticks++;
         }
-        else{
-            if(gameOver){
-                context->states->addState(std::make_unique<Menu>(context),true);
+        else
+        {
+            if (gameOver)
+            {
+                context->states->addState(std::make_unique<Menu>(context), true);
             }
         }
         elapsedTime = sf::Time::Zero;
@@ -184,7 +183,7 @@ void GamePanel::draw()
     context->window->draw(panel);
     context->window->draw(divider);
     context->window->draw(borders);
-//    drawGrid();
+    //drawGrid();
     if (!player1.isLose()) player1.draw();
     else showP1LoseScreen();
     if (!player2.isLose()) player2.draw();
@@ -212,30 +211,6 @@ void GamePanel::start()
     running = true;
 }
 
-/**
- * Helper method to draw grid lines
- */
-void GamePanel::drawGrid()
-{
-    // draw vertical lines
-    for (int i = 0; i < Settings::WINDOW_HEIGHT / Settings::UNIT_SIZE; i++)
-    {
-        sf::RectangleShape line;
-        line.setSize(sf::Vector2f(Settings::WINDOW_WIDTH, 2));
-        line.setPosition(0, i * Settings::UNIT_SIZE + Settings::GAME_YPOS);
-        line.setFillColor(sf::Color::White);
-        context->window->draw(line);
-    }
-    // draw horizontal lines
-    for (int i = 0; i < Settings::WINDOW_WIDTH / Settings::UNIT_SIZE; i++)
-    {
-        sf::RectangleShape line;
-        line.setSize(sf::Vector2f(2, Settings::GAME_HEIGHT));
-        line.setPosition(i * Settings::UNIT_SIZE, Settings::GAME_YPOS);
-        line.setFillColor(sf::Color::White);
-        context->window->draw(line);
-    }
-}
 
 /**
  * Draws game over screen
@@ -243,9 +218,9 @@ void GamePanel::drawGrid()
 void GamePanel::showGameOverScreen()
 {
     //show highscore of both players
-    checkScore(getHighScore());
+    HighScore::checkScore(player1.getScore(), player2.getScore());
     sf::RectangleShape rect;
-    rect.setSize(sf::Vector2f {Settings::WINDOW_WIDTH, Settings::GAME_HEIGHT});
+    rect.setSize(sf::Vector2f{Settings::WINDOW_WIDTH, Settings::GAME_HEIGHT});
     rect.setPosition(0, Settings::GAME_YPOS + 1);
     rect.setFillColor(sf::Color::Black);
 
@@ -279,8 +254,8 @@ void GamePanel::showGameOverScreen()
     result.setFont(context->assets->getFont(BOLD_FONT));
 
     sf::FloatRect resultRect = result.getLocalBounds();
-    result.setOrigin(resultRect.left + resultRect.width/2.0f,resultRect.top  + resultRect.height/2.0f);
-    result.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH/2.0f, Settings::WINDOW_HEIGHT/2.0f + 50));
+    result.setOrigin(resultRect.left + resultRect.width / 2.0f, resultRect.top + resultRect.height / 2.0f);
+    result.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH / 2.0f, Settings::WINDOW_HEIGHT / 2.0f + 50));
     result.setFillColor(sf::Color(102, 255, 153));
 
     context->window->draw(rect);
@@ -308,7 +283,7 @@ void GamePanel::showP1LoseScreen()
     // Clear left screen
     sf::RectangleShape rect;
     rect.setPosition(1, 1 + Settings::GAME_YPOS);
-    rect.setSize(sf::Vector2f {(Settings::WINDOW_WIDTH / 2.0f) - 1, Settings::GAME_HEIGHT - 1});
+    rect.setSize(sf::Vector2f{(Settings::WINDOW_WIDTH / 2.0f) - 1, Settings::GAME_HEIGHT - 1});
     rect.setFillColor(sf::Color::Black);
 
     // Game over text
@@ -317,8 +292,8 @@ void GamePanel::showP1LoseScreen()
     gameOver.setString("Player 1 Game Over");
     gameOver.setFont(context->assets->getFont(BOLD_FONT));
     sf::FloatRect gameOverRect = gameOver.getLocalBounds();
-    gameOver.setOrigin(gameOverRect.left + gameOverRect.width/2.0f,gameOverRect.top  + gameOverRect.height/2.0f);
-    gameOver.setPosition(sf::Vector2f(Settings::CENTER/2.0f, Settings::WINDOW_HEIGHT/2.0f));
+    gameOver.setOrigin(gameOverRect.left + gameOverRect.width / 2.0f, gameOverRect.top + gameOverRect.height / 2.0f);
+    gameOver.setPosition(sf::Vector2f(Settings::CENTER / 2.0f, Settings::WINDOW_HEIGHT / 2.0f));
     gameOver.setFillColor(sf::Color(255, 102, 102));
 
     context->window->draw(rect);
@@ -343,72 +318,14 @@ void GamePanel::showP2LoseScreen()
     gameOver.setString("Player 2 Game Over");
     gameOver.setFont(context->assets->getFont(BOLD_FONT));
     sf::FloatRect gameOverRect = gameOver.getLocalBounds();
-    gameOver.setOrigin(gameOverRect.left + gameOverRect.width/2.0f,gameOverRect.top  + gameOverRect.height/2.0f);
-    gameOver.setPosition(sf::Vector2f(Settings::CENTER + Settings::CENTER/2.0f, Settings::WINDOW_HEIGHT/2.0f));
+    gameOver.setOrigin(gameOverRect.left + gameOverRect.width / 2.0f, gameOverRect.top + gameOverRect.height / 2.0f);
+    gameOver.setPosition(sf::Vector2f(Settings::CENTER + Settings::CENTER / 2.0f, Settings::WINDOW_HEIGHT / 2.0f));
     gameOver.setFillColor(sf::Color(255, 102, 102));
 
     context->window->draw(rect);
     context->window->draw(gameOver);
 }
 
-
-void GamePanel::checkScore(std::string highScore){
-    // int to store the high score.
-    int high;
-    // compare if player 1 is higher than high score.
-    if(player1.getScore() > std::stoi(highScore)){
-        high = player1.getScore();
-
-        // if got new high score update the high score.
-        fileWrite(std::to_string(high));
-    }
-    // compare if player 2 is higher than high score.
-    else if (player2.getScore() > std::stoi(highScore)){
-        high = player2.getScore();
-
-        // if got new high score update the high score.
-        fileWrite(std::to_string(high));
-    }
-}
-
-void GamePanel::fileWrite(std::string highScore) {
-    // int to store the high score
-    int hs;
-    // write initial score to highscore.txt
-    std::ofstream outfile("highscore.txt");
-
-    // read highscore.txt
-    std::ifstream myFile("highscore.txt");
-
-    // if file is empty then write 0 to the highscore.txt
-    if (myFile.peek() == std::ifstream::traits_type::eof()){
-        outfile << "0";
-        outfile.close();
-    }
-
-    // get the int from highscore.txt
-    myFile >> hs;
-    myFile.close();
-
-    // overwrite the current score with new high score.
-    std::ofstream hscore("highscore.txt", std::ofstream::trunc);
-    // update high score.
-    hscore << highScore;
-    hscore.close();
-}
-
-std::string GamePanel::getHighScore()
-{
-    int line;
-    std::ifstream myfile;
-    myfile.open ("highscore.txt");
-    if (myfile.is_open())
-    {
-        myfile >> line;
-        myfile.close();
-    }
-    return std::to_string(line);
-}
 
 /**
  * Display hearts for player 1 remaining lives
@@ -419,7 +336,7 @@ void GamePanel::displayP1Hearts()
     {
         sf::Sprite heart;
         heart.setTexture(context->assets->getTexture(HEART));
-        heart.setPosition((float)60+((float )i*25), (float)30);
+        heart.setPosition((float) 60 + ((float) i * 25), (float) 30);
         context->window->draw(heart);
     }
 }
@@ -433,7 +350,7 @@ void GamePanel::displayP2Hearts()
     {
         sf::Sprite heart;
         heart.setTexture(context->assets->getTexture(HEART));
-        heart.setPosition(Settings::CENTER + 480 + ((float )i*25), (float)30);
+        heart.setPosition(Settings::CENTER + 480 + ((float) i * 25), (float) 30);
         context->window->draw(heart);
     }
 }
@@ -444,12 +361,12 @@ void GamePanel::displayP2Hearts()
 void GamePanel::displayPanelText()
 {
     sf::Text p1, p1Score, p1Lives,
-             p2, p2Score, p2Lives,
-             pauseText, HighScore;
+            p2, p2Score, p2Lives,
+            pauseText, HighScore;
 
     // Player 1 text
     p1.setCharacterSize(25);
-    p1.setPosition(Settings::CENTER/2.0f, 18);
+    p1.setPosition(Settings::CENTER / 2.0f, 18);
     p1.setFillColor(sf::Color(255, 102, 153));
     p1.setFont(context->assets->getFont(BOLD_FONT));
     p1.setString("Player 1");
@@ -471,7 +388,7 @@ void GamePanel::displayPanelText()
 
     // Player 2 text
     p2.setCharacterSize(25);
-    p2.setPosition(Settings::CENTER + Settings::CENTER/2.0f - 60, 18);
+    p2.setPosition(Settings::CENTER + Settings::CENTER / 2.0f - 60, 18);
     p2.setFillColor(sf::Color(255, 102, 153));
     p2.setFont(context->assets->getFont(BOLD_FONT));
     p2.setString("Player 2");
@@ -503,7 +420,7 @@ void GamePanel::displayPanelText()
     HighScore.setPosition(Settings::CENTER - 50, 20);
     HighScore.setFillColor(sf::Color::Cyan);
     HighScore.setFont(context->assets->getFont(BOLD_FONT));
-    HighScore.setString("High Score: " + getHighScore());
+    HighScore.setString("High Score: " + HighScore::getHighScore());
 
     context->window->draw(p1);
     context->window->draw(p2);
@@ -513,4 +430,29 @@ void GamePanel::displayPanelText()
     context->window->draw(p2Lives);
     context->window->draw(pauseText);
     context->window->draw(HighScore);
+}
+
+/**
+ * Helper method to draw grid lines
+ */
+void GamePanel::drawGrid()
+{
+    // draw vertical lines
+    for (int i = 0; i < Settings::WINDOW_HEIGHT / Settings::UNIT_SIZE; i++)
+    {
+        sf::RectangleShape line;
+        line.setSize(sf::Vector2f(Settings::WINDOW_WIDTH, 2));
+        line.setPosition(0, i * Settings::UNIT_SIZE + Settings::GAME_YPOS);
+        line.setFillColor(sf::Color::White);
+        context->window->draw(line);
+    }
+    // draw horizontal lines
+    for (int i = 0; i < Settings::WINDOW_WIDTH / Settings::UNIT_SIZE; i++)
+    {
+        sf::RectangleShape line;
+        line.setSize(sf::Vector2f(2, Settings::GAME_HEIGHT));
+        line.setPosition(i * Settings::UNIT_SIZE, Settings::GAME_YPOS);
+        line.setFillColor(sf::Color::White);
+        context->window->draw(line);
+    }
 }

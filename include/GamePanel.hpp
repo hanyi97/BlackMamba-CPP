@@ -1,12 +1,14 @@
 #ifndef BLACKMAMBA_GAMEPANEL_HPP
 #define BLACKMAMBA_GAMEPANEL_HPP
-#pragma once
+
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
+
 #include "State.hpp"
 #include "Game.hpp"
 #include "Food.hpp"
 #include "Player.hpp"
+#include "HighScore.hpp"
 
 namespace Engine
 {
@@ -28,7 +30,7 @@ namespace Engine
         int ticks;
     public:
         GamePanel(std::shared_ptr<Context> &);
-        ~GamePanel();
+        ~GamePanel() = default;
 
         void init() override;
         void processInput() override;
@@ -41,10 +43,6 @@ namespace Engine
         void showP1LoseScreen();
         void showP2LoseScreen();
         void displayPanelText();
-        std::string getHighScore();
-        void fileWrite(std::string);
-        void checkScore(std::string);
-     /*   std::string displayHighScore();*/
         void displayP1Hearts();
         void displayP2Hearts();
     };

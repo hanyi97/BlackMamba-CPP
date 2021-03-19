@@ -1,54 +1,19 @@
-//
-// Created by gohts on 14/3/2021.
-//
-/*
+#ifndef BLACKMAMBA_HIGHSCORE_HPP
+#define BLACKMAMBA_HIGHSCORE_HPP
 
-#pragma once
+#include <string>
 
-#include <memory>
-
-#include <SFML/Graphics/Sprite.hpp>
-#include <SFML/Graphics/RectangleShape.hpp>
-#include "State.hpp"
-#include "Game.hpp"
-#include "Food.hpp"
-#include "Player.hpp"
-#ifndef BLACKMAMBA_HIGHSCORE_H
-#define BLACKMAMBA_HIGHSCORE_H
 namespace Engine
 {
-    class GamePanel : public State
+    class HighScore
     {
     private:
-        std::shared_ptr<Context> context;
-        sf::Time elapsedTime;
-        sf::Sprite background;
-        sf::RectangleShape panel;
-        sf::RectangleShape divider;
-        sf::RectangleShape borders;
-
-        Player player1;
-        Player player2;
-
-        bool running;
-        int ticks;
+        inline static const std::string FILE_PATH = "highscore.txt";
     public:
-        GamePanel(std::shared_ptr<Context> &);
-        ~GamePanel();
-
-        void init() override;
-        void processInput() override;
-        void update(sf::Time) override;
-        void draw() override;
-        void pause() override;
-        void start() override;
-        void drawGrid();
-        void showGameOverScreen();
-        void showP1LoseScreen();
-        void showP2LoseScreen();
-        void displayPanelText();
+        static void checkScore(int, int);
+        static void fileWrite(std::string);
+        static std::string getHighScore();
     };
 }
 
-#endif //BLACKMAMBA_HIGHSCORE_H
-*/
+#endif //BLACKMAMBA_HIGHSCORE_HPP
