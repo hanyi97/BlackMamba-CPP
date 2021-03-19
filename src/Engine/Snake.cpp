@@ -6,9 +6,13 @@
 #include <iostream>
 #include <exception>
 #include <windows.h> // for error dialogue box.
+#include <iostream>
 
 using namespace Engine;
 using namespace Math;
+using namespace std;
+
+
 
 Snake::Snake() = default;
 
