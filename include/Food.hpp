@@ -1,6 +1,6 @@
 #ifndef BLACKMAMBA_FOOD_HPP
 #define BLACKMAMBA_FOOD_HPP
-
+#pragma once
 #include <SFML/Graphics/Sprite.hpp>
 #include "Game.hpp"
 #include "Drawable.hpp"

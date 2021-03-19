@@ -1,6 +1,6 @@
 #ifndef BLACKMAMBA_GAMEMATH_HPP
 #define BLACKMAMBA_GAMEMATH_HPP
-
+#pragma once
 namespace Math
 {
     class GameMath

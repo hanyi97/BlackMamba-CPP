@@ -1,6 +1,6 @@
 #ifndef BLACKMAMBA_GAME_HPP
 #define BLACKMAMBA_GAME_HPP
-
+#pragma once
 #include <memory>
 #include <SFML/Graphics/RenderWindow.hpp>
 
@@ -17,6 +17,7 @@ namespace Engine
         BACKGROUND,
         FOOD,
         POISON,
+        HEART,
         UP_MOUTH,
         DOWN_MOUTH,
         LEFT_MOUTH,
