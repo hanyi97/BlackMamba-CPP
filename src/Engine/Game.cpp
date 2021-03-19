@@ -7,26 +7,17 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
 
-#ifdef APPLE
-#define OS 0
-#elif defined(_WIN32) || defined(_WIN64)
-#define OS 1
-#endif
-
 using namespace Engine;
 
+// Initialise pointer to null so that it can be initialised
+// in first call to getInstance
+Game *Game::instance = nullptr;
+
+// Private constructor for Game class.
 Game::Game() : context(std::make_shared<Context>())
 {
     // Setup window and show first screen to display
-    if (OS == 0)
-    {
-        context->window->create(sf::VideoMode(Settings::WINDOW_WIDTH*2, Settings::WINDOW_HEIGHT*2), "Black Mamba", sf::Style::Close);
-        context->window->setView(sf::View(sf::FloatRect(0, 0, Settings::WINDOW_WIDTH, Settings::WINDOW_HEIGHT)));
-    }
-    else
-    {
-        context->window->create(sf::VideoMode(Settings::WINDOW_WIDTH, Settings::WINDOW_HEIGHT), "Black Mamba", sf::Style::Close);
-    }
+    context->window->create(sf::VideoMode(Settings::WINDOW_WIDTH, Settings::WINDOW_HEIGHT), "Black Mamba", sf::Style::Close);
     context->states->addState(std::make_unique<Menu>(context));
 }
 
@@ -55,8 +46,8 @@ void Game::Run()
 
 int main()
 {
-    Game game;
-    game.Run();
+    Game *singleton_game = Engine::Game::getInstance();
+    singleton_game->Run();
 
     return 0;
 }

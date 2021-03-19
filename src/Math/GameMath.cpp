@@ -2,7 +2,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <exception>
-#include <windows.h>
+//#include <windows.h>
 
 using namespace Math;
 
@@ -30,8 +30,8 @@ int GameMath::calculateXBound(int center, int unitSize)
     } catch(DivideByZero& e) {
         std::cerr << "DivideByZero exception caught!" << std::endl;
         std::cerr << e.what() << std::endl;
-        MessageBox(NULL, "DivideByZero error!",
-                   "Exception has occurred!", MB_ICONERROR); // windows only.
+//        MessageBox(NULL, "DivideByZero error!",
+//                   "Exception has occurred!", MB_ICONERROR); // windows only.
         std::terminate(); // aborts program.
     }
     return center / unitSize;
@@ -53,8 +53,8 @@ int GameMath::calculateYBound(int height, int unitSize)
     } catch(DivideByZero& e) {
         std::cerr << "DivideByZero exception caught!" << std::endl;
         std::cerr << e.what() << std::endl;
-        MessageBox(NULL, "DivideByZero error!",
-                   "Exception has occurred!", MB_ICONERROR); // windows only.
+//        MessageBox(NULL, "DivideByZero error!",
+//                   "Exception has occurred!", MB_ICONERROR); // windows only.
         std::terminate(); // aborts program.
     }
     return (height - unitSize) / unitSize;
