@@ -9,13 +9,12 @@
 using namespace Engine;
 
 GamePanel::GamePanel(std::shared_ptr<Context> &context)
-         : context(context),
-           elapsedTime(sf::Time::Zero),
-           running(true),
-           ticks(0),
-           player1(context, PLAYER1),
-           player2(context, PLAYER2)
-{
+        : context(context),
+          elapsedTime(sf::Time::Zero),
+          running(true),
+          ticks(0),
+          player1(context, PLAYER1),
+          player2(context, PLAYER2) {
     srand(time(nullptr));
 }
 
@@ -24,8 +23,7 @@ GamePanel::~GamePanel() = default;
 /**
  * Initialises screen objects
  */
-void GamePanel::init()
-{
+void GamePanel::init() {
     context->assets->addFont(MAIN_FONT, "../assets/fonts/Helvetica.ttf");
     context->assets->addFont(BOLD_FONT, "../assets/fonts/Helvetica-Bold.ttf");
     context->assets->addTexture(BACKGROUND, "../assets/images/background.jpg", true);
@@ -62,18 +60,13 @@ void GamePanel::init()
 /**
  * Wait for user keypress
  */
-void GamePanel::processInput()
-{
+void GamePanel::processInput() {
     sf::Event event{};
 
-    while (context->window->pollEvent(event))
-    {
-        if (event.type == sf::Event::Closed)
-        {
+    while (context->window->pollEvent(event)) {
+        if (event.type == sf::Event::Closed) {
             context->window->close();
-        }
-        else if (event.type == sf::Event::KeyPressed)
-        {
+        } else if (event.type == sf::Event::KeyPressed) {
             int key = event.key.code;
 
             if (key == sf::Keyboard::W && !player1.getDown())
@@ -92,15 +85,11 @@ void GamePanel::processInput()
                 player2.changeDirection(false, false, true, false);
             else if (key == sf::Keyboard::Right && !player2.getLeft())
                 player2.changeDirection(false, false, false, true);
-            else if (key == sf::Keyboard::Space)
-            {
+            else if (key == sf::Keyboard::Space) {
                 if (running) pause();
                 else start();
-            }
-            else if (key == sf::Keyboard::Enter)
-            {
-                if (!running)
-                {
+            } else if (key == sf::Keyboard::Enter) {
+                if (!running) {
                     running = true;
                     player1 = Player(context, PLAYER1);
                     player2 = Player(context, PLAYER2);
@@ -117,35 +106,29 @@ void GamePanel::processInput()
  *
  * @param deltaTime: Elapsed time
  */
-void GamePanel::update(sf::Time deltaTime)
-{
+void GamePanel::update(sf::Time deltaTime) {
     elapsedTime += deltaTime;
-    if (elapsedTime.asSeconds() > 0.1)
-    {
-        if (running)
-        {
+    if (elapsedTime.asSeconds() > 0.1) {
+        if (running) {
+
             // Both lost
             if (player1.isLose() && player2.isLose()) running = false;
 
             // Player 1
-            if (!player1.isLose())
-            {
+            if (!player1.isLose()) {
                 player1.moveSnake();
                 player1.checkHit();
                 player1.checkEat();
             }
 
             // Player 2
-            if (!player2.isLose())
-            {
+            if (!player2.isLose()) {
                 player2.moveSnake();
                 player2.checkHit();
                 player2.checkEat();
             }
-
             // Reposition poison
-            if (ticks >= 20)
-            {
+            if (ticks >= 20) {
                 player1.repositionPoison();
                 player2.repositionPoison();
                 ticks = 0;
@@ -159,8 +142,7 @@ void GamePanel::update(sf::Time deltaTime)
 /**
  * Clears screen frame and redraw objects
  */
-void GamePanel::draw()
-{
+void GamePanel::draw() {
     // Clear screen
     context->window->clear();
 
@@ -184,27 +166,23 @@ void GamePanel::draw()
 /**
  * Set running state to false
  */
-void GamePanel::pause()
-{
+void GamePanel::pause() {
     running = false;
 }
 
 /**
  * Set running state to true
  */
-void GamePanel::start()
-{
+void GamePanel::start() {
     running = true;
 }
 
 /**
  * Helper method to draw grid lines
  */
-void GamePanel::drawGrid()
-{
+void GamePanel::drawGrid() {
     // draw vertical lines
-    for (int i = 0; i < Settings::WINDOW_HEIGHT / Settings::UNIT_SIZE; i++)
-    {
+    for (int i = 0; i < Settings::WINDOW_HEIGHT / Settings::UNIT_SIZE; i++) {
         sf::RectangleShape line;
         line.setSize(sf::Vector2f(Settings::WINDOW_WIDTH, 2));
         line.setPosition(0, i * Settings::UNIT_SIZE + Settings::GAME_YPOS);
@@ -212,8 +190,7 @@ void GamePanel::drawGrid()
         context->window->draw(line);
     }
     // draw horizontal lines
-    for (int i = 0; i < Settings::WINDOW_WIDTH / Settings::UNIT_SIZE; i++)
-    {
+    for (int i = 0; i < Settings::WINDOW_WIDTH / Settings::UNIT_SIZE; i++) {
         sf::RectangleShape line;
         line.setSize(sf::Vector2f(2, Settings::GAME_HEIGHT));
         line.setPosition(i * Settings::UNIT_SIZE, Settings::GAME_YPOS);
@@ -225,10 +202,9 @@ void GamePanel::drawGrid()
 /**
  * Draws game over screen
  */
-void GamePanel::showGameOverScreen()
-{
+void GamePanel::showGameOverScreen() {
     sf::RectangleShape rect;
-    rect.setSize(sf::Vector2f {Settings::WINDOW_WIDTH, Settings::GAME_HEIGHT});
+    rect.setSize(sf::Vector2f{Settings::WINDOW_WIDTH, Settings::GAME_HEIGHT});
     rect.setPosition(0, Settings::GAME_YPOS + 1);
     rect.setFillColor(sf::Color::Black);
 
@@ -239,8 +215,8 @@ void GamePanel::showGameOverScreen()
     gameOver.setString("GAME OVER");
     gameOver.setFont(context->assets->getFont(BOLD_FONT));
     sf::FloatRect gameOverRect = gameOver.getLocalBounds();
-    gameOver.setOrigin(gameOverRect.left + gameOverRect.width/2.0f,gameOverRect.top  + gameOverRect.height/2.0f);
-    gameOver.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH/2.0f, Settings::WINDOW_HEIGHT/2.0f));
+    gameOver.setOrigin(gameOverRect.left + gameOverRect.width / 2.0f, gameOverRect.top + gameOverRect.height / 2.0f);
+    gameOver.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH / 2.0f, Settings::WINDOW_HEIGHT / 2.0f));
     gameOver.setFillColor(sf::Color(255, 102, 102));
 
     // Result text
@@ -250,8 +226,8 @@ void GamePanel::showGameOverScreen()
     else if (player2.getScore() > player1.getScore()) result.setString("Player 2 Won!!");
     else result.setString("Draw");
     sf::FloatRect resultRect = result.getLocalBounds();
-    result.setOrigin(resultRect.left + resultRect.width/2.0f,resultRect.top  + resultRect.height/2.0f);
-    result.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH/2.0f, Settings::WINDOW_HEIGHT/2.0f + 50));
+    result.setOrigin(resultRect.left + resultRect.width / 2.0f, resultRect.top + resultRect.height / 2.0f);
+    result.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH / 2.0f, Settings::WINDOW_HEIGHT / 2.0f + 50));
     result.setFillColor(sf::Color(102, 255, 153));
 
     // Restart text
@@ -259,8 +235,8 @@ void GamePanel::showGameOverScreen()
     restart.setString("Press Enter to Restart");
     restart.setFont(context->assets->getFont(MAIN_FONT));
     sf::FloatRect restartRect = restart.getLocalBounds();
-    restart.setOrigin(restartRect.left + restartRect.width/2.0f,restartRect.top  + restartRect.height/2.0f);
-    restart.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH/2.0f, Settings::WINDOW_HEIGHT/2.0f + 100));
+    restart.setOrigin(restartRect.left + restartRect.width / 2.0f, restartRect.top + restartRect.height / 2.0f);
+    restart.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH / 2.0f, Settings::WINDOW_HEIGHT / 2.0f + 100));
     restart.setFillColor(sf::Color(255, 77, 77));
 
     // Menu text
@@ -268,8 +244,8 @@ void GamePanel::showGameOverScreen()
     menu.setString("Press Escape to return to Main Menu");
     menu.setFont(context->assets->getFont(MAIN_FONT));
     sf::FloatRect menuRect = menu.getLocalBounds();
-    menu.setOrigin(menuRect.left + menuRect.width/2.0f,menuRect.top  + menuRect.height/2.0f);
-    menu.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH/2.0f, Settings::WINDOW_HEIGHT/2.0f + 130));
+    menu.setOrigin(menuRect.left + menuRect.width / 2.0f, menuRect.top + menuRect.height / 2.0f);
+    menu.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH / 2.0f, Settings::WINDOW_HEIGHT / 2.0f + 130));
     menu.setFillColor(sf::Color(255, 77, 77));
 
     context->window->draw(rect);
@@ -282,12 +258,11 @@ void GamePanel::showGameOverScreen()
 /**
  * Draws player 1 game over screen
  */
-void GamePanel::showP1LoseScreen()
-{
+void GamePanel::showP1LoseScreen() {
     // Clear left screen
     sf::RectangleShape rect;
     rect.setPosition(1, 1 + Settings::GAME_YPOS);
-    rect.setSize(sf::Vector2f {(Settings::WINDOW_WIDTH / 2.0f) - 1, Settings::GAME_HEIGHT - 1});
+    rect.setSize(sf::Vector2f{(Settings::WINDOW_WIDTH / 2.0f) - 1, Settings::GAME_HEIGHT - 1});
     rect.setFillColor(sf::Color::Black);
 
     // Game over text
@@ -296,8 +271,8 @@ void GamePanel::showP1LoseScreen()
     gameOver.setString("Player 1 Game Over");
     gameOver.setFont(context->assets->getFont(BOLD_FONT));
     sf::FloatRect gameOverRect = gameOver.getLocalBounds();
-    gameOver.setOrigin(gameOverRect.left + gameOverRect.width/2.0f,gameOverRect.top  + gameOverRect.height/2.0f);
-    gameOver.setPosition(sf::Vector2f(Settings::CENTER/2.0f, Settings::WINDOW_HEIGHT/2.0f));
+    gameOver.setOrigin(gameOverRect.left + gameOverRect.width / 2.0f, gameOverRect.top + gameOverRect.height / 2.0f);
+    gameOver.setPosition(sf::Vector2f(Settings::CENTER / 2.0f, Settings::WINDOW_HEIGHT / 2.0f));
     gameOver.setFillColor(sf::Color(255, 102, 102));
 
     context->window->draw(rect);
@@ -307,8 +282,7 @@ void GamePanel::showP1LoseScreen()
 /**
  * Draws player 2 game over screen
  */
-void GamePanel::showP2LoseScreen()
-{
+void GamePanel::showP2LoseScreen() {
     // Clear right screen
     sf::RectangleShape rect;
     rect.setPosition(Settings::CENTER + 1, 1 + Settings::GAME_YPOS);
@@ -322,8 +296,8 @@ void GamePanel::showP2LoseScreen()
     gameOver.setString("Player 2 Game Over");
     gameOver.setFont(context->assets->getFont(BOLD_FONT));
     sf::FloatRect gameOverRect = gameOver.getLocalBounds();
-    gameOver.setOrigin(gameOverRect.left + gameOverRect.width/2.0f,gameOverRect.top  + gameOverRect.height/2.0f);
-    gameOver.setPosition(sf::Vector2f(Settings::CENTER + Settings::CENTER/2.0f, Settings::WINDOW_HEIGHT/2.0f));
+    gameOver.setOrigin(gameOverRect.left + gameOverRect.width / 2.0f, gameOverRect.top + gameOverRect.height / 2.0f);
+    gameOver.setPosition(sf::Vector2f(Settings::CENTER + Settings::CENTER / 2.0f, Settings::WINDOW_HEIGHT / 2.0f));
     gameOver.setFillColor(sf::Color(255, 102, 102));
 
     context->window->draw(rect);
@@ -333,15 +307,14 @@ void GamePanel::showP2LoseScreen()
 /**
  * Draws objects for top panel
  */
-void GamePanel::displayPanelText()
-{
+void GamePanel::displayPanelText() {
     sf::Text p1, p1Score, p1Lives,
-             p2, p2Score, p2Lives,
-             pauseText;
+            p2, p2Score, p2Lives,
+            pauseText;
 
     // Player 1 text
     p1.setCharacterSize(25);
-    p1.setPosition(Settings::CENTER/2.0f, 18);
+    p1.setPosition(Settings::CENTER / 2.0f, 18);
     p1.setFillColor(sf::Color(255, 102, 153));
     p1.setFont(context->assets->getFont(BOLD_FONT));
     p1.setString("Player 1");
@@ -362,7 +335,7 @@ void GamePanel::displayPanelText()
 
     // Player 2 text
     p2.setCharacterSize(25);
-    p2.setPosition(Settings::CENTER + Settings::CENTER/2.0f, 18);
+    p2.setPosition(Settings::CENTER + Settings::CENTER / 2.0f, 18);
     p2.setFillColor(sf::Color(255, 102, 153));
     p2.setFont(context->assets->getFont(BOLD_FONT));
     p2.setString("Player 2");

@@ -28,7 +28,6 @@ namespace Engine
     public:
         GamePanel(std::shared_ptr<Context> &);
         ~GamePanel();
-
         void init() override;
         void processInput() override;
         void update(sf::Time) override;

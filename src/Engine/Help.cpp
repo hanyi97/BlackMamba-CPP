@@ -75,7 +75,7 @@ void Help::processInput() {
 void Help::update(sf::Time) {
     if (startButtonPressed) {
         std:: cout << "Go Back!" << std:: endl;
-        context->states->addState(std::make_unique<GamePanel>(context),true);
+        context->states->addState(std::make_unique<Menu>(context),true);
 
     }
 }
