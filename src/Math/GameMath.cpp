@@ -1,7 +1,18 @@
 #include "../../include/GameMath.hpp"
 #include <cstdlib>
+#include <iostream>
+#include <exception>
+#include <windows.h>
 
 using namespace Math;
+
+
+struct DivideByZero : public std::exception {
+    const char * what () const throw () {
+        return "DivideByZero Exception";
+    }
+};
+
 
 /**
  * Calculate bound for random generating of x position
@@ -12,6 +23,17 @@ using namespace Math;
  */
 int GameMath::calculateXBound(int center, int unitSize)
 {
+    try {
+        if (unitSize == 0) {
+            throw DivideByZero();
+        }
+    } catch(DivideByZero& e) {
+        std::cerr << "DivideByZero exception caught!" << std::endl;
+        std::cerr << e.what() << std::endl;
+        MessageBox(NULL, "DivideByZero error!",
+                   "Exception has occurred!", MB_ICONERROR); // windows only.
+        std::terminate(); // aborts program.
+    }
     return center / unitSize;
 }
 
@@ -24,6 +46,17 @@ int GameMath::calculateXBound(int center, int unitSize)
  */
 int GameMath::calculateYBound(int height, int unitSize)
 {
+    try {
+        if (unitSize == 0) {
+            throw DivideByZero();
+        }
+    } catch(DivideByZero& e) {
+        std::cerr << "DivideByZero exception caught!" << std::endl;
+        std::cerr << e.what() << std::endl;
+        MessageBox(NULL, "DivideByZero error!",
+                   "Exception has occurred!", MB_ICONERROR); // windows only.
+        std::terminate(); // aborts program.
+    }
     return (height - unitSize) / unitSize;
 }
 

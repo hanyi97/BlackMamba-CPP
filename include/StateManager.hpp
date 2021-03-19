@@ -1,6 +1,6 @@
 #ifndef BLACKMAMBA_STATEMANAGER_HPP
 #define BLACKMAMBA_STATEMANAGER_HPP
-
+#pragma once
 #include <memory>
 #include <stack>
 #include "State.hpp"

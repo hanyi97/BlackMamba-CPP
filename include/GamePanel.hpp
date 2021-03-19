@@ -1,6 +1,6 @@
 #ifndef BLACKMAMBA_GAMEPANEL_HPP
 #define BLACKMAMBA_GAMEPANEL_HPP
-
+#pragma once
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
 #include "State.hpp"
@@ -40,6 +40,8 @@ namespace Engine
         void showP1LoseScreen();
         void showP2LoseScreen();
         void displayPanelText();
+        void displayP1Hearts();
+        void displayP2Hearts();
     };
 }
 

@@ -1,6 +1,6 @@
 #ifndef BLACKMAMBA_SNAKE_HPP
 #define BLACKMAMBA_SNAKE_HPP
-
+#pragma once
 #include <vector>
 #include "Body.hpp"
 #include "Food.hpp"

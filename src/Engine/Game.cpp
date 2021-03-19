@@ -7,7 +7,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
 
-#ifdef __APPLE__
+#ifdef APPLE
 #define OS 0
 #elif defined(_WIN32) || defined(_WIN64)
 #define OS 1
@@ -28,7 +28,6 @@ Game::Game() : context(std::make_shared<Context>())
         context->window->create(sf::VideoMode(Settings::WINDOW_WIDTH, Settings::WINDOW_HEIGHT), "Black Mamba", sf::Style::Close);
     }
     context->states->addState(std::make_unique<Menu>(context));
-
 }
 
 /**
