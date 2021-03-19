@@ -40,11 +40,19 @@ namespace Engine
 
     class Game
     {
+        // we will implement Game class as singleton class.
+        static Game *instance;
     private:
         std::shared_ptr<Context> context;
         const sf::Time TIME_PER_FRAME = sf::seconds(1.f/60.f);
+        Game(); // constructor is private as per singleton class implementation.
     public:
-        Game();
+        static Game* getInstance() {
+            if(!instance) {
+                instance = new Game;
+            }
+            return instance;
+        }
         void Run();
     };
 }
