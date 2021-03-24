@@ -46,10 +46,12 @@ void Snake::init()
  */
 void Snake::move()
 {
-    try {
+    try
+    {
         body.emplace_back(context, xPos, yPos);
         if (body.size() > size) body.erase(body.begin());
-    } catch (const std::out_of_range& oor) {
+    } catch (const std::out_of_range& oor)
+    {
         std::cerr << "Out of Range error: " << oor.what() << '\n';
 //        MessageBox(NULL, "Out of Range error: Snake::move()",
 //                   "Exception has occurred!", MB_ICONERROR); // windows only.

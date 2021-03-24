@@ -213,8 +213,8 @@ void GamePanel::start()
 void GamePanel::reset()
 {
     start();
-    player1 = Player(context, PLAYER1, NORMAL);
-    player2 = Player(context, PLAYER2, NORMAL);
+    player1 = Player(context, PLAYER1, difficulty);
+    player2 = Player(context, PLAYER2, difficulty);
     player1.init();
     player2.init();
 }

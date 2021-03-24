@@ -8,16 +8,23 @@ using namespace Math;
 Player::Player(std::shared_ptr<Context> &context, int player, int difficulty)
       :context(context), player(player), lives(3), score(0), lose(false), difficulty(difficulty)
 {
-    this->food = createFood();
-    if (difficulty == HARD) this->poison = createPoison();
+    food = createFood();
+    if (difficulty == HARD)
+    {
+        // Create 10 poisons
+        for (int i = 0; i < Settings::POISON_COUNT; i++)
+        {
+            poisons.push_back(createPoison());
+        }
+    }
     switch (player)
     {
         case PLAYER1:
-            this->snake = Snake(context, PLAYER1);
+            snake = Snake(context, PLAYER1);
             right = true, left = false, up = false, down = false;
             break;
         case PLAYER2:
-            this->snake = Snake(context, PLAYER2);
+            snake = Snake(context, PLAYER2);
             right = false, left = true, up = false, down = false;
             break;
         default:
@@ -46,7 +53,10 @@ void Player::draw()
 
     snake.draw(dir);
     food.draw();
-    if (difficulty == HARD) poison.draw();
+    if (difficulty == HARD)
+    {
+        for (Poison poison : poisons) poison.draw();
+    }
 }
 
 /**
@@ -87,7 +97,7 @@ void Player::changeDirection(bool up, bool down, bool left, bool right)
  */
 void Player::checkHit()
 {
-    if (snake.hitBorder() || snake.hitItself() || lives == 0) lose = true;
+    if (snake.hitBorder() || snake.hitItself() || lives == 0) setLose(true);
 }
 
 /**
@@ -104,12 +114,16 @@ void Player::checkEat()
     }
     if (difficulty == HARD)
     {
-        if (snake.hitFood(poison))
+        for (Poison &poison : poisons)
         {
-            score -= SCORE_DECREMENT;
-            lives--;
-            snake.increaseSize(10);
-            poison = createPoison();
+            if (snake.hitFood(poison))
+            {
+                score -= SCORE_DECREMENT;
+                lives--;
+                snake.increaseSize(10);
+                poison = createPoison();
+                break;
+            }
         }
     }
 }
@@ -119,7 +133,10 @@ void Player::checkEat()
  */
 void Player::repositionPoison()
 {
-    poison = createPoison();
+    for (Poison &poison : poisons)
+    {
+        poison = createPoison();
+    }
 }
 
 /**
