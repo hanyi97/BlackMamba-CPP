@@ -9,6 +9,7 @@
 #include "../../include/Menu.hpp"
 #include "../../include/Help.hpp"
 #include "../../include/GamePanel.hpp"
+#include "../../include/DifficultyMenu.hpp"
 
 #include <iostream>
 
@@ -149,7 +150,7 @@ void Menu::processInput() {
 void Menu::update(sf::Time) {
     menu[currentMenuIndex].setFillColor(sf::Color::Yellow);
     if (playButtonPressed) {
-        context->states->addState(std::make_unique<GamePanel>(context), true);
+        context->states->addState(std::make_unique<DifficultyMenu>(context), true);
     } else if (helpButtonPressed) {
         context->states->addState(std::make_unique<Help>(context), true);
     } else if (exitButtonPressed) {

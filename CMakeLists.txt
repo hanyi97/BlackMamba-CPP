@@ -12,7 +12,7 @@ add_executable(BlackMamba src/Engine/Game.cpp include/Game.hpp include/Settings.
         include/Snake.hpp src/Engine/Body.cpp include/Body.hpp src/Math/SnakeMath.cpp
         include/SnakeMath.hpp src/Engine/Poison.cpp include/Poison.hpp
         include/Drawable.hpp src/Engine/Menu.cpp include/Menu.hpp
-        include/Drawable.hpp src/Engine/Menu.cpp include/Menu.hpp src/Engine/Help.cpp include/Help.hpp src/Engine/HighScore.cpp include/HighScore.hpp)
+        include/Drawable.hpp src/Engine/Menu.cpp include/Menu.hpp src/Engine/Help.cpp include/Help.hpp src/Engine/HighScore.cpp include/HighScore.hpp src/Engine/DifficultyMenu.cpp include/DifficultyMenu.hpp)
 
 
 
