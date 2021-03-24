@@ -4,6 +4,7 @@
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/Text.hpp>
 #include "../../include/Menu.hpp"
+#include "../../include/Pause.hpp"
 
 using namespace Engine;
 
@@ -118,7 +119,6 @@ void GamePanel::update(sf::Time deltaTime)
 {
     elapsedTime += deltaTime;
 
-    std::cout << elapsedTime.asSeconds() << std::endl;
     if (elapsedTime.asSeconds() > 0.1)
     {
         if (running)
@@ -182,7 +182,7 @@ void GamePanel::draw()
     else showP2LoseScreen();
     if (player1.isLose() && player2.isLose())
     {
-        pause();
+        running = false;
         showGameOverScreen();
     }
     displayPanelText();
@@ -197,7 +197,10 @@ void GamePanel::draw()
 void GamePanel::pause()
 {
     running = false;
+    context->states->addState(std::make_unique<Pause>(context), true);
+
 }
+
 
 /**
  * Set running state to true
@@ -205,6 +208,7 @@ void GamePanel::pause()
 void GamePanel::start()
 {
     running = true;
+    context->states->addState(std::make_unique<GamePanel>(context), true);
 }
 
 /**

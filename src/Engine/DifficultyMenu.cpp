@@ -101,10 +101,10 @@ void DifficultyMenu::processInput() {
 
 void DifficultyMenu::update(sf::Time) {
     if (normalPressed) {
-        context->states->addState(std::make_unique<GamePanel>(context,0),true);
+        context->states->addState(std::make_unique<GamePanel>(context, NORMAL),true);
     }
     else if (hardPressed) {
-        context->states->addState(std::make_unique<GamePanel>(context,1),true);
+        context->states->addState(std::make_unique<GamePanel>(context, HARD),true);
     }
     else if (backPressed){
         context->states->addState(std::make_unique<Menu>(context),true);
