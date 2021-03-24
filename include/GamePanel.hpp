@@ -30,7 +30,7 @@ namespace Engine
         int ticks;
         int difficulty;
     public:
-        GamePanel(std::shared_ptr<Context> &);
+        GamePanel(std::shared_ptr<Context> &, int = HARD);
         ~GamePanel() = default;
 
         void init() override;
