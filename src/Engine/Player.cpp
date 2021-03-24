@@ -1,16 +1,15 @@
-#include <iostream>
 #include "../../include/Player.hpp"
 #include "../../include/GameMath.hpp"
-#include "../../include/Settings.hpp"
+
 
 using namespace Engine;
 using namespace Math;
 
-Player::Player(std::shared_ptr<Context> &context, int player)
-      :context(context), player(player), lives(3), score(0), lose(false)
+Player::Player(std::shared_ptr<Context> &context, int player, int difficulty)
+      :context(context), player(player), lives(3), score(0), lose(false), difficulty(difficulty)
 {
     this->food = createFood();
-    this->poison = createPoison();
+    if (difficulty == HARD) this->poison = createPoison();
     switch (player)
     {
         case PLAYER1:
@@ -47,7 +46,7 @@ void Player::draw()
 
     snake.draw(dir);
     food.draw();
-    poison.draw();
+    if (difficulty == HARD) poison.draw();
 }
 
 /**
@@ -103,13 +102,15 @@ void Player::checkEat()
         snake.increaseSize();
         food = createFood();
     }
-
-    if (snake.hitFood(poison))
+    if (difficulty == HARD)
     {
-        score -= SCORE_DECREMENT;
-        lives--;
-        snake.increaseSize(10);
-        poison = createPoison();
+        if (snake.hitFood(poison))
+        {
+            score -= SCORE_DECREMENT;
+            lives--;
+            snake.increaseSize(10);
+            poison = createPoison();
+        }
     }
 }
 

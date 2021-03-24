@@ -28,6 +28,7 @@ namespace Engine
         bool running;
         bool gameOver;
         int ticks;
+        int difficulty;
     public:
         GamePanel(std::shared_ptr<Context> &);
         ~GamePanel() = default;
@@ -38,6 +39,7 @@ namespace Engine
         void draw() override;
         void pause() override;
         void start() override;
+        void reset();
         void drawGrid();
         void showGameOverScreen();
         void showP1LoseScreen();
