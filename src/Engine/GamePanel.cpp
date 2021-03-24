@@ -118,7 +118,6 @@ void GamePanel::update(sf::Time deltaTime)
 {
     elapsedTime += deltaTime;
 
-    std::cout << elapsedTime.asSeconds() << std::endl;
     if (elapsedTime.asSeconds() > 0.1)
     {
         if (running)
