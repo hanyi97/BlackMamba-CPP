@@ -133,10 +133,7 @@ void Player::checkEat()
  */
 void Player::repositionPoison()
 {
-    for (Poison &poison : poisons)
-    {
-        poison = createPoison();
-    }
+    poisons[rand() % Settings::POISON_COUNT] = createPoison();
 }
 
 /**
