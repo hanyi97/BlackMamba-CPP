@@ -32,7 +32,6 @@ namespace Engine
         Food food;
         Snake snake;
         std::vector<Poison> poisons;
-//        Poison poison;
 
         static const int SCORE_INCREMENT = 10;
         static const int SCORE_DECREMENT = 5;
