@@ -103,7 +103,7 @@ void GamePanel::processInput()
             }
             else if (key == sf::Keyboard::Escape)
             {
-                gameOver = true;
+                if (!running) gameOver = true;
             }
         }
     }
