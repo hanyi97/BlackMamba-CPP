@@ -6,7 +6,8 @@
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
-
+#include <iostream>
+#include <string>
 using namespace Engine;
 
 // Initialise pointer to null so that it can be initialised

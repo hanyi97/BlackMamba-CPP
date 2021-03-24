@@ -2,9 +2,9 @@
 #define BLACKMAMBA_GAME_HPP
 #pragma once
 #include <memory>
-#include <SFML/Graphics/RenderWindow.hpp>
-
 #include <iostream>
+#include <SFML/Graphics/RenderWindow.hpp>
+#include "Settings.hpp"
 //#include <windows.h>
 
 #include "StateManager.hpp"
@@ -24,7 +24,16 @@ namespace Engine
         UP_MOUTH,
         DOWN_MOUTH,
         LEFT_MOUTH,
-        RIGHT_MOUTH
+        RIGHT_MOUTH,
+        DRAW,
+        PLAYER1WON,
+        PLAYER2WON
+    };
+
+    enum Difficulty
+    {
+        NORMAL,
+        HARD
     };
 
     struct Context
@@ -53,20 +62,27 @@ namespace Engine
         static Game *instance;
     private:
         std::shared_ptr<Context> context;
-        const sf::Time TIME_PER_FRAME = sf::seconds(1.f/60.f);
+        sf::Time TIME_PER_FRAME = sf::seconds(Settings::NORMAL_SPEED);;
         Game(); // constructor is private as per singleton class implementation.
     public:
-        static Game* getInstance() {
-            try {
-                if (!instance) {
+        static Game* getInstance()
+        {
+            try
+            {
+                if (!instance)
+                {
                     instance = new Game;
                     return instance;
-                } else {
+                }
+                else
+                {
                     // throw an exception since somewhere is trying to call an instance...
                     // ...when an instance already exists.
                     throw MultipleGameInitException();
                 }
-            } catch(MultipleGameInitException& e) {
+            }
+            catch(MultipleGameInitException& e)
+            {
                 std::cerr << "MultipleGameInit exception caught!" << std::endl;
                 std::cerr << e.what() << std::endl;
 //                MessageBox(NULL, "Calling Multiple Game Instances! Ending game!",
