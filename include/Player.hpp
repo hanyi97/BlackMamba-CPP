@@ -20,6 +20,7 @@ namespace Engine
 
         int lives;
         int score;
+        int difficulty;
         int player;
         bool lose;
 
@@ -30,12 +31,14 @@ namespace Engine
 
         Food food;
         Snake snake;
-        Poison poison;
+        std::vector<Poison> poisons;
+//        Poison poison;
 
         static const int SCORE_INCREMENT = 10;
         static const int SCORE_DECREMENT = 5;
     public:
-        Player(std::shared_ptr<Context> &, int);
+        Player() = default;
+        Player(std::shared_ptr<Context> &, int, int);
         void init();
         void draw();
         void moveSnake();

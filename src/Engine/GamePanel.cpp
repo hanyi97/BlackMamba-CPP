@@ -1,13 +1,9 @@
 #include "../../include/GamePanel.hpp"
-#include "../../include/Settings.hpp"
 #include <cstdlib>
 #include <fstream>
 #include <SFML/Window/Event.hpp>
-#include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/Text.hpp>
-#include "../../include/HighScore.hpp"
 #include "../../include/Menu.hpp"
-#include <iostream>
 
 using namespace Engine;
 
@@ -17,9 +13,10 @@ GamePanel::GamePanel(std::shared_ptr<Context> &context)
           running(true),
           gameOver(false),
           ticks(0),
-          player1(context, PLAYER1),
-          player2(context, PLAYER2)
+          difficulty(HARD)
 {
+    player1 = Player(context, PLAYER1, difficulty);
+    player2 = Player(context, PLAYER2, difficulty);
     srand(time(nullptr));
 }
 
@@ -102,14 +99,7 @@ void GamePanel::processInput()
             }
             else if (key == sf::Keyboard::Enter)
             {
-                if (!running)
-                {
-                    running = true;
-                    player1 = Player(context, PLAYER1);
-                    player2 = Player(context, PLAYER2);
-                    player1.init();
-                    player2.init();
-                }
+                if (!running) reset();
             }
             else if (key == sf::Keyboard::Escape)
             {
@@ -127,13 +117,12 @@ void GamePanel::processInput()
 void GamePanel::update(sf::Time deltaTime)
 {
     elapsedTime += deltaTime;
+
+    std::cout << elapsedTime.asSeconds() << std::endl;
     if (elapsedTime.asSeconds() > 0.1)
     {
         if (running)
         {
-            // Both lost
-            if (player1.isLose() && player2.isLose()) running = false;
-
             // Player 1
             if (!player1.isLose())
             {
@@ -151,13 +140,16 @@ void GamePanel::update(sf::Time deltaTime)
             }
 
             // Reposition poison
-            if (ticks >= 20)
+            if (difficulty == HARD)
             {
-                player1.repositionPoison();
-                player2.repositionPoison();
-                ticks = 0;
+                if (ticks >= 20)
+                {
+                    player1.repositionPoison();
+                    player2.repositionPoison();
+                    ticks = 0;
+                }
+                ticks++;
             }
-            ticks++;
         }
         else
         {
@@ -188,7 +180,11 @@ void GamePanel::draw()
     else showP1LoseScreen();
     if (!player2.isLose()) player2.draw();
     else showP2LoseScreen();
-    if (player1.isLose() && player2.isLose()) showGameOverScreen();
+    if (player1.isLose() && player2.isLose())
+    {
+        pause();
+        showGameOverScreen();
+    }
     displayPanelText();
 
     // Display objects
@@ -211,6 +207,17 @@ void GamePanel::start()
     running = true;
 }
 
+/**
+ * Reset to original game state
+ */
+void GamePanel::reset()
+{
+    start();
+    player1 = Player(context, PLAYER1, difficulty);
+    player2 = Player(context, PLAYER2, difficulty);
+    player1.init();
+    player2.init();
+}
 
 /**
  * Draws game over screen
@@ -378,14 +385,6 @@ void GamePanel::displayPanelText()
     p1Score.setFont(context->assets->getFont(BOLD_FONT));
     p1Score.setString("Score: " + std::to_string(player1.getScore()));
 
-    // Player 1 lives
-    GamePanel::displayP1Hearts();
-    p1Lives.setCharacterSize(15);
-    p1Lives.setPosition(10, 30);
-    p1Lives.setFillColor(sf::Color::White);
-    p1Lives.setFont(context->assets->getFont(BOLD_FONT));
-    p1Lives.setString("Lives: ");
-
     // Player 2 text
     p2.setCharacterSize(25);
     p2.setPosition(Settings::CENTER + Settings::CENTER / 2.0f - 60, 18);
@@ -399,14 +398,6 @@ void GamePanel::displayPanelText()
     p2Score.setFillColor(sf::Color::White);
     p2Score.setFont(context->assets->getFont(BOLD_FONT));
     p2Score.setString("Score: " + std::to_string(player2.getScore()));
-
-    // Player 2 lives
-    GamePanel::displayP2Hearts();
-    p2Lives.setCharacterSize(15);
-    p2Lives.setPosition(Settings::CENTER + 430, 30);
-    p2Lives.setFillColor(sf::Color::White);
-    p2Lives.setFont(context->assets->getFont(BOLD_FONT));
-    p2Lives.setString("Lives: ");
 
     // Pause text
     pauseText.setCharacterSize(12);
@@ -422,12 +413,32 @@ void GamePanel::displayPanelText()
     HighScore.setFont(context->assets->getFont(BOLD_FONT));
     HighScore.setString("High Score: " + HighScore::getHighScore());
 
+    if (difficulty == HARD)
+    {
+        // Player 1 lives
+        GamePanel::displayP1Hearts();
+        p1Lives.setCharacterSize(15);
+        p1Lives.setPosition(10, 30);
+        p1Lives.setFillColor(sf::Color::White);
+        p1Lives.setFont(context->assets->getFont(BOLD_FONT));
+        p1Lives.setString("Lives: ");
+
+        // Player 2 lives
+        GamePanel::displayP2Hearts();
+        p2Lives.setCharacterSize(15);
+        p2Lives.setPosition(Settings::CENTER + 430, 30);
+        p2Lives.setFillColor(sf::Color::White);
+        p2Lives.setFont(context->assets->getFont(BOLD_FONT));
+        p2Lives.setString("Lives: ");
+
+        context->window->draw(p1Lives);
+        context->window->draw(p2Lives);
+    }
+
     context->window->draw(p1);
     context->window->draw(p2);
     context->window->draw(p1Score);
     context->window->draw(p2Score);
-    context->window->draw(p1Lives);
-    context->window->draw(p2Lives);
     context->window->draw(pauseText);
     context->window->draw(HighScore);
 }
