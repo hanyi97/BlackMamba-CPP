@@ -28,11 +28,10 @@ namespace Engine
         bool running;
         bool gameOver;
         int ticks;
-        int difficulty;
     public:
-        GamePanel(std::shared_ptr<Context> &, int = HARD);
-        ~GamePanel() = default;
+        GamePanel(std::shared_ptr<Context> &);
 
+        static int difficulty;
         void init() override;
         void processInput() override;
         void update(sf::Time) override;
