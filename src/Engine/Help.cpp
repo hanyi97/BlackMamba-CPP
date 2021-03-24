@@ -76,7 +76,6 @@ void Help::update(sf::Time) {
     if (startButtonPressed) {
         std:: cout << "Go Back!" << std:: endl;
         context->states->addState(std::make_unique<Menu>(context),true);
-
     }
 }
 

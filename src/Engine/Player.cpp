@@ -160,23 +160,20 @@ Food Player::createFood()
 Poison Player::createPoison()
 {
     Poison newPoison;
-    switch (player)
-    {
+    switch (player) {
         case PLAYER1:
-            do
-            {
+            do {
                 newPoison = Poison(context, GameMath::getRandomLeftX(Settings::CENTER, Settings::UNIT_SIZE),
-                        GameMath::getRandomY(Settings::GAME_YPOS, Settings::GAME_HEIGHT, Settings::UNIT_SIZE));
-            }
-            while (food.getXPos() == newPoison.getXPos());
+                                   GameMath::getRandomY(Settings::GAME_YPOS, Settings::GAME_HEIGHT,
+                                                        Settings::UNIT_SIZE));
+            } while (food.getXPos() == newPoison.getXPos());
             break;
         case PLAYER2:
-            do
-            {
+            do {
                 newPoison = Poison(context, GameMath::getRandomRightX(Settings::CENTER, Settings::UNIT_SIZE),
-                                   GameMath::getRandomY(Settings::GAME_YPOS, Settings::GAME_HEIGHT, Settings::UNIT_SIZE));
-            }
-            while (food.getXPos() == newPoison.getXPos());
+                                   GameMath::getRandomY(Settings::GAME_YPOS, Settings::GAME_HEIGHT,
+                                                        Settings::UNIT_SIZE));
+            } while (food.getXPos() == newPoison.getXPos());
             break;
     }
     return newPoison;
