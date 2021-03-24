@@ -7,13 +7,13 @@
 
 using namespace Engine;
 
-GamePanel::GamePanel(std::shared_ptr<Context> &context)
+GamePanel::GamePanel(std::shared_ptr<Context> &context, int difficulty)
         : context(context),
           elapsedTime(sf::Time::Zero),
           running(true),
           gameOver(false),
           ticks(0),
-          difficulty(HARD)
+          difficulty(difficulty)
 {
     player1 = Player(context, PLAYER1, difficulty);
     player2 = Player(context, PLAYER2, difficulty);
