@@ -36,7 +36,6 @@ void Game::Run()
         while (timeSinceLastFrame > TIME_PER_FRAME)
         {
             timeSinceLastFrame -= TIME_PER_FRAME;
-
             context->states->processStateChange();
             context->states->GetCurrent()->processInput();
             context->states->GetCurrent()->update(TIME_PER_FRAME);
