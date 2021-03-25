@@ -29,59 +29,53 @@ Menu::~Menu() {
 
 void Menu::init() {
     context->assets->addFont(MAIN_FONT, "../assets/fonts/Helvetica.ttf");
-    context->assets->addTexture(0, "../assets/images/mamba.png", true);
-    context->assets->addTexture(1, "../assets/images/king_cobra.png", true);
-
+    context->assets->addTexture(MAMBA, "../assets/images/mamba.png", true);
+    context->assets->addTexture(KING_COBRA, "../assets/images/king_cobra.png", true);
+    context->assets->addTexture(HELP_BUTTON, "../assets/images/help_button.png", true);
+    context->assets->addTexture(START_BUTTON, "../assets/images/start_button.png", true);
+    context->assets->addTexture(GEAR_BUTTON, "../assets/images/gear.png", true);
+    context->assets->addTexture(EXIT_BUTTON, "../assets/images/exit_button.png", true);
 
     // snake image
-    snake.setTexture(context->assets->getTexture(0));
+    snake.setTexture(context->assets->getTexture(MAMBA));
     snake.setPosition(385, 100);
 
 
     //cobras
-    cobra1.setTexture(context->assets->getTexture(1));
+    cobra1.setTexture(context->assets->getTexture(KING_COBRA));
     cobra1.setScale(0.2,0.2);
     cobra1.setPosition(190,100);
 
-    cobra2.setTexture(context->assets->getTexture(1));
+    cobra2.setTexture(context->assets->getTexture(KING_COBRA));
     cobra2.setScale(0.2,0.2);
     cobra2.setPosition(810,99);
 
-    context->assets->addTexture(2, "../assets/images/start_button.png", true);
 
     //start button
-    start_button.setTexture(context->assets->getTexture(2));
+    start_button.setTexture(context->assets->getTexture(START_BUTTON));
     start_button.setPosition(260,400);
 
     //help_button
-    context->assets->addTexture(3, "../assets/images/help_button.png", true);
-    help_button.setTexture(context->assets->getTexture(3));
+    help_button.setTexture(context->assets->getTexture(HELP_BUTTON));
     help_button.setPosition(480,400);
 
-
     //gear_button
-    context->assets->addTexture(4, "../assets/images/gear.png", true);
-    gear_button.setTexture(context->assets->getTexture(4));
+    gear_button.setTexture(context->assets->getTexture(GEAR_BUTTON));
     gear_button.setScale(0.1,0.1);
     gear_button.setPosition(1050,560);
 
-
     //exit_button
-    context->assets->addTexture(5, "../assets/images/exit_button.png", true);
-    exit_button.setTexture(context->assets->getTexture(5));
+    exit_button.setTexture(context->assets->getTexture(EXIT_BUTTON));
     exit_button.setPosition(710,400);
-
 
     //title
     gameTitle.setFont(context->assets->getFont(MAIN_FONT));
     //gameTitle.setString("Black Mamba");
     gameTitle.setOrigin(gameTitle.getLocalBounds().width / 2, gameTitle.getLocalBounds().height / 2);
     gameTitle.setPosition(context->window->getSize().x / 2, context->window->getSize().y / 2 - 200.f);
-
 }
 
 void Menu::processInput() {
-
     // Keyboard menu
     sf::Event event;
     while (context->window->pollEvent(event)) {
@@ -148,7 +142,7 @@ void Menu::processInput() {
 
 
 void Menu::update(sf::Time) {
-    menu[currentMenuIndex].setFillColor(sf::Color::Yellow);
+//    menu[currentMenuIndex].setFillColor(sf::Color::Yellow);
     if (playButtonPressed) {
         context->states->addState(std::make_unique<DifficultyMenu>(context), true);
     } else if (helpButtonPressed) {
@@ -160,6 +154,7 @@ void Menu::update(sf::Time) {
 
 
 void Menu::draw() {
+    std::cout << "In draw" << std::endl;
     context->window->clear();
     context->window->draw(snake);
     context->window->draw(cobra1);

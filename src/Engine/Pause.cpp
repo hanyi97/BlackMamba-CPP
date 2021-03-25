@@ -22,22 +22,22 @@ Pause::~Pause() {
 
 void Pause::init() {
     context->assets->addFont(MAIN_FONT, "../assets/fonts/Helvetica.ttf");
-    context->assets->addTexture(0, "../assets/images/pause_screen.jpg", true);
+    context->assets->addTexture(PAUSE_SCREEN, "../assets/images/pause_screen.jpg", true);
 
 
     // snake image
-    pause.setTexture(context->assets->getTexture(0));
+    pause.setTexture(context->assets->getTexture(PAUSE_SCREEN));
     pause.setScale(0.4,0.4);
     pause.setPosition(450, 100);
 
-    context->assets->addTexture(2, "../assets/images/reset_button.png", true);
+    context->assets->addTexture(PAUSE_RESET_BUTTON, "../assets/images/reset_button.png", true);
     //Normal button
-    rectangle.setTexture(context->assets->getTexture(2));
+    rectangle.setTexture(context->assets->getTexture(PAUSE_RESET_BUTTON));
     rectangle.setScale(0.1,0.1);
     rectangle.setPosition(200,400);
 
-    context->assets->addTexture(3, "../assets/images/pause_exit.png", true);
-    exitButton.setTexture(context->assets->getTexture(3));
+    context->assets->addTexture(PAUSE_EXIT, "../assets/images/pause_exit.png", true);
+    exitButton.setTexture(context->assets->getTexture(PAUSE_EXIT));
     exitButton.setScale(0.73,0.73);
     exitButton.setPosition(650,400);
 
@@ -50,6 +50,9 @@ void Pause::processInput() {
         switch (event.type) {
             case sf::Event::Closed:
                 context->window->close();
+                break;
+            case sf::Event::KeyPressed:
+                if (event.key.code == sf::Keyboard::Space) context->states->popCurrent();
                 break;
             case sf::Event::MouseMoved:
                 std::cout << "X: " << event.mouseMove.x << "Y: " << event.mouseMove.y << std::endl;
@@ -75,7 +78,7 @@ void Pause::processInput() {
 
 void Pause::update(sf::Time) {
     if (normalPressed) {
-        context->states->addState(std::make_unique<GamePanel>(context, 0), true);
+        context->states->addState(std::make_unique<GamePanel>(context));
     }
     if (normalPressed && difficulty == HARD) {
         context->states->addState(std::make_unique<GamePanel>(context, 1), true);
@@ -83,7 +86,6 @@ void Pause::update(sf::Time) {
 }
 
 void Pause::draw() {
-    context->window->clear();
     context->window->draw(pause);
     context->window->draw(gameTitle);
     context->window->draw(rectangle);

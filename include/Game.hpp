@@ -27,7 +27,19 @@ namespace Engine
         RIGHT_MOUTH,
         DRAW,
         PLAYER1WON,
-        PLAYER2WON
+        PLAYER2WON,
+        EASY_BUTTON,
+        HARD_BUTTON,
+        BACK_BUTTON,
+        MAMBA,
+        KING_COBRA,
+        START_BUTTON,
+        HELP_BUTTON,
+        GEAR_BUTTON,
+        EXIT_BUTTON,
+        PAUSE_SCREEN,
+        PAUSE_RESET_BUTTON,
+        PAUSE_EXIT
     };
 
     enum Difficulty

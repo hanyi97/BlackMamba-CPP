@@ -23,38 +23,35 @@ DifficultyMenu::~DifficultyMenu() {
 
 void DifficultyMenu::init() {
     context->assets->addFont(MAIN_FONT, "../assets/fonts/Helvetica.ttf");
-    context->assets->addTexture(0, "../assets/images/mamba.png", true);
-    context->assets->addTexture(1, "../assets/images/king_cobra.png", true);
-
+    context->assets->addTexture(MAMBA, "../assets/images/mamba.png", true);
+    context->assets->addTexture(KING_COBRA, "../assets/images/king_cobra.png", true);
+    context->assets->addTexture(EASY_BUTTON, "../assets/images/easybutton.png", true);
+    context->assets->addTexture(HARD_BUTTON, "../assets/images/hardbutton.png", true);
+    context->assets->addTexture(BACK_BUTTON, "../assets/images/back_button.png", true);
 
     // snake image
-    snake.setTexture(context->assets->getTexture(0));
+    snake.setTexture(context->assets->getTexture(MAMBA));
     snake.setPosition(385, 100);
 
-
     //cobras
-    cobra1.setTexture(context->assets->getTexture(1));
+    cobra1.setTexture(context->assets->getTexture(KING_COBRA));
     cobra1.setScale(0.2,0.2);
     cobra1.setPosition(190,100);
 
-    cobra2.setTexture(context->assets->getTexture(1));
+    cobra2.setTexture(context->assets->getTexture(KING_COBRA));
     cobra2.setScale(0.2,0.2);
     cobra2.setPosition(810,99);
 
-    context->assets->addTexture(2, "../assets/images/easybutton.png", true);
-
     //Normal button
-    easyButton.setTexture(context->assets->getTexture(2));
+    easyButton.setTexture(context->assets->getTexture(EASY_BUTTON));
     easyButton.setPosition(360,400);
 
     //Hard button
-    context->assets->addTexture(3, "../assets/images/hardbutton.png", true);
-    hardButton.setTexture(context->assets->getTexture(3));
+    hardButton.setTexture(context->assets->getTexture(HARD_BUTTON));
     hardButton.setPosition(580,400);
 
     //Back button
-    context->assets->addTexture(5, "../assets/images/back_button.png", true);
-    backButton.setTexture(context->assets->getTexture(5));
+    backButton.setTexture(context->assets->getTexture(BACK_BUTTON));
     backButton.setPosition(480,550);
 //    // Back Button
 //    startButton.setFont(context->assets->getFont(MAIN_FONT));
@@ -101,10 +98,12 @@ void DifficultyMenu::processInput() {
 
 void DifficultyMenu::update(sf::Time) {
     if (normalPressed) {
-        context->states->addState(std::make_unique<GamePanel>(context,0),true);
+        GamePanel::difficulty = NORMAL;
+        context->states->addState(std::make_unique<GamePanel>(context),true);
     }
     else if (hardPressed) {
-        context->states->addState(std::make_unique<GamePanel>(context,1),true);
+        GamePanel::difficulty = HARD;
+        context->states->addState(std::make_unique<GamePanel>(context),true);
     }
     else if (backPressed){
         context->states->addState(std::make_unique<Menu>(context),true);

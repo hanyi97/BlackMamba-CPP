@@ -1,23 +1,22 @@
 #include "../../include/GamePanel.hpp"
 #include <cstdlib>
-#include <fstream>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/Text.hpp>
 #include "../../include/Menu.hpp"
 #include "../../include/Pause.hpp"
 
 using namespace Engine;
+int GamePanel::difficulty;
 
-GamePanel::GamePanel(std::shared_ptr<Context> &context, int difficulty)
+GamePanel::GamePanel(std::shared_ptr<Context> &context)
         : context(context),
           elapsedTime(sf::Time::Zero),
           running(true),
           gameOver(false),
           ticks(0),
-          difficulty(difficulty)
+          player1(context, PLAYER1, difficulty),
+          player2(context, PLAYER2, difficulty)
 {
-    player1 = Player(context, PLAYER1, difficulty);
-    player2 = Player(context, PLAYER2, difficulty);
     srand(time(nullptr));
 }
 
@@ -57,7 +56,6 @@ void GamePanel::init()
 
     player1.init();
     player2.init();
-    start();
 }
 
 /**
@@ -95,8 +93,7 @@ void GamePanel::processInput()
                 player2.changeDirection(false, false, false, true);
             else if (key == sf::Keyboard::Space)
             {
-                if (running) pause();
-                else start();
+                if (running)  context->states->addState(std::make_unique<Pause>(context));
             }
             else if (key == sf::Keyboard::Enter)
             {
@@ -104,7 +101,7 @@ void GamePanel::processInput()
             }
             else if (key == sf::Keyboard::Escape)
             {
-                if (!running) gameOver = true;
+                if (!running) context->states->addState(std::make_unique<Menu>(context), true);
             }
         }
     }
@@ -119,7 +116,6 @@ void GamePanel::update(sf::Time deltaTime)
 {
     elapsedTime += deltaTime;
 
-    std::cout << elapsedTime.asSeconds() << std::endl;
     if (elapsedTime.asSeconds() > 0.1)
     {
         if (running)
@@ -150,13 +146,6 @@ void GamePanel::update(sf::Time deltaTime)
                     ticks = 0;
                 }
                 ticks++;
-            }
-        }
-        else
-        {
-            if (gameOver)
-            {
-                context->states->addState(std::make_unique<Menu>(context), true);
             }
         }
         elapsedTime = sf::Time::Zero;
@@ -198,8 +187,6 @@ void GamePanel::draw()
 void GamePanel::pause()
 {
     running = false;
-    context->states->addState(std::make_unique<Pause>(context), true);
-
 }
 
 
@@ -209,7 +196,6 @@ void GamePanel::pause()
 void GamePanel::start()
 {
     running = true;
-    context->states->addState(std::make_unique<GamePanel>(context), true);
 }
 
 /**
