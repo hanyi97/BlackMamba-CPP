@@ -23,10 +23,11 @@ namespace Engine {
         sf::Sprite rectangle;
         sf::Sprite exitButton;
         bool normalPressed;
+        int difficulty;
 
 
     public:
-        Pause(std::shared_ptr<Context> &context);
+        Pause(std::shared_ptr<Context> &context, int = HARD);
 
         ~Pause();
 

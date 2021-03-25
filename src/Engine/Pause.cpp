@@ -3,17 +3,16 @@
 //
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Window/Event.hpp>
-
+#include <windows.h>
 #include "../../include/Game.hpp"
 #include "../../include/Pause.hpp"
 #include "../../include/Menu.hpp"
 #include "../../include/GamePanel.hpp"
-
 #include <iostream>
 
 using namespace Engine;
 
-Pause::Pause(std::shared_ptr<Context> &context) : context(context), normalPressed(false) {
+Pause::Pause(std::shared_ptr<Context> &context, int difficulty) : context(context), normalPressed(false), difficulty(difficulty) {
 
 }
 
@@ -77,6 +76,9 @@ void Pause::processInput() {
 void Pause::update(sf::Time) {
     if (normalPressed) {
         context->states->addState(std::make_unique<GamePanel>(context, 0), true);
+    }
+    if (normalPressed && difficulty == HARD) {
+        context->states->addState(std::make_unique<GamePanel>(context, 1), true);
     }
 }
 
