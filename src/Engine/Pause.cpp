@@ -12,7 +12,7 @@
 
 using namespace Engine;
 
-Pause::Pause(std::shared_ptr<Context> &context, int difficulty) : context(context), normalPressed(false), difficulty(difficulty) {
+Pause::Pause(std::shared_ptr<Context> &context, int difficulty) : context(context), normalPressed(false), difficulty(difficulty), exitPressed(false) {
 
 }
 
@@ -67,7 +67,7 @@ void Pause::processInput() {
                     // exit
                     if (event.mouseButton.x >= 700 and event.mouseButton.x <= 800) {
                         if (event.mouseButton.y >= 400 and event.mouseButton.y <= 500)
-                            exit(EXIT_SUCCESS);
+                            exitPressed = true;
                     }
                 }
                 break;
@@ -81,7 +81,10 @@ void Pause::update(sf::Time) {
         context->states->addState(std::make_unique<GamePanel>(context));
     }
     if (normalPressed && difficulty == HARD) {
-        context->states->addState(std::make_unique<GamePanel>(context, 1), true);
+        context->states->addState(std::make_unique<GamePanel>(context), true);
+    }
+    if (exitPressed){
+        context->states->addState(std::make_unique<Menu>(context), true);
     }
 }
 

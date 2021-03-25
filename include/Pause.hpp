@@ -23,6 +23,7 @@ namespace Engine {
         sf::Sprite rectangle;
         sf::Sprite exitButton;
         bool normalPressed;
+        bool exitPressed;
         int difficulty;
 
 
