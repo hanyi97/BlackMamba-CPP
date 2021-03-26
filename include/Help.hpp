@@ -20,7 +20,7 @@ namespace Engine {
     private:
         std::shared_ptr<Context> context;
         sf::Text gameTitle;
-        sf::Text backButton;
+        sf::Sprite backButton;
         sf::Sprite background;
 
         bool startButtonPressed;
