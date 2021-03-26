@@ -95,7 +95,7 @@ namespace Engine
             }
             catch(MultipleGameInitException& e)
             {
-                std::cerr << "MultipleGameInit exception caught!" << std::endl;
+                std::cerr << "MultipleGameInit exception caught at Game.hpp -> class Game!" << std::endl;
                 std::cerr << e.what() << std::endl;
 //                MessageBox(NULL, "Calling Multiple Game Instances! Ending game!",
 //                           "Exception has occurred!", MB_ICONERROR); // windows only.
