@@ -33,10 +33,10 @@ void Help::init() {
 //    gameTitle.setPosition(context->window->getSize().x / 2, context->window->getSize().y / 2 - 200.f);
 
     // Back Button
-    backButton.setFont(context->assets->getFont(MAIN_FONT));
-    backButton.setString("Back!");
+    context->assets->addTexture(BACK_BUTTON, "../assets/images/back_button.png",true);
+    backButton.setTexture(context->assets->getTexture(BACK_BUTTON));
     backButton.setOrigin(backButton.getLocalBounds().width / 2, backButton.getLocalBounds().height / 2);
-    backButton.setPosition(context->window->getSize().x / 2, context->window->getSize().y / 2 + 200.f);
+    backButton.setPosition(context->window->getSize().x / 2, context->window->getSize().y / 2 + 230.f);
 
 }
 
@@ -53,8 +53,8 @@ void Help::processInput() {
             case sf::Event::MouseButtonPressed:
                 if (event.mouseButton.button == sf::Mouse::Left) {
                     // back
-                    if (event.mouseButton.x >= 545 and event.mouseButton.x <= 610) {
-                        if (event.mouseButton.y >= 535 and event.mouseButton.y <= 555)
+                    if (event.mouseButton.x >= 495 and event.mouseButton.x <= 650) {
+                        if (event.mouseButton.y >= 536 and event.mouseButton.y <= 591)
                                 startButtonPressed = true;
                     }
                 }

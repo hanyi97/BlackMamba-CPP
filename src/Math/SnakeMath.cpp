@@ -1,3 +1,5 @@
+#include <exception>
+#include <iostream>
 #include "../../include/SnakeMath.hpp"
 
 using namespace Math;
