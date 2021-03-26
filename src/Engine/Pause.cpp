@@ -3,17 +3,16 @@
 //
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Window/Event.hpp>
-
+#include <windows.h>
 #include "../../include/Game.hpp"
 #include "../../include/Pause.hpp"
 #include "../../include/Menu.hpp"
 #include "../../include/GamePanel.hpp"
-
 #include <iostream>
 
 using namespace Engine;
 
-Pause::Pause(std::shared_ptr<Context> &context) : context(context), normalPressed(false) {
+Pause::Pause(std::shared_ptr<Context> &context, int difficulty) : context(context), normalPressed(false), difficulty(difficulty), exitPressed(false) {
 
 }
 
@@ -68,7 +67,7 @@ void Pause::processInput() {
                     // exit
                     if (event.mouseButton.x >= 700 and event.mouseButton.x <= 800) {
                         if (event.mouseButton.y >= 400 and event.mouseButton.y <= 500)
-                            exit(EXIT_SUCCESS);
+                            exitPressed = true;
                     }
                 }
                 break;
@@ -80,6 +79,12 @@ void Pause::processInput() {
 void Pause::update(sf::Time) {
     if (normalPressed) {
         context->states->addState(std::make_unique<GamePanel>(context));
+    }
+    if (normalPressed && difficulty == HARD) {
+        context->states->addState(std::make_unique<GamePanel>(context), true);
+    }
+    if (exitPressed){
+        context->states->addState(std::make_unique<Menu>(context), true);
     }
 }
 

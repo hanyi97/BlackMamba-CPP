@@ -2,6 +2,14 @@
 
 using namespace Math;
 
+
+struct MultiplyByZero : public std::exception {
+    const char * what () const throw () {
+        return "MultiplyByZero Exception";
+    }
+};
+
+
 /**
  * Calculate the starting x position of snake 1
  *
@@ -10,6 +18,17 @@ using namespace Math;
  */
 int SnakeMath::calculateSnake1X(int unitSize)
 {
+    try {
+        if (unitSize == 0) {
+            throw MultiplyByZero();
+        }
+    } catch(MultiplyByZero& e) {
+        std::cerr << "MultiplyByZero exception caught at SnakeMath::calculateSnake1X()! unitSize == 0" << std::endl;
+        std::cerr << e.what() << std::endl;
+//        MessageBox(NULL, "MultiplyByZero error!",
+//                   "Exception has occurred!", MB_ICONERROR); // windows only.
+        std::terminate(); // aborts program.
+    }
     return 5 * unitSize;
 }
 
@@ -22,6 +41,17 @@ int SnakeMath::calculateSnake1X(int unitSize)
  */
 int SnakeMath::calculateSnake1Y(int gameYPos, int unitSize)
 {
+    try {
+        if (unitSize == 0) {
+            throw MultiplyByZero();
+        }
+    } catch(MultiplyByZero& e) {
+        std::cerr << "MultiplyByZero exception caught at SnakeMath::calculateSnake1Y()! unitSize == 0" << std::endl;
+        std::cerr << e.what() << std::endl;
+//        MessageBox(NULL, "MultiplyByZero error!",
+//                   "Exception has occurred!", MB_ICONERROR); // windows only.
+        std::terminate(); // aborts program.
+    }
     return gameYPos + 10 * unitSize;
 }
 
@@ -34,6 +64,17 @@ int SnakeMath::calculateSnake1Y(int gameYPos, int unitSize)
  */
 int SnakeMath::calculateSnake2X(int center, int unitSize)
 {
+    try {
+        if (unitSize == 0) {
+            throw MultiplyByZero();
+        }
+    } catch(MultiplyByZero& e) {
+        std::cerr << "MultiplyByZero exception caught at SnakeMath::calculateSnake2X()! unitSize == 0" << std::endl;
+        std::cerr << e.what() << std::endl;
+//        MessageBox(NULL, "MultiplyByZero error!",
+//                   "Exception has occurred!", MB_ICONERROR); // windows only.
+        std::terminate(); // aborts program.
+    }
     return center + 18 * unitSize;
 }
 
@@ -46,5 +87,16 @@ int SnakeMath::calculateSnake2X(int center, int unitSize)
  */
 int SnakeMath::calculateSnake2Y(int gameYPos, int unitSize)
 {
+    try {
+        if (unitSize == 0) {
+            throw MultiplyByZero();
+        }
+    } catch(MultiplyByZero& e) {
+        std::cerr << "MultiplyByZero exception caught at SnakeMath::calculateSnake2Y()! unitSize == 0" << std::endl;
+        std::cerr << e.what() << std::endl;
+//        MessageBox(NULL, "MultiplyByZero error!",
+//                   "Exception has occurred!", MB_ICONERROR); // windows only.
+        std::terminate(); // aborts program.
+    }
     return gameYPos + 10 * unitSize;
 }
