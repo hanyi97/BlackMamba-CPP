@@ -52,7 +52,7 @@ void Snake::move()
         if (body.size() > size) body.erase(body.begin());
     } catch (const std::out_of_range& oor)
     {
-        std::cerr << "Out of Range error: " << oor.what() << '\n';
+        std::cerr << "Out of Range error at Snake::move(): " << oor.what() << '\n';
 //        MessageBox(NULL, "Out of Range error: Snake::move()",
 //                   "Exception has occurred!", MB_ICONERROR); // windows only.
         std::terminate(); // aborts program.
