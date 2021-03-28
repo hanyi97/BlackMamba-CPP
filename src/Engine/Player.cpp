@@ -2,9 +2,11 @@
 #include "../../include/Player.hpp"
 #include "../../include/GameMath.hpp"
 #include "../../include/Settings.hpp"
+#include "../../include/Sound.hpp"
 
 using namespace Engine;
 using namespace Math;
+Sound sfx;
 
 Player::Player(std::shared_ptr<Context> &context, int player)
       :context(context), player(player), lives(3), score(0), lose(false)
@@ -102,6 +104,8 @@ void Player::checkEat()
         score += SCORE_INCREMENT;
         snake.increaseSize();
         food = createFood();
+
+        sfx.playGoodFood();
     }
 
     if (snake.hitFood(poison))
@@ -110,6 +114,8 @@ void Player::checkEat()
         lives--;
         snake.increaseSize(10);
         poison = createPoison();
+
+        sfx.playBadFood();
     }
 }
 

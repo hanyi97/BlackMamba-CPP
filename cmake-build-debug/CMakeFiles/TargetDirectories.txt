@@ -1,0 +1,3 @@
+C:/Users/mynam/CLionProjects/BlackMamba-CPP/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/mynam/CLionProjects/BlackMamba-CPP/cmake-build-debug/CMakeFiles/BlackMamba.dir
+C:/Users/mynam/CLionProjects/BlackMamba-CPP/cmake-build-debug/CMakeFiles/rebuild_cache.dir

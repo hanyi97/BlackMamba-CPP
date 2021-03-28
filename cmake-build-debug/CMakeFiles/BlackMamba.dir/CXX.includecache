@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/mynam/CLionProjects/BlackMamba-CPP/include/Sound.hpp
+
+C:/Users/mynam/CLionProjects/BlackMamba-CPP/src/Engine/Sound.cpp
+../../include/Sound.hpp
+C:/Users/mynam/CLionProjects/BlackMamba-CPP/include/Sound.hpp
+../../include/Sound.hpp
+C:/Users/mynam/CLionProjects/BlackMamba-CPP/include/Sound.hpp
+iostream
+-
+fstream
+-
+windows.h
+-
+mmsystem.h
+-
+conio.h
+-
+

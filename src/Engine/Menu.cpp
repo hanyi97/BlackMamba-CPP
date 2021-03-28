@@ -9,6 +9,7 @@
 #include "../../include/Menu.hpp"
 #include "../../include/Help.hpp"
 #include "../../include/GamePanel.hpp"
+#include "../../include/Sound.hpp"
 
 #include <iostream>
 
@@ -76,6 +77,9 @@ void Menu::init() {
     //gameTitle.setString("Black Mamba");
     gameTitle.setOrigin(gameTitle.getLocalBounds().width / 2, gameTitle.getLocalBounds().height / 2);
     gameTitle.setPosition(context->window->getSize().x / 2, context->window->getSize().y / 2 - 200.f);
+
+    Sound bgm;
+    bgm.playBGM();
 
 }
 
