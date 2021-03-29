@@ -27,7 +27,7 @@ Game::Game() : context(std::make_shared<Context>())
 /**
  * Start timer and run game loop
  */
-void Game::Run()
+void Game::run()
 {
     sf::Clock clock;
     sf::Time timeSinceLastFrame = sf::Time::Zero;
@@ -49,7 +49,7 @@ void Game::Run()
 int main()
 {
     Game *singleton_game = Engine::Game::getInstance();
-    singleton_game->Run();
+    singleton_game->run();
 
 
     return 0;

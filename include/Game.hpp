@@ -75,7 +75,7 @@ namespace Engine
         static Game *instance;
     private:
         std::shared_ptr<Context> context;
-        sf::Time TIME_PER_FRAME = sf::seconds(Settings::NORMAL_SPEED);;
+        sf::Time TIME_PER_FRAME = sf::seconds(Settings::SPEED);
         Game(); // constructor is private as per singleton class implementation.
     public:
         static Game* getInstance()
@@ -103,7 +103,7 @@ namespace Engine
                 std::terminate(); // aborts program.
             }
         }
-        void Run();
+        void run();
     };
 }
 

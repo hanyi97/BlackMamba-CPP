@@ -34,8 +34,6 @@ namespace Engine {
     public:
         DifficultyMenu(std::shared_ptr<Context> &context);
 
-        ~DifficultyMenu();
-
         void init() override;
 
         void processInput() override;
