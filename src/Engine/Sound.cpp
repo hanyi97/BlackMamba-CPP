@@ -4,8 +4,6 @@
 
 #include "../../include/Sound.hpp"
 
-#include "../../include/Sound.hpp"
-
 #include <iostream>
 #include <fstream>
 #include <windows.h>
@@ -14,17 +12,23 @@
 
 
 using namespace std;
+using namespace Engine;
 
-void Sound::setPlay(bool flag) {
+void Sound::setPlay(bool flag)
+{
     this->checker = flag;
 }
 
-void Sound::playBGM() {
-    if(checker == true) {
+void Sound::playBGM()
+{
+    if (checker == true)
+    {
         mciSendString("open \"..\\assets\\sounds\\bgm.wav\" type mpegvideo alias bgm", NULL, 0, NULL);
         mciSendString("play bgm repeat", NULL, 0, NULL);
-    } else {
-        mciSendString("stop bgm",NULL,0,NULL);
+    }
+    else
+    {
+        mciSendString("stop bgm", NULL, 0, NULL);
     }
 
     /*char goodFood[] = {"..\\assets\\sounds\\bgm.wav"};
@@ -38,14 +42,18 @@ void Sound::playBGM() {
 
 }
 
-void Sound::stopBGM() {
+void Sound::stopBGM()
+{
     //PlaySound(NULL,0,0);
-    if(checker == false) {
-        mciSendString("stop bgm",NULL,0,NULL);
-        mciSendString("close bgm",NULL,0,NULL);}
+    if (checker == false)
+    {
+        mciSendString("stop bgm", NULL, 0, NULL);
+        mciSendString("close bgm", NULL, 0, NULL);
     }
+}
 
-void Sound::playGoodFood() {
+void Sound::playGoodFood()
+{
     char goodFood[] = {"..\\assets\\sounds\\goodFood.wav"};
     string goodFood_str;
     fstream fp;
@@ -59,7 +67,8 @@ void Sound::playGoodFood() {
 
 }
 
-void Sound::playBadFood() {
+void Sound::playBadFood()
+{
     char goodFood[] = {"..\\assets\\sounds\\badFood.wav"};
     string goodFood_str;
     fstream fp;
@@ -70,7 +79,8 @@ void Sound::playBadFood() {
 
 }
 
-void Sound::playGameOver() {
+void Sound::playGameOver()
+{
     char go[] = {"..\\assets\\sounds\\gameover.wav"};
     string go_str;
     fstream fp;
