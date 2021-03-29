@@ -13,7 +13,6 @@ GamePanel::GamePanel(std::shared_ptr<Context> &context)
         : context(context),
           elapsedTime(sf::Time::Zero),
           running(true),
-          gameOver(false),
           ticks(0),
           player1(context, PLAYER1, difficulty),
           player2(context, PLAYER2, difficulty)

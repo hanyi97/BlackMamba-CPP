@@ -17,10 +17,6 @@ DifficultyMenu::DifficultyMenu(std::shared_ptr<Context> &context) : context(cont
 
 }
 
-DifficultyMenu::~DifficultyMenu() {
-
-}
-
 void DifficultyMenu::init() {
     context->assets->addFont(MAIN_FONT, "../assets/fonts/Helvetica.ttf");
     context->assets->addTexture(MAMBA, "../assets/images/mamba.png", true);
