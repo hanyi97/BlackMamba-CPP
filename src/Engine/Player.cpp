@@ -6,15 +6,13 @@
 
 using namespace Engine;
 using namespace Math;
-Sound sfx;
+Sound sfxP;
 
 Player::Player(std::shared_ptr<Context> &context, int player)
-      :context(context), player(player), lives(3), score(0), lose(false)
-{
+        : context(context), player(player), lives(3), score(0), lose(false) {
     this->food = createFood();
     this->poison = createPoison();
-    switch (player)
-    {
+    switch (player) {
         case PLAYER1:
             this->snake = Snake(context, PLAYER1);
             right = true, left = false, up = false, down = false;
@@ -31,16 +29,14 @@ Player::Player(std::shared_ptr<Context> &context, int player)
 /**
  * Initialises snake
  */
-void Player::init()
-{
+void Player::init() {
     snake.init();
 }
 
 /**
  * Draws snake and edibles for player
  */
-void Player::draw()
-{
+void Player::draw() {
     char dir = 'A';
     if (up) dir = 'U';
     else if (down) dir = 'D';
@@ -55,12 +51,11 @@ void Player::draw()
 /**
  * Move snake based on direction it is facing
  */
-void Player::moveSnake()
-{
+void Player::moveSnake() {
     int x = snake.getXPos();
     int y = snake.getYPos();
 
-    if (right)  x += Settings::UNIT_SIZE;
+    if (right) x += Settings::UNIT_SIZE;
     if (left) x -= Settings::UNIT_SIZE;
     if (up) y -= Settings::UNIT_SIZE;
     if (down) y += Settings::UNIT_SIZE;
@@ -77,8 +72,7 @@ void Player::moveSnake()
  * @param left: true to indicate left
  * @param right: true to indicate right
  */
-void Player::changeDirection(bool up, bool down, bool left, bool right)
-{
+void Player::changeDirection(bool up, bool down, bool left, bool right) {
     this->up = up;
     this->down = down;
     this->left = left;
@@ -88,52 +82,49 @@ void Player::changeDirection(bool up, bool down, bool left, bool right)
 /**
  * Check if snake hits border/itself or when life count becomes zero
  */
-void Player::checkHit()
-{
-    if (snake.hitBorder() || snake.hitItself() || lives == 0) lose = true;
+void Player::checkHit() {
+    if (snake.hitBorder() || snake.hitItself() || lives == 0) {
+        lose = true;
+        sfxP.playGameOver();
+
+    }
 }
 
 /**
  * Increase snake size and score when snake eats food.
  * Increase snake size by 10 and minus lives and score when ate poison.
  */
-void Player::checkEat()
-{
-    if (snake.hitFood(food))
-    {
+void Player::checkEat() {
+    if (snake.hitFood(food)) {
         score += SCORE_INCREMENT;
         snake.increaseSize();
         food = createFood();
 
-        sfx.playGoodFood();
+        sfxP.playGoodFood();
     }
 
-    if (snake.hitFood(poison))
-    {
+    if (snake.hitFood(poison)) {
         score -= SCORE_DECREMENT;
         lives--;
         snake.increaseSize(10);
         poison = createPoison();
 
-        sfx.playBadFood();
+        sfxP.playBadFood();
     }
 }
 
 /**
  * Regenerate position for poison
  */
-void Player::repositionPoison()
-{
+void Player::repositionPoison() {
     poison = createPoison();
 }
 
 /**
  * @return new food object
  */
-Food Player::createFood()
-{
-    switch (player)
-    {
+Food Player::createFood() {
+    switch (player) {
         case PLAYER1:
             return Food(context, GameMath::getRandomLeftX(Settings::CENTER, Settings::UNIT_SIZE),
                         GameMath::getRandomY(Settings::GAME_YPOS, Settings::GAME_HEIGHT, Settings::UNIT_SIZE));
@@ -148,26 +139,22 @@ Food Player::createFood()
 /**
  * @return new poison object
  */
-Poison Player::createPoison()
-{
+Poison Player::createPoison() {
     Poison newPoison;
-    switch (player)
-    {
+    switch (player) {
         case PLAYER1:
-            do
-            {
+            do {
                 newPoison = Poison(context, GameMath::getRandomLeftX(Settings::CENTER, Settings::UNIT_SIZE),
-                        GameMath::getRandomY(Settings::GAME_YPOS, Settings::GAME_HEIGHT, Settings::UNIT_SIZE));
-            }
-            while (food.getXPos() == newPoison.getXPos());
+                                   GameMath::getRandomY(Settings::GAME_YPOS, Settings::GAME_HEIGHT,
+                                                        Settings::UNIT_SIZE));
+            } while (food.getXPos() == newPoison.getXPos());
             break;
         case PLAYER2:
-            do
-            {
+            do {
                 newPoison = Poison(context, GameMath::getRandomRightX(Settings::CENTER, Settings::UNIT_SIZE),
-                                   GameMath::getRandomY(Settings::GAME_YPOS, Settings::GAME_HEIGHT, Settings::UNIT_SIZE));
-            }
-            while (food.getXPos() == newPoison.getXPos());
+                                   GameMath::getRandomY(Settings::GAME_YPOS, Settings::GAME_HEIGHT,
+                                                        Settings::UNIT_SIZE));
+            } while (food.getXPos() == newPoison.getXPos());
             break;
     }
     return newPoison;
@@ -176,63 +163,55 @@ Poison Player::createPoison()
 /**
  * @return up boolean
  */
-bool Player::getUp() const
-{
+bool Player::getUp() const {
     return up;
 }
 
 /**
  * @return down boolean
  */
-bool Player::getDown() const
-{
+bool Player::getDown() const {
     return down;
 }
 
 /**
  * @return left boolean
  */
-bool Player::getLeft() const
-{
+bool Player::getLeft() const {
     return left;
 }
 
 /**
  * @return right boolean
  */
-bool Player::getRight() const
-{
+bool Player::getRight() const {
     return right;
 }
 
 /**
  * @param lose: boolean to set
  */
-void Player::setLose(bool lose)
-{
+void Player::setLose(bool lose) {
     this->lose = lose;
 }
 
 /**
  * @return lose boolean
  */
-bool Player::isLose() const
-{
+bool Player::isLose() const {
     return lose;
 }
 
 /**
  * @return score count
  */
-int Player::getScore() const
-{
+int Player::getScore() const {
     return score;
 }
 
 /**
  * @return lives count
  */
-int Player::getLives() const
-{
+int Player::getLives() const {
     return lives;
 }

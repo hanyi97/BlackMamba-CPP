@@ -180,6 +180,7 @@ CMakeFiles/BlackMamba.dir/src/Engine/Game.cpp.obj: ../include/Player.hpp
 CMakeFiles/BlackMamba.dir/src/Engine/Game.cpp.obj: ../include/Poison.hpp
 CMakeFiles/BlackMamba.dir/src/Engine/Game.cpp.obj: ../include/Settings.hpp
 CMakeFiles/BlackMamba.dir/src/Engine/Game.cpp.obj: ../include/Snake.hpp
+CMakeFiles/BlackMamba.dir/src/Engine/Game.cpp.obj: ../include/Sound.hpp
 CMakeFiles/BlackMamba.dir/src/Engine/Game.cpp.obj: ../include/State.hpp
 CMakeFiles/BlackMamba.dir/src/Engine/Game.cpp.obj: ../include/StateManager.hpp
 CMakeFiles/BlackMamba.dir/src/Engine/Game.cpp.obj: ../src/Engine/Game.cpp
@@ -247,6 +248,7 @@ CMakeFiles/BlackMamba.dir/src/Engine/GamePanel.cpp.obj: ../include/Player.hpp
 CMakeFiles/BlackMamba.dir/src/Engine/GamePanel.cpp.obj: ../include/Poison.hpp
 CMakeFiles/BlackMamba.dir/src/Engine/GamePanel.cpp.obj: ../include/Settings.hpp
 CMakeFiles/BlackMamba.dir/src/Engine/GamePanel.cpp.obj: ../include/Snake.hpp
+CMakeFiles/BlackMamba.dir/src/Engine/GamePanel.cpp.obj: ../include/Sound.hpp
 CMakeFiles/BlackMamba.dir/src/Engine/GamePanel.cpp.obj: ../include/State.hpp
 CMakeFiles/BlackMamba.dir/src/Engine/GamePanel.cpp.obj: ../include/StateManager.hpp
 CMakeFiles/BlackMamba.dir/src/Engine/GamePanel.cpp.obj: ../src/Engine/GamePanel.cpp

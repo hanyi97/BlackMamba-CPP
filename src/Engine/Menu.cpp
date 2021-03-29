@@ -12,19 +12,22 @@
 #include "../../include/Sound.hpp"
 
 #include <iostream>
+#include <windows.h>
+
 
 using namespace Engine;
+Sound bgm;
+
 
 Menu::Menu(std::shared_ptr<Context> &context)
-        : context(context), playButtonPressed(false), exitButtonPressed(false), helpButtonPressed(false) {
+        : context(context), playButtonPressed(false), exitButtonPressed(false), helpButtonPressed(false),
+          onButtonPressed(false), offButtonPressed(false), bgmCheck(true) {
 
 }
 
 Menu::~Menu() {
 
 }
-
-
 
 
 void Menu::init() {
@@ -40,36 +43,43 @@ void Menu::init() {
 
     //cobras
     cobra1.setTexture(context->assets->getTexture(1));
-    cobra1.setScale(0.2,0.2);
-    cobra1.setPosition(190,100);
+    cobra1.setScale(0.2, 0.2);
+    cobra1.setPosition(190, 100);
 
     cobra2.setTexture(context->assets->getTexture(1));
-    cobra2.setScale(0.2,0.2);
-    cobra2.setPosition(810,99);
+    cobra2.setScale(0.2, 0.2);
+    cobra2.setPosition(810, 99);
 
     context->assets->addTexture(2, "../assets/images/start_button.png", true);
 
     //start button
     start_button.setTexture(context->assets->getTexture(2));
-    start_button.setPosition(260,400);
+    start_button.setPosition(260, 400);
 
     //help_button
     context->assets->addTexture(3, "../assets/images/help_button.png", true);
     help_button.setTexture(context->assets->getTexture(3));
-    help_button.setPosition(480,400);
+    help_button.setPosition(480, 400);
 
 
-    //gear_button
-    context->assets->addTexture(4, "../assets/images/gear.png", true);
-    gear_button.setTexture(context->assets->getTexture(4));
-    gear_button.setScale(0.1,0.1);
-    gear_button.setPosition(1050,560);
+    //onOFF_button
+    context->assets->addTexture(4, "../assets/images/switch_button.png", true);
+    switch_button.setTexture(context->assets->getTexture(4));
+    switch_button.setScale(0.5, 0.5);
+    switch_button.setPosition(950, 580);
 
 
     //exit_button
     context->assets->addTexture(5, "../assets/images/exit_button.png", true);
     exit_button.setTexture(context->assets->getTexture(5));
-    exit_button.setPosition(710,400);
+    exit_button.setPosition(710, 400);
+
+
+    //Sound_Icon
+    context->assets->addTexture(6, "../assets/images/sound.png", true);
+    sound_button.setTexture(context->assets->getTexture(6));
+    sound_button.setScale(0.6, 0.6);
+    sound_button.setPosition(850, 585);
 
 
     //title
@@ -78,8 +88,10 @@ void Menu::init() {
     gameTitle.setOrigin(gameTitle.getLocalBounds().width / 2, gameTitle.getLocalBounds().height / 2);
     gameTitle.setPosition(context->window->getSize().x / 2, context->window->getSize().y / 2 - 200.f);
 
-    Sound bgm;
+
+    bgm.setPlay(bgmCheck);
     bgm.playBGM();
+
 
 }
 
@@ -107,6 +119,26 @@ void Menu::processInput() {
                         if (event.mouseButton.y >= 400 and event.mouseButton.y <= 500)
                             helpButtonPressed = true;
                     }
+                    // on
+                    if (event.mouseButton.x >= 950 and event.mouseButton.x <= 1035) {
+                        if (event.mouseButton.y >= 580 and event.mouseButton.y <= 660) {
+                            onButtonPressed = true;
+                            bgm.setPlay(true);
+                            bgm.playBGM();
+                        }
+
+                    }
+
+                    // off
+                    if (event.mouseButton.x >= 1045 and event.mouseButton.x <= 1130) {
+                        if (event.mouseButton.y >= 580 and event.mouseButton.y <= 660) {
+                            offButtonPressed = true;
+                            bgm.setPlay(false);
+                            bgm.stopBGM();
+                        }
+
+                    }
+
                     // quit
                     if (event.mouseButton.x >= 800 and event.mouseButton.x <= 850) {
                         if (event.mouseButton.y >= 400 and event.mouseButton.y <= 500)
@@ -126,6 +158,8 @@ void Menu::processInput() {
                         playButtonPressed = false;
                         exitButtonPressed = false;
                         helpButtonPressed = false;
+                        onButtonPressed = false;
+                        offButtonPressed = false;
                         switch (pressedItem()) {
                             case 0:
                                 playButtonPressed = true;
@@ -137,6 +171,14 @@ void Menu::processInput() {
                                 std::cout << "Help button pressed" << std::endl;
                                 break;
                             case 2:
+                                onButtonPressed = true;
+                                std::cout << "On button pressed" << std::endl;
+                                break;
+                            case 3:
+                                offButtonPressed = true;
+                                std::cout << "Off button pressed" << std::endl;
+                                break;
+                            case 4:
                                 exitButtonPressed = true;
                                 std::cout << "Exit button pressed" << std::endl;
                                 break;
@@ -170,8 +212,9 @@ void Menu::draw() {
     context->window->draw(gameTitle);
     context->window->draw(start_button);
     context->window->draw(help_button);
-    context->window->draw(gear_button);
+    context->window->draw(switch_button);
     context->window->draw(exit_button);
+    context->window->draw(sound_button);
     context->window->draw(menu[0]);
     context->window->draw(menu[1]);
     context->window->draw(menu[2]);

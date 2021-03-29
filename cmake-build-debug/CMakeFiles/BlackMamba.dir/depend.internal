@@ -181,6 +181,7 @@ CMakeFiles/BlackMamba.dir/src/Engine/Game.cpp.obj
  C:/Users/mynam/CLionProjects/BlackMamba-CPP/include/Poison.hpp
  C:/Users/mynam/CLionProjects/BlackMamba-CPP/include/Settings.hpp
  C:/Users/mynam/CLionProjects/BlackMamba-CPP/include/Snake.hpp
+ C:/Users/mynam/CLionProjects/BlackMamba-CPP/include/Sound.hpp
  C:/Users/mynam/CLionProjects/BlackMamba-CPP/include/State.hpp
  C:/Users/mynam/CLionProjects/BlackMamba-CPP/include/StateManager.hpp
  C:/Users/mynam/CLionProjects/BlackMamba-CPP/src/Engine/Game.cpp
@@ -248,6 +249,7 @@ CMakeFiles/BlackMamba.dir/src/Engine/GamePanel.cpp.obj
  C:/Users/mynam/CLionProjects/BlackMamba-CPP/include/Poison.hpp
  C:/Users/mynam/CLionProjects/BlackMamba-CPP/include/Settings.hpp
  C:/Users/mynam/CLionProjects/BlackMamba-CPP/include/Snake.hpp
+ C:/Users/mynam/CLionProjects/BlackMamba-CPP/include/Sound.hpp
  C:/Users/mynam/CLionProjects/BlackMamba-CPP/include/State.hpp
  C:/Users/mynam/CLionProjects/BlackMamba-CPP/include/StateManager.hpp
  C:/Users/mynam/CLionProjects/BlackMamba-CPP/src/Engine/GamePanel.cpp

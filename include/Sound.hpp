@@ -9,12 +9,13 @@ class Sound {
 protected:
     bool checker = true;
 public:
-    void check(bool);
+    void setPlay(bool);
     void playBGM();
+    void stopBGM();
     void playBadFood();
     void playGoodFood();
     void playGameOver();
-    void playWin();
+
 
 };
 

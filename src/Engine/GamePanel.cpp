@@ -8,9 +8,11 @@
 #include "../../include/HighScore.hpp"
 #include "../../include/GameMath.hpp"
 #include "../../include/Menu.hpp"
+#include "../../include/Sound.hpp"
 #include <iostream>
 
 using namespace Engine;
+Sound ss;
 
 GamePanel::GamePanel(std::shared_ptr<Context> &context)
          : context(context),
@@ -117,6 +119,8 @@ void GamePanel::processInput()
             else if (key == sf::Keyboard::Escape)
             {
                 gameOver = true;
+
+
             }
         }
     }
@@ -165,6 +169,7 @@ void GamePanel::update(sf::Time deltaTime)
         else{
             if(gameOver){
                 context->states->addState(std::make_unique<Menu>(context),true);
+
             }
         }
         elapsedTime = sf::Time::Zero;
@@ -266,16 +271,19 @@ void GamePanel::showGameOverScreen()
     result.setFont(context->assets->getFont(BOLD_FONT));
     if (player1.getScore() > player2.getScore()){
         result.setString("Player 1 Won!!");
+
     }
 
     else if (player2.getScore() > player1.getScore()){
         result.setString("Player 2 Won!!");
+
     }
     else result.setString("Draw");
     sf::FloatRect resultRect = result.getLocalBounds();
     result.setOrigin(resultRect.left + resultRect.width/2.0f,resultRect.top  + resultRect.height/2.0f);
     result.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH/2.0f, Settings::WINDOW_HEIGHT/2.0f + 50));
     result.setFillColor(sf::Color(102, 255, 153));
+
 
 
 
