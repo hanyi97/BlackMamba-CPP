@@ -5,6 +5,7 @@
 #include "../../include/Menu.hpp"
 #include "../../include/Pause.hpp"
 
+
 using namespace Engine;
 int GamePanel::difficulty;
 
@@ -146,7 +147,12 @@ void GamePanel::update(sf::Time deltaTime)
                     ticks = 0;
                 }
                 ticks++;
+
+                player1.repositionPoison();
+                player2.repositionPoison();
+                ticks = 0;
             }
+            ticks++;
         }
         elapsedTime = sf::Time::Zero;
     }
@@ -255,6 +261,7 @@ void GamePanel::showGameOverScreen()
     result.setOrigin(resultRect.left + resultRect.width / 2.0f, resultRect.top + resultRect.height / 2.0f);
     result.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH / 2.0f, Settings::WINDOW_HEIGHT / 2.0f + 50));
     result.setFillColor(sf::Color(102, 255, 153));
+
 
     context->window->draw(rect);
     if (player1.getScore() > player2.getScore()) //result.setString("Player 1 Won!!");

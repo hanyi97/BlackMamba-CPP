@@ -2,6 +2,7 @@
 #include "../../include/GamePanel.hpp"
 #include "../../include/Settings.hpp"
 #include "../../include/Menu.hpp"
+#include "../../include/Sound.hpp"
 
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -9,6 +10,7 @@
 #include <iostream>
 #include <string>
 using namespace Engine;
+Sound bgmSound;
 
 // Initialise pointer to null so that it can be initialised
 // in first call to getInstance
@@ -48,6 +50,7 @@ int main()
 {
     Game *singleton_game = Engine::Game::getInstance();
     singleton_game->Run();
+
 
     return 0;
 }

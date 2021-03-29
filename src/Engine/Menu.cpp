@@ -9,14 +9,22 @@
 #include "../../include/Menu.hpp"
 #include "../../include/Help.hpp"
 #include "../../include/GamePanel.hpp"
+
 #include "../../include/DifficultyMenu.hpp"
+#include "../../include/Sound.hpp"
+
 
 #include <iostream>
+#include <windows.h>
+
 
 using namespace Engine;
+Sound bgm;
+
 
 Menu::Menu(std::shared_ptr<Context> &context)
-        : context(context), playButtonPressed(false), exitButtonPressed(false), helpButtonPressed(false) {
+        : context(context), playButtonPressed(false), exitButtonPressed(false), helpButtonPressed(false),
+          onButtonPressed(false), offButtonPressed(false), bgmCheck(true) {
 
 }
 
@@ -25,16 +33,15 @@ Menu::~Menu() {
 }
 
 
-
-
 void Menu::init() {
     context->assets->addFont(MAIN_FONT, "../assets/fonts/Helvetica.ttf");
     context->assets->addTexture(MAMBA, "../assets/images/mamba.png", true);
     context->assets->addTexture(KING_COBRA, "../assets/images/king_cobra.png", true);
     context->assets->addTexture(HELP_BUTTON, "../assets/images/help_button.png", true);
     context->assets->addTexture(START_BUTTON, "../assets/images/start_button.png", true);
-    context->assets->addTexture(GEAR_BUTTON, "../assets/images/gear.png", true);
+    context->assets->addTexture(SWITCH_BUTTON, "../assets/images/switch_button.png", true);
     context->assets->addTexture(EXIT_BUTTON, "../assets/images/exit_button.png", true);
+    context->assets->addTexture(SOUND, "../assets/images/sound.png", true);
 
     // snake image
     snake.setTexture(context->assets->getTexture(MAMBA));
@@ -52,6 +59,7 @@ void Menu::init() {
 
 
     //start button
+
     start_button.setTexture(context->assets->getTexture(START_BUTTON));
     start_button.setPosition(260,400);
 
@@ -59,20 +67,35 @@ void Menu::init() {
     help_button.setTexture(context->assets->getTexture(HELP_BUTTON));
     help_button.setPosition(480,400);
 
-    //gear_button
-    gear_button.setTexture(context->assets->getTexture(GEAR_BUTTON));
-    gear_button.setScale(0.1,0.1);
-    gear_button.setPosition(1050,560);
+
+    //onOFF_button
+    switch_button.setTexture(context->assets->getTexture(SWITCH_BUTTON));
+    switch_button.setScale(0.5, 0.5);
+    switch_button.setPosition(950, 580);
 
     //exit_button
+
     exit_button.setTexture(context->assets->getTexture(EXIT_BUTTON));
     exit_button.setPosition(710,400);
+
+    //Sound_Icon
+
+    sound_button.setTexture(context->assets->getTexture(SOUND));
+    sound_button.setScale(0.6, 0.6);
+    sound_button.setPosition(850, 585);
 
     //title
     gameTitle.setFont(context->assets->getFont(MAIN_FONT));
     //gameTitle.setString("Black Mamba");
     gameTitle.setOrigin(gameTitle.getLocalBounds().width / 2, gameTitle.getLocalBounds().height / 2);
     gameTitle.setPosition(context->window->getSize().x / 2, context->window->getSize().y / 2 - 200.f);
+
+
+    bgm.setPlay(bgmCheck);
+    bgm.playBGM();
+
+
+
 }
 
 void Menu::processInput() {
@@ -98,6 +121,26 @@ void Menu::processInput() {
                         if (event.mouseButton.y >= 400 and event.mouseButton.y <= 500)
                             helpButtonPressed = true;
                     }
+                    // on
+                    if (event.mouseButton.x >= 950 and event.mouseButton.x <= 1035) {
+                        if (event.mouseButton.y >= 580 and event.mouseButton.y <= 660) {
+                            onButtonPressed = true;
+                            bgm.setPlay(true);
+                            bgm.playBGM();
+                        }
+
+                    }
+
+                    // off
+                    if (event.mouseButton.x >= 1045 and event.mouseButton.x <= 1130) {
+                        if (event.mouseButton.y >= 580 and event.mouseButton.y <= 660) {
+                            offButtonPressed = true;
+                            bgm.setPlay(false);
+                            bgm.stopBGM();
+                        }
+
+                    }
+
                     // quit
                     if (event.mouseButton.x >= 800 and event.mouseButton.x <= 850) {
                         if (event.mouseButton.y >= 400 and event.mouseButton.y <= 500)
@@ -117,6 +160,8 @@ void Menu::processInput() {
                         playButtonPressed = false;
                         exitButtonPressed = false;
                         helpButtonPressed = false;
+                        onButtonPressed = false;
+                        offButtonPressed = false;
                         switch (pressedItem()) {
                             case 0:
                                 playButtonPressed = true;
@@ -128,6 +173,14 @@ void Menu::processInput() {
                                 std::cout << "Help button pressed" << std::endl;
                                 break;
                             case 2:
+                                onButtonPressed = true;
+                                std::cout << "On button pressed" << std::endl;
+                                break;
+                            case 3:
+                                offButtonPressed = true;
+                                std::cout << "Off button pressed" << std::endl;
+                                break;
+                            case 4:
                                 exitButtonPressed = true;
                                 std::cout << "Exit button pressed" << std::endl;
                                 break;
@@ -162,8 +215,9 @@ void Menu::draw() {
     context->window->draw(gameTitle);
     context->window->draw(start_button);
     context->window->draw(help_button);
-    context->window->draw(gear_button);
+    context->window->draw(switch_button);
     context->window->draw(exit_button);
+    context->window->draw(sound_button);
     context->window->draw(menu[0]);
     context->window->draw(menu[1]);
     context->window->draw(menu[2]);

@@ -26,14 +26,18 @@ namespace Engine {
         //buttons
         sf::Sprite start_button;
         sf::Sprite help_button;
-        sf::Sprite gear_button;
+        sf::Sprite switch_button;
         sf::Sprite exit_button;
+        sf::Sprite sound_button;
 
         sf::Text menu[menuLength];
         int currentMenuIndex;
         bool playButtonPressed;
         bool exitButtonPressed;
         bool helpButtonPressed;
+        bool onButtonPressed;
+        bool offButtonPressed;
+        bool bgmCheck = true;
 
     public:
         Menu(std::shared_ptr<Context> &context);
