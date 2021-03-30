@@ -1,5 +1,4 @@
 #include "../../include/Food.hpp"
-#include "../../include/Settings.hpp"
 
 using namespace Engine;
 Food::Food() = default;

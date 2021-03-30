@@ -1,11 +1,10 @@
 #include "../../include/Snake.hpp"
-#include "../../include/Settings.hpp"
 #include "../../include/Player.hpp"
 #include "../../include/SnakeMath.hpp"
 
 #include <iostream>
 #include <exception>
-//#include <windows.h> // for error dialogue box.
+#include <windows.h> // for error dialogue box.
 
 using namespace Engine;
 using namespace Math;
@@ -53,8 +52,8 @@ void Snake::move()
     } catch (const std::out_of_range& oor)
     {
         std::cerr << "Out of Range error at Snake::move(): " << oor.what() << '\n';
-//        MessageBox(NULL, "Out of Range error: Snake::move()",
-//                   "Exception has occurred!", MB_ICONERROR); // windows only.
+        MessageBox(NULL, "Out of Range error: Snake::move()",
+                   "Exception has occurred!", MB_ICONERROR); // windows only.
         std::terminate(); // aborts program.
     }
 }

@@ -8,15 +8,11 @@
 #include "../../include/Game.hpp"
 #include "../../include/Menu.hpp"
 #include "../../include/Help.hpp"
-#include "../../include/GamePanel.hpp"
 
 #include "../../include/DifficultyMenu.hpp"
 #include "../../include/Sound.hpp"
 
-
 #include <iostream>
-#include <windows.h>
-
 
 using namespace Engine;
 Sound bgm;
