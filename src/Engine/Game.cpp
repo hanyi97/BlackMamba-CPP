@@ -18,6 +18,7 @@ Game::Game() : context(std::make_shared<Context>())
     // Setup window and show first screen to display
     context->window->create(sf::VideoMode(Settings::WINDOW_WIDTH, Settings::WINDOW_HEIGHT), "Black Mamba",
                             sf::Style::Close);
+    context->window->setFramerateLimit(60);
     context->states->addState(std::make_unique<Menu>(context));
 }
 
