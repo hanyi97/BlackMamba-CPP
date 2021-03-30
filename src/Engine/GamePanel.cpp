@@ -172,7 +172,7 @@ void GamePanel::draw()
     else showP2LoseScreen();
     if (player1.isLose() && player2.isLose())
     {
-        running = false;
+        pause();
         showGameOverScreen();
     }
     displayPanelText();
