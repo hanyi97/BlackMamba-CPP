@@ -1,6 +1,5 @@
 #include <iostream>
 #include "../../include/Body.hpp"
-#include "../../include/Settings.hpp"
 
 using namespace Engine;
 

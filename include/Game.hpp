@@ -5,7 +5,7 @@
 #include <iostream>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "Settings.hpp"
-//#include <windows.h>
+#include <windows.h>
 
 #include "StateManager.hpp"
 #include "AssetManager.hpp"

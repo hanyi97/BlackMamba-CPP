@@ -3,7 +3,6 @@
 //
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Window/Event.hpp>
-#include <windows.h>
 #include "../../include/Game.hpp"
 #include "../../include/Pause.hpp"
 #include "../../include/Menu.hpp"

@@ -139,19 +139,14 @@ void GamePanel::update(sf::Time deltaTime)
             // Reposition poison
             if (difficulty == HARD)
             {
-                if (ticks >= 5)
+                if (ticks >= 10)
                 {
                     player1.repositionPoison();
                     player2.repositionPoison();
                     ticks = 0;
                 }
                 ticks++;
-
-                player1.repositionPoison();
-                player2.repositionPoison();
-                ticks = 0;
             }
-            ticks++;
         }
         elapsedTime = sf::Time::Zero;
     }
