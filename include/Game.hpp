@@ -72,13 +72,13 @@ namespace Engine
 
     class Game
     {
-        // we will implement Game class as singleton class.
+        // Implement Game class as singleton class.
         static Game *instance;
     private:
+        Game();
+
         std::shared_ptr<Context> context;
         sf::Time TIME_PER_FRAME = sf::seconds(Settings::SPEED);
-
-        Game(); // constructor is private as per singleton class implementation.
     public:
         static Game *getInstance()
         {
@@ -91,8 +91,8 @@ namespace Engine
                 }
                 else
                 {
-                    // throw an exception since somewhere is trying to call an instance...
-                    // ...when an instance already exists.
+                    // Throw an exception since somewhere is trying to call an instance...
+                    // when an instance already exists.
                     throw MultipleGameInitException();
                 }
             }
@@ -100,8 +100,8 @@ namespace Engine
             {
                 std::cerr << "MultipleGameInit exception caught at Game.hpp -> class Game!" << std::endl;
                 std::cerr << e.what() << std::endl;
-//                MessageBox(NULL, "Calling Multiple Game Instances! Ending game!",
-//                           "Exception has occurred!", MB_ICONERROR); // windows only.
+                MessageBox(NULL, "Calling Multiple Game Instances! Ending game!",
+                           "Exception has occurred!", MB_ICONERROR); // windows only.
                 std::terminate(); // aborts program.
             }
         }
@@ -110,5 +110,4 @@ namespace Engine
     };
 }
 
-
-#endif //BLACKMAMBA_GAME_HPP
+#endif
