@@ -1,12 +1,13 @@
-#include "../../include/GamePanel.hpp"
 #include <cstdlib>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/Text.hpp>
+
 #include "../../include/Menu.hpp"
 #include "../../include/Pause.hpp"
-
+#include "../../include/GamePanel.hpp"
 
 using namespace Engine;
+
 int GamePanel::difficulty;
 
 GamePanel::GamePanel(std::shared_ptr<Context> &context)
@@ -74,7 +75,7 @@ void GamePanel::processInput()
         else if (event.type == sf::Event::KeyPressed)
         {
             int key = event.key.code;
-
+            // Player 1 controls
             if (key == sf::Keyboard::W && !player1.getDown())
                 player1.changeDirection(true, false, false, false);
             else if (key == sf::Keyboard::S && !player1.getUp())
@@ -83,6 +84,7 @@ void GamePanel::processInput()
                 player1.changeDirection(false, false, true, false);
             else if (key == sf::Keyboard::D && !player1.getLeft())
                 player1.changeDirection(false, false, false, true);
+            // Player 2 controls
             else if (key == sf::Keyboard::Up && !player2.getDown())
                 player2.changeDirection(true, false, false, false);
             else if (key == sf::Keyboard::Down && !player2.getUp())
@@ -165,11 +167,16 @@ void GamePanel::draw()
     context->window->draw(panel);
     context->window->draw(divider);
     context->window->draw(borders);
-    //drawGrid();
+
+    // Player 1
     if (!player1.isLose()) player1.draw();
     else showP1LoseScreen();
+
+    // Player 2
     if (!player2.isLose()) player2.draw();
     else showP2LoseScreen();
+
+    // Game over
     if (player1.isLose() && player2.isLose())
     {
         pause();
@@ -188,7 +195,6 @@ void GamePanel::pause()
 {
     running = false;
 }
-
 
 /**
  * Set running state to true
@@ -215,12 +221,8 @@ void GamePanel::reset()
  */
 void GamePanel::showGameOverScreen()
 {
-    //show highscore of both players
+    // Show high score of both players
     HighScore::checkScore(player1.getScore(), player2.getScore());
-    sf::RectangleShape rect;
-    rect.setSize(sf::Vector2f{Settings::WINDOW_WIDTH, Settings::GAME_HEIGHT});
-    rect.setPosition(0, Settings::GAME_YPOS + 1);
-    rect.setFillColor(sf::Color::Black);
 
     // Draw result image
     sf::Sprite gameoverDrawImage;
@@ -243,35 +245,9 @@ void GamePanel::showGameOverScreen()
     player2won.setPosition(0, Settings::GAME_YPOS);
     player2won.setTextureRect(context->window->getViewport(context->window->getDefaultView()));
 
-    sf::Text gameOver, restart, result, menu;
-
-
-
-    // Result text
-    result.setCharacterSize(30);
-    result.setFont(context->assets->getFont(BOLD_FONT));
-
-    sf::FloatRect resultRect = result.getLocalBounds();
-    result.setOrigin(resultRect.left + resultRect.width / 2.0f, resultRect.top + resultRect.height / 2.0f);
-    result.setPosition(sf::Vector2f(Settings::WINDOW_WIDTH / 2.0f, Settings::WINDOW_HEIGHT / 2.0f + 50));
-    result.setFillColor(sf::Color(102, 255, 153));
-
-
-    context->window->draw(rect);
-    if (player1.getScore() > player2.getScore()) //result.setString("Player 1 Won!!");
-    {
-        context->window->draw(player1won);
-    }
-    else if (player2.getScore() > player1.getScore()) //result.setString("Player 2 Won!!");
-    {
-        context->window->draw(player2won);
-    }
-    else //result.setString("Draw");
-    {
-        context->window->draw(gameoverDrawImage);
-    }
-    context->window->draw(restart);
-    context->window->draw(menu);
+    if (player1.getScore() > player2.getScore()) context->window->draw(player1won);
+    else if (player2.getScore() > player1.getScore()) context->window->draw(player2won);
+    else context->window->draw(gameoverDrawImage);
 }
 
 /**
@@ -309,7 +285,6 @@ void GamePanel::showP2LoseScreen()
     rect.setPosition(Settings::CENTER + 1, 1 + Settings::GAME_YPOS);
     rect.setSize(sf::Vector2f{(Settings::WINDOW_WIDTH / 2.0f) - 2, Settings::GAME_HEIGHT - 1});
     rect.setFillColor(sf::Color::Black);
-
 
     // Game over text
     sf::Text gameOver;
@@ -440,7 +415,7 @@ void GamePanel::displayPanelText()
  */
 void GamePanel::drawGrid()
 {
-    // draw vertical lines
+    // Draw vertical lines
     for (int i = 0; i < Settings::WINDOW_HEIGHT / Settings::UNIT_SIZE; i++)
     {
         sf::RectangleShape line;
@@ -449,7 +424,7 @@ void GamePanel::drawGrid()
         line.setFillColor(sf::Color::White);
         context->window->draw(line);
     }
-    // draw horizontal lines
+    // Draw horizontal lines
     for (int i = 0; i < Settings::WINDOW_WIDTH / Settings::UNIT_SIZE; i++)
     {
         sf::RectangleShape line;

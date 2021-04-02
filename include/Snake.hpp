@@ -1,7 +1,8 @@
 #ifndef BLACKMAMBA_SNAKE_HPP
 #define BLACKMAMBA_SNAKE_HPP
-#pragma once
+
 #include <vector>
+
 #include "Body.hpp"
 #include "Food.hpp"
 
@@ -10,7 +11,6 @@ namespace Engine
     class Snake
     {
     private:
-
         std::shared_ptr<Context> context;
         std::vector<Body> body;
 
@@ -32,11 +32,12 @@ namespace Engine
         bool hitFood(Drawable &) const;
 
         void setXPos(int);
-        int getXPos() const;
         void setYPos(int);
+
+        int getXPos() const;
         int getYPos() const;
     };
 }
 
 
-#endif //BLACKMAMBA_SNAKE_HPP
+#endif

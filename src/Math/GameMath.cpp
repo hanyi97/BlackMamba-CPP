@@ -1,25 +1,33 @@
-#include "../../include/GameMath.hpp"
 #include <cstdlib>
 #include <iostream>
 #include <exception>
-//#include <windows.h>
+#include <windows.h>
+
+#include "../../include/GameMath.hpp"
 
 using namespace Math;
 
-
-struct MultiplyByZero : public std::exception {
-    const char * what () const throw () {
+/**
+ * Exception when multiplying by 0
+ */
+struct MultiplyByZero : public std::exception
+{
+    const char *what() const throw()
+    {
         return "MultiplyByZero Exception";
     }
 };
 
-
-struct DivideByZero : public std::exception {
-    const char * what () const throw () {
+/**
+ * Exception when dividing by 0
+ */
+struct DivideByZero : public std::exception
+{
+    const char *what() const throw()
+    {
         return "DivideByZero Exception";
     }
 };
-
 
 /**
  * Calculate bound for random generating of x position
@@ -30,16 +38,20 @@ struct DivideByZero : public std::exception {
  */
 int GameMath::calculateXBound(int center, int unitSize)
 {
-    try {
-        if (unitSize == 0) {
+    try
+    {
+        if (unitSize == 0)
+        {
             throw DivideByZero();
         }
-    } catch(DivideByZero& e) {
+    }
+    catch (DivideByZero &e)
+    {
         std::cerr << "DivideByZero exception caught at GameMath::calculateXBound()! unitSize == 0" << std::endl;
         std::cerr << e.what() << std::endl;
-//        MessageBox(NULL, "DivideByZero error!",
-//                   "Exception has occurred!", MB_ICONERROR); // windows only.
-        std::terminate(); // aborts program.
+        MessageBox(NULL, "DivideByZero error!",
+                   "Exception has occurred!", MB_ICONERROR);
+        std::terminate();
     }
     return center / unitSize;
 }
@@ -53,16 +65,20 @@ int GameMath::calculateXBound(int center, int unitSize)
  */
 int GameMath::calculateYBound(int height, int unitSize)
 {
-    try {
-        if (unitSize == 0) {
+    try
+    {
+        if (unitSize == 0)
+        {
             throw DivideByZero();
         }
-    } catch(DivideByZero& e) {
+    }
+    catch (DivideByZero &e)
+    {
         std::cerr << "DivideByZero exception caught at GameMath::calculateYBound()! unitSize == 0" << std::endl;
         std::cerr << e.what() << std::endl;
-//        MessageBox(NULL, "DivideByZero error!",
-//                   "Exception has occurred!", MB_ICONERROR); // windows only.
-        std::terminate(); // aborts program.
+        MessageBox(NULL, "DivideByZero error!",
+                   "Exception has occurred!", MB_ICONERROR);
+        std::terminate();
     }
     return (height - unitSize) / unitSize;
 }
@@ -77,16 +93,17 @@ int GameMath::calculateYBound(int height, int unitSize)
  */
 int GameMath::getRandomY(int yPos, int height, int unitSize)
 {
-    try {
-        if (unitSize == 0) {
-            throw MultiplyByZero();
-        }
-    } catch(MultiplyByZero& e) {
+    try
+    {
+        if (unitSize == 0) throw MultiplyByZero();
+    }
+    catch (MultiplyByZero &e)
+    {
         std::cerr << "MultiplyByZero exception caught at GameMath::getRandomY()! unitSize == 0" << std::endl;
         std::cerr << e.what() << std::endl;
-//        MessageBox(NULL, "MultiplyByZero error!",
-//                   "Exception has occurred!", MB_ICONERROR); // windows only.
-        std::terminate(); // aborts program.
+        MessageBox(NULL, "MultiplyByZero error!",
+                   "Exception has occurred!", MB_ICONERROR);
+        std::terminate();
     }
     return yPos + rand() % calculateYBound(height, unitSize) * unitSize;
 }
@@ -100,16 +117,17 @@ int GameMath::getRandomY(int yPos, int height, int unitSize)
  */
 int GameMath::getRandomLeftX(int center, int unitSize)
 {
-    try {
-        if (unitSize == 0) {
-            throw MultiplyByZero();
-        }
-    } catch(MultiplyByZero& e) {
+    try
+    {
+        if (unitSize == 0) throw MultiplyByZero();
+    }
+    catch (MultiplyByZero &e)
+    {
         std::cerr << "MultiplyByZero exception caught at GameMath::getRandomLeftX()! unitSize == 0" << std::endl;
         std::cerr << e.what() << std::endl;
-//        MessageBox(NULL, "MultiplyByZero error!",
-//                   "Exception has occurred!", MB_ICONERROR); // windows only.
-        std::terminate(); // aborts program.
+        MessageBox(NULL, "MultiplyByZero error!",
+                   "Exception has occurred!", MB_ICONERROR);
+        std::terminate();
     }
     return rand() % calculateXBound(center, unitSize) * unitSize;
 }
@@ -123,16 +141,17 @@ int GameMath::getRandomLeftX(int center, int unitSize)
  */
 int GameMath::getRandomRightX(int center, int unitSize)
 {
-    try {
-        if (unitSize == 0) {
-            throw MultiplyByZero();
-        }
-    } catch(MultiplyByZero& e) {
+    try
+    {
+        if (unitSize == 0) throw MultiplyByZero();
+    }
+    catch (MultiplyByZero &e)
+    {
         std::cerr << "MultiplyByZero exception caught at GameMath::getRandomRightX()! unitSize == 0" << std::endl;
         std::cerr << e.what() << std::endl;
-//        MessageBox(NULL, "MultiplyByZero error!",
-//                   "Exception has occurred!", MB_ICONERROR); // windows only.
-        std::terminate(); // aborts program.
+        MessageBox(NULL, "MultiplyByZero error!",
+                   "Exception has occurred!", MB_ICONERROR);
+        std::terminate();
     }
     return (rand() % calculateXBound(center, unitSize) + calculateXBound(center, unitSize)) * unitSize;
 }

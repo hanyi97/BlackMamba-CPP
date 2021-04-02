@@ -1,15 +1,10 @@
-//
-// Created by mynam on 28-Mar-21.
-//
-
-#include "../../include/Sound.hpp"
-
 #include <iostream>
 #include <fstream>
+#include <conio.h>
 #include <windows.h>
 #include <mmsystem.h>
-#include <conio.h>
 
+#include "../../include/Sound.hpp"
 
 using namespace std;
 using namespace Engine;
@@ -19,32 +14,27 @@ void Sound::setPlay(bool flag)
     this->checker = flag;
 }
 
+/**
+ * Plays background music
+ */
 void Sound::playBGM()
 {
     if (checker == true)
     {
-        mciSendString("open \"..\\assets\\sounds\\bgm.wav\" type mpegvideo alias bgm", NULL, 0, NULL);
+        mciSendString(R"(open "..\assets\sounds\bgm.wav" type mpegvideo alias bgm)", NULL, 0, NULL);
         mciSendString("play bgm repeat", NULL, 0, NULL);
     }
     else
     {
         mciSendString("stop bgm", NULL, 0, NULL);
     }
-
-    /*char goodFood[] = {"..\\assets\\sounds\\bgm.wav"};
-    string goodFood_str;
-    fstream fp;
-    fp.open(goodFood, ios::in);
-    goodFood_str = goodFood;
-    PlaySound(goodFood_str.c_str(), NULL, SND_FILENAME | SND_ASYNC);
-    fp.close();*/
-
-
 }
 
+/**
+ * Stops background music
+ */
 void Sound::stopBGM()
 {
-    //PlaySound(NULL,0,0);
     if (checker == false)
     {
         mciSendString("stop bgm", NULL, 0, NULL);
@@ -52,6 +42,9 @@ void Sound::stopBGM()
     }
 }
 
+/**
+ * Plays sound when snake ate a food
+ */
 void Sound::playGoodFood()
 {
     char goodFood[] = {"..\\assets\\sounds\\goodFood.wav"};
@@ -61,12 +54,11 @@ void Sound::playGoodFood()
     goodFood_str = goodFood;
     PlaySound(goodFood_str.c_str(), NULL, SND_FILENAME | SND_ASYNC);
     fp.close();
-
-    //PlaySound("..\\assets\\sounds\\goodFood.wav", GetModuleHandle(NULL), SND_FILENAME | SND_ASYNC | SND_LOOP);
-
-
 }
 
+/**
+ * Plays sound when snake ate a poison
+ */
 void Sound::playBadFood()
 {
     char goodFood[] = {"..\\assets\\sounds\\badFood.wav"};
@@ -76,9 +68,11 @@ void Sound::playBadFood()
     goodFood_str = goodFood;
     PlaySound(goodFood_str.c_str(), NULL, SND_FILENAME | SND_ASYNC);
     fp.close();
-
 }
 
+/**
+ * Plays game over sound
+ */
 void Sound::playGameOver()
 {
     char go[] = {"..\\assets\\sounds\\gameover.wav"};
@@ -89,4 +83,3 @@ void Sound::playGameOver()
     PlaySound(go_str.c_str(), NULL, SND_FILENAME | SND_ASYNC);
     fp.close();
 }
-

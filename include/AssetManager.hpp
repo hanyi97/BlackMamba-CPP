@@ -1,6 +1,5 @@
 #ifndef BLACKMAMBA_ASSETMANAGER_HPP
 #define BLACKMAMBA_ASSETMANAGER_HPP
-#pragma once
 
 #include <map>
 #include <memory>
@@ -25,5 +24,4 @@ namespace Engine
     };
 }
 
-
-#endif //BLACKMAMBA_ASSETMANAGER_HPP
+#endif

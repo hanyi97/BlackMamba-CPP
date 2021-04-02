@@ -1,7 +1,8 @@
 #ifndef BLACKMAMBA_FOOD_HPP
 #define BLACKMAMBA_FOOD_HPP
-#pragma once
+
 #include <SFML/Graphics/Sprite.hpp>
+
 #include "Game.hpp"
 #include "Drawable.hpp"
 
@@ -19,12 +20,12 @@ namespace Engine
         Food(std::shared_ptr<Context> &, int, int);
 
         void draw() override;
-        int getXPos() override;
         void setXPos(int) override;
-        int getYPos() override;
         void setYPos(int) override;
+
+        int getXPos() override;
+        int getYPos() override;
     };
 }
 
-
-#endif //BLACKMAMBA_FOOD_HPP
+#endif

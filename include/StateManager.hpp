@@ -1,8 +1,9 @@
 #ifndef BLACKMAMBA_STATEMANAGER_HPP
 #define BLACKMAMBA_STATEMANAGER_HPP
-#pragma once
+
 #include <memory>
 #include <stack>
+
 #include "State.hpp"
 
 namespace Engine
@@ -19,12 +20,12 @@ namespace Engine
     public:
         StateManager();
 
+        std::unique_ptr<State>& GetCurrent();
+
         void addState(std::unique_ptr<State> toAdd, bool replace = false);
         void popCurrent();
         void processStateChange();
-        std::unique_ptr<State>& GetCurrent();
     };
 }
 
-
-#endif //BLACKMAMBA_STATEMANAGER_HPP
+#endif

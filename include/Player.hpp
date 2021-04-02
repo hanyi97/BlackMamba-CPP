@@ -1,6 +1,6 @@
 #ifndef BLACKMAMBA_PLAYER_HPP
 #define BLACKMAMBA_PLAYER_HPP
-#pragma once
+
 #include "Food.hpp"
 #include "Snake.hpp"
 #include "Poison.hpp"
@@ -22,8 +22,8 @@ namespace Engine
         int score;
         int difficulty;
         int player;
-        bool lose;
 
+        bool lose;
         bool up;
         bool down;
         bool left;
@@ -38,13 +38,14 @@ namespace Engine
     public:
         Player() = default;
         Player(std::shared_ptr<Context> &, int, int);
+
+        Food createFood();
+        Poison createPoison();
+
         void init();
         void draw();
         void moveSnake();
         void changeDirection(bool, bool, bool, bool);
-
-        Food createFood();
-        Poison createPoison();
 
         void checkHit();
         void checkEat();
@@ -63,5 +64,4 @@ namespace Engine
     };
 }
 
-
-#endif //BLACKMAMBA_PLAYER_HPP
+#endif

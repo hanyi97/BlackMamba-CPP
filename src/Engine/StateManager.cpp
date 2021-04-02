@@ -4,7 +4,6 @@ using namespace Engine;
 
 StateManager::StateManager() : add(false), replace(false), remove(false)
 {
-
 }
 
 /**

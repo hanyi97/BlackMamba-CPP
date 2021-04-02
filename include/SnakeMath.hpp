@@ -1,6 +1,6 @@
 #ifndef BLACKMAMBA_SNAKEMATH_HPP
 #define BLACKMAMBA_SNAKEMATH_HPP
-#pragma once
+
 namespace Math
 {
     class SnakeMath
@@ -13,4 +13,4 @@ namespace Math
     };
 }
 
-#endif //BLACKMAMBA_SNAKEMATH_HPP
+#endif

@@ -1,18 +1,20 @@
+#include <SFML/Window/Event.hpp>
+
 #include "../../include/Game.hpp"
 #include "../../include/GamePanel.hpp"
 #include "../../include/Menu.hpp"
-#include "../../include/Sound.hpp"
-
-#include <SFML/Window/Event.hpp>
 
 using namespace Engine;
-Sound bgmSound;
 
-// Initialise pointer to null so that it can be initialised
-// in first call to getInstance
+/**
+ * Initialise pointer to null so that it can be initialised
+ * in first call to getInstance
+ */
 Game *Game::instance = nullptr;
 
-// Private constructor for Game class.
+/**
+ * Private constructor for Game class.
+ */
 Game::Game() : context(std::make_shared<Context>())
 {
     // Setup window and show first screen to display
@@ -48,7 +50,5 @@ int main()
 {
     Game *singleton_game = Engine::Game::getInstance();
     singleton_game->run();
-
-
     return 0;
 }
