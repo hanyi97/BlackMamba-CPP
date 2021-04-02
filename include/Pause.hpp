@@ -26,7 +26,6 @@ namespace Engine
         int difficulty;
     public:
         Pause(std::shared_ptr<Context> &context, int = HARD);
-        ~Pause();
 
         void init() override;
         void processInput() override;

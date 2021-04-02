@@ -29,7 +29,7 @@ int Poison::getXPos()
 }
 
 /**
- * @param x:	x position to set
+ * @param x: x position to set
  */
 void Poison::setXPos(int x)
 {

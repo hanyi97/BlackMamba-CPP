@@ -1,6 +1,7 @@
 #include "../../include/Food.hpp"
 
 using namespace Engine;
+
 Food::Food() = default;
 
 Food::Food(std::shared_ptr<Context> &context, int xPos, int yPos)

@@ -3,6 +3,7 @@
 
 #include <memory>
 #include  <SFML/Graphics/Text.hpp>
+#include  <SFML/Graphics/Sprite.hpp>
 
 #include "State.hpp"
 #include "Game.hpp"
@@ -38,7 +39,6 @@ namespace Engine
 
     public:
         Menu(std::shared_ptr<Context> &context);
-        ~Menu();
 
         void moveUp();
         void moveDown();

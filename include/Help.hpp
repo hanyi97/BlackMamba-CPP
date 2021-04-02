@@ -21,7 +21,6 @@ namespace Engine
         bool startButtonPressed;
     public:
         Help(std::shared_ptr<Context> &context);
-        ~Help();
 
         void init() override;
         void processInput() override;
