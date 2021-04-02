@@ -1,6 +1,6 @@
 #ifndef BLACKMAMBA_SETTINGS_HPP
 #define BLACKMAMBA_SETTINGS_HPP
-#pragma once
+
 namespace Engine
 {
     class Settings
@@ -17,4 +17,4 @@ namespace Engine
     };
 }
 
-#endif //BLACKMAMBA_SETTINGS_HPP
+#endif

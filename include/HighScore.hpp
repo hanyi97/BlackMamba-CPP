@@ -16,4 +16,4 @@ namespace Engine
     };
 }
 
-#endif //BLACKMAMBA_HIGHSCORE_HPP
+#endif

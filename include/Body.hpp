@@ -1,9 +1,10 @@
 #ifndef BLACKMAMBA_BODY_HPP
 #define BLACKMAMBA_BODY_HPP
-#pragma once
+
 #include <memory>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
+
 #include "Game.hpp"
 
 namespace Engine
@@ -30,5 +31,4 @@ namespace Engine
     };
 }
 
-
-#endif //BLACKMAMBA_BODY_HPP
+#endif

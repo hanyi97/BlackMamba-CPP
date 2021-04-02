@@ -1,6 +1,6 @@
 #ifndef BLACKMAMBA_DRAWABLE_HPP
 #define BLACKMAMBA_DRAWABLE_HPP
-#pragma once
+
 class Drawable
 {
 public:
@@ -11,4 +11,4 @@ public:
     virtual void setYPos(int) = 0;
 };
 
-#endif //BLACKMAMBA_DRAWABLE_HPP
+#endif

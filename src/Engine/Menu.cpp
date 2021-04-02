@@ -229,7 +229,7 @@ void Menu::moveUp() {
 }
 
 void Menu::moveDown() {
-    if (currentMenuIndex + 1 < menuLength) {
+    if (currentMenuIndex + 1 < MENU_LENGTH) {
         menu[currentMenuIndex].setFillColor(sf::Color::White);
         currentMenuIndex++;
         menu[currentMenuIndex].setFillColor(sf::Color::Yellow);

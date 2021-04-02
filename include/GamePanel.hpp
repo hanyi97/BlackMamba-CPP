@@ -31,6 +31,7 @@ namespace Engine
         GamePanel(std::shared_ptr<Context> &);
 
         static int difficulty;
+
         void init() override;
         void processInput() override;
         void update(sf::Time) override;
@@ -48,4 +49,4 @@ namespace Engine
     };
 }
 
-#endif //BLACKMAMBA_GAMEPANEL_HPP
+#endif

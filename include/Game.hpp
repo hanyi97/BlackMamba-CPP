@@ -1,15 +1,14 @@
 #ifndef BLACKMAMBA_GAME_HPP
 #define BLACKMAMBA_GAME_HPP
-#pragma once
+
 #include <memory>
 #include <iostream>
-#include <SFML/Graphics/RenderWindow.hpp>
-#include "Settings.hpp"
 #include <windows.h>
+#include <SFML/Graphics/RenderWindow.hpp>
 
+#include "Settings.hpp"
 #include "StateManager.hpp"
 #include "AssetManager.hpp"
-
 
 namespace Engine
 {
@@ -63,8 +62,10 @@ namespace Engine
         }
     };
 
-    struct MultipleGameInitException : public std::exception {
-        const char * what () const throw () {
+    struct MultipleGameInitException : public std::exception
+    {
+        const char *what() const throw()
+        {
             return "MultipleGameInit Exception";
         }
     };
@@ -76,9 +77,10 @@ namespace Engine
     private:
         std::shared_ptr<Context> context;
         sf::Time TIME_PER_FRAME = sf::seconds(Settings::SPEED);
+
         Game(); // constructor is private as per singleton class implementation.
     public:
-        static Game* getInstance()
+        static Game *getInstance()
         {
             try
             {
@@ -94,7 +96,7 @@ namespace Engine
                     throw MultipleGameInitException();
                 }
             }
-            catch(MultipleGameInitException& e)
+            catch (MultipleGameInitException &e)
             {
                 std::cerr << "MultipleGameInit exception caught at Game.hpp -> class Game!" << std::endl;
                 std::cerr << e.what() << std::endl;
@@ -103,6 +105,7 @@ namespace Engine
                 std::terminate(); // aborts program.
             }
         }
+
         void run();
     };
 }
